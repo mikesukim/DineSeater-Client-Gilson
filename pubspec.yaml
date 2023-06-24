@@ -7,6 +7,8 @@ environment:
   sdk: '>=3.0.3 <4.0.0'
 
 dependencies:
+  firebase_core: ^2.14.0
+  firebase_messaging: ^14.6.3
   flutter:
     sdk: flutter
   stacked: ^3.4.0
