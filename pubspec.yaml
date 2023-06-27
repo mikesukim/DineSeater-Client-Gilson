@@ -13,6 +13,7 @@ dependencies:
   firebase_messaging: ^14.6.3
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   stacked: ^3.4.0
   stacked_services: ^1.1.0
 
