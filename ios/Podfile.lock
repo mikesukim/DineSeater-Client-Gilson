@@ -1,4 +1,48 @@
 PODS:
+  - Amplify (1.29.1):
+    - Amplify/Default (= 1.29.1)
+  - Amplify/Default (1.29.1)
+  - amplify_auth_cognito_ios (0.0.1):
+    - Amplify (= 1.29.1)
+    - amplify_core
+    - AmplifyPlugins/AWSCognitoAuthPlugin (= 1.29.1)
+    - Flutter
+    - ObjectMapper
+  - amplify_core (0.0.1):
+    - Flutter
+    - SwiftFormat/CLI
+    - SwiftLint (= 0.48.0)
+  - amplify_flutter_ios (0.0.1):
+    - Amplify (= 1.29.1)
+    - amplify_core
+    - AmplifyPlugins/AWSCognitoAuthPlugin (= 1.29.1)
+    - AWSPluginsCore (= 1.29.1)
+    - Flutter
+    - SwiftFormat/CLI
+    - SwiftLint (= 0.48.0)
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.29.1):
+    - AWSAuthCore (~> 2.30.1)
+    - AWSCognitoIdentityProvider (~> 2.30.1)
+    - AWSCognitoIdentityProviderASF (~> 2.30.1)
+    - AWSCore (~> 2.30.1)
+    - AWSMobileClient (~> 2.30.1)
+    - AWSPluginsCore (= 1.29.1)
+  - AWSAuthCore (2.30.4):
+    - AWSCore (= 2.30.4)
+  - AWSCognitoIdentityProvider (2.30.4):
+    - AWSCognitoIdentityProviderASF (= 2.30.4)
+    - AWSCore (= 2.30.4)
+  - AWSCognitoIdentityProviderASF (2.30.4):
+    - AWSCore (= 2.30.4)
+  - AWSCore (2.30.4)
+  - AWSMobileClient (2.30.4):
+    - AWSAuthCore (= 2.30.4)
+    - AWSCognitoIdentityProvider (= 2.30.4)
+    - AWSCognitoIdentityProviderASF (= 2.30.4)
+    - AWSCore (= 2.30.4)
+  - AWSPluginsCore (1.29.1):
+    - Amplify (= 1.29.1)
+    - AWSCore (~> 2.30.1)
   - Firebase/CoreOnly (10.10.0):
     - FirebaseCore (= 10.10.0)
   - Firebase/Messaging (10.10.0):
@@ -58,15 +102,29 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - ObjectMapper (4.2.0)
   - PromisesObjC (2.2.0)
+  - SwiftFormat/CLI (0.51.12)
+  - SwiftLint (0.48.0)
 
 DEPENDENCIES:
+  - amplify_auth_cognito_ios (from `.symlinks/plugins/amplify_auth_cognito_ios/ios`)
+  - amplify_core (from `.symlinks/plugins/amplify_core/ios`)
+  - amplify_flutter_ios (from `.symlinks/plugins/amplify_flutter_ios/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
 
 SPEC REPOS:
   trunk:
+    - Amplify
+    - AmplifyPlugins
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSPluginsCore
     - Firebase
     - FirebaseCore
     - FirebaseCoreInternal
@@ -75,9 +133,18 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - nanopb
+    - ObjectMapper
     - PromisesObjC
+    - SwiftFormat
+    - SwiftLint
 
 EXTERNAL SOURCES:
+  amplify_auth_cognito_ios:
+    :path: ".symlinks/plugins/amplify_auth_cognito_ios/ios"
+  amplify_core:
+    :path: ".symlinks/plugins/amplify_core/ios"
+  amplify_flutter_ios:
+    :path: ".symlinks/plugins/amplify_flutter_ios/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -86,6 +153,17 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
+  Amplify: b72bc02515114147a7be8c4f76ef4ecc41350a23
+  amplify_auth_cognito_ios: 5260aed8aaa4e6c5a08a49695077c1b6f8d75251
+  amplify_core: 0876b2fbbcec7619f5b58b20c59ecc0118f65a47
+  amplify_flutter_ios: b215a2d52f8beeb9d30e29a99152c71fadc6730a
+  AmplifyPlugins: f8fa63aafd782a44cf48abef656e759dcab3eb71
+  AWSAuthCore: 42e2d4927d94e5e323b63b2ae885f287c51b5889
+  AWSCognitoIdentityProvider: 2331f5f4c8c1775c6a228bb2dae2d353198401e8
+  AWSCognitoIdentityProviderASF: d905c2acab3d2e7016b643d53ba553d5217fa929
+  AWSCore: 19b8233fe2d0ed3ccf5cff833a615814282cdc90
+  AWSMobileClient: 7d9c81e47ef27c6b5604858477006548eb1db342
+  AWSPluginsCore: d2c3685072cf896a05f09b55686af476db7c0596
   Firebase: facd334e557a979bd03a0b58d90fd56b52b8aba0
   firebase_core: 85b6664038311940ad60584eaabc73103c61f5de
   firebase_messaging: db0dab2713aafcf69591a1dc4ee8af7d8bba2abd
@@ -97,7 +175,10 @@ SPEC CHECKSUMS:
   GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  SwiftFormat: a5bbe21e2794b5a914f548ec651f28f2ab8be099
+  SwiftLint: 284cea64b6187c5d6bd83e9a548a64104d546447
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 

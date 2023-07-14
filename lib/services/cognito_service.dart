@@ -1,0 +1,69 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+
+import '../amplifyconfiguration.dart';
+
+class CognitoService {
+  // To use this service, you must first call configureAmplify()
+  // currently Android is not supported
+  Future<void> configureAmplify() async {
+    try {
+      final auth = AmplifyAuthCognito();
+      await Amplify.addPlugin(auth);
+
+      // call Amplify.configure to use the initialized categories in your app
+      await Amplify.configure(amplifyconfig);
+    } on Exception catch (e) {
+      safePrint('An error occurred configuring Amplify: $e');
+    }
+  }
+
+  Future<void> signInUser(String username, String password) async {
+    try {
+      final result = await Amplify.Auth.signIn(
+        username: username,
+        password: password,
+      );
+      safePrint('login success: ${result.isSignedIn}');
+
+      // await _handleSignInResult(result);
+    } on AuthException catch (e) {
+      safePrint('Error signing in: ${e.message}');
+    }
+  }
+
+  Future<void> signOutUser() async {
+    try {
+      // Sign out the user from Amplify
+      await Amplify.Auth.signOut();
+      safePrint('logout success');
+    } on AuthException catch (e) {
+      safePrint('Error signing out: ${e.message}');
+    }
+  }
+
+  Future<bool> isUserSignedIn() async {
+    try {
+      final session = await Amplify.Auth.fetchAuthSession();
+      return session.isSignedIn;
+    } on SignedOutException catch (e) {
+      safePrint('User is not signed in: ${e.message}');
+      return false;
+    } on AuthException catch (e) {
+      safePrint('Error checking signed in: ${e.message}');
+      rethrow;
+    }
+  }
+
+  Future<String> getTokenId() async {
+    try {
+      final authSession = (await Amplify.Auth.fetchAuthSession(
+        options: CognitoSessionOptions(getAWSCredentials: true),
+      )) as CognitoAuthSession;
+      return authSession.userPoolTokens!.idToken;
+    } on AmplifyException catch (e) {
+      safePrint('error occurred while retrieving Token ID : ${e.message}');
+      rethrow;
+    }
+  }
+}

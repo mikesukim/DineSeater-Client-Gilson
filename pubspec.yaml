@@ -7,10 +7,13 @@ environment:
   sdk: '>=3.0.3 <4.0.0'
 
 dependencies:
+  amplify_auth_cognito: ^0.6.13
+  amplify_flutter: ^0.6.13
   firebase_core: ^2.14.0
   firebase_messaging: ^14.6.3
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   stacked: ^3.4.0
   stacked_services: ^1.1.0
 
@@ -24,4 +27,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env
 
