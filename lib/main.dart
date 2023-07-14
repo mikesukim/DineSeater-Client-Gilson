@@ -1,4 +1,3 @@
-import 'package:dineseater_client_gilson/services/cognito_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dineseater_client_gilson/app/app.bottomsheets.dart';
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
@@ -12,10 +11,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'firebase_messaging_service.dart';
 
-import 'package:flutter/material.dart';
-import 'dart:developer';
-
-final _cognitoService = locator<CognitoService>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -32,16 +27,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessagingService().initialize();
-
-  // Cognito service init
-  await _cognitoService.configureAmplify();
-  bool isUserSignedIn = await _cognitoService.isUserSignedIn();
-  if (!isUserSignedIn) {
-    await _cognitoService.signInUser(dotenv.env['COGNITO_TESTING_USER_ID']!,
-        dotenv.env['COGNITO_TESTING_USER_PASSWORD']!);
-  }
-  String id_token = await _cognitoService.getTokenId();
-  log('id_token: $id_token');
 
   runApp(const MainApp());
 }
