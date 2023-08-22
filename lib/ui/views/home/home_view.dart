@@ -18,7 +18,7 @@ class HomeView extends StackedView<HomeViewModel> {
       backgroundColor: const Color(0xFFF6921E),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          padding: const EdgeInsets.only(bottom: 10.0),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -26,16 +26,7 @@ class HomeView extends StackedView<HomeViewModel> {
               children: [
                 verticalSpaceLarge,
                 Image.asset('assets/Logo_Gilson.png'),
-                const MaterialButton(
-                  color: kcDarkGreyColor,
-                  onPressed: null,
-                  child: Text(
-                    'Show Dialog',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                )
+                Image.asset('assets/Logo_DineSeater_white.png', width: 75,),
               ],
             ),
           ),
