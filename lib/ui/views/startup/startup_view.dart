@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dineseater_client_gilson/ui/common/ui_helpers.dart';
 
@@ -14,31 +15,20 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'STACKED',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Loading ...', style: TextStyle(fontSize: 16)),
-                horizontalSpaceSmall,
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                    strokeWidth: 6,
-                  ),
-                )
-              ],
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: const Color(0xFFF6921E),
+      body: Padding(
+        padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              verticalSpaceLarge,
+              Image.asset('assets/Logo_Gilson.png'),
+              Image.asset('assets/Logo_DineSeater_white.png', width: 75,),
+            ],
+          ),
         ),
       ),
     );

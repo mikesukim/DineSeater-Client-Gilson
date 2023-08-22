@@ -16,7 +16,6 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF6921E),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
