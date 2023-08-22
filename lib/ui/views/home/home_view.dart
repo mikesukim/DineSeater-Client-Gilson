@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dineseater_client_gilson/ui/common/ui_helpers.dart';
 
@@ -13,11 +14,12 @@ class HomeView extends StackedView<HomeViewModel> {
     HomeViewModel viewModel,
     Widget? child,
   ) {
+
     return Scaffold(
       backgroundColor: const Color(0xFFF6921E),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 20.0),
+          padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.max,
