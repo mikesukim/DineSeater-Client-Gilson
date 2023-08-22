@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:dineseater_client_gilson/ui/common/app_colors.dart';
 import 'package:dineseater_client_gilson/ui/common/ui_helpers.dart';
 
 import 'home_viewmodel.dart';
@@ -18,7 +17,7 @@ class HomeView extends StackedView<HomeViewModel> {
       backgroundColor: const Color(0xFFF6921E),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: 20.0),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.max,
