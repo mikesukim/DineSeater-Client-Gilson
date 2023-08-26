@@ -43,6 +43,7 @@ class MainApp extends StatelessWidget {
       navigatorObservers: [
         StackedService.routeObserver,
       ],
+      debugShowCheckedModeBanner: false,
     );
   }
 }
