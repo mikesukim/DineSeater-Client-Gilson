@@ -22,9 +22,8 @@ const Widget verticalSpaceMassive = SizedBox(height: _massiveSize);
 const FontWeight mediumFontWeight = FontWeight.w500;
 const FontWeight semiBoldFontWeight = FontWeight.w600;
 
-Widget gilsonIconSmall =   FractionallySizedBox(
-    widthFactor: 0.5,
-    child: Image.asset('assets/Logo_Gilson.png'));
+Widget gilsonIconSmall = FractionallySizedBox(
+    widthFactor: 0.5, child: Image.asset('assets/Logo_Gilson.png'));
 
 Widget spacedDivider = const Column(
   children: <Widget>[

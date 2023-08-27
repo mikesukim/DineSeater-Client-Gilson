@@ -496,8 +496,7 @@ class MockDialogService extends _i1.Mock implements _i2.DialogService {
       _i3.BuildContext,
       _i2.DialogRequest<dynamic>,
       dynamic Function(_i2.DialogResponse<dynamic>),
-    )?
-        builder,
+    )? builder,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -631,4 +630,57 @@ class MockDialogService extends _i1.Mock implements _i2.DialogService {
 /// A class which mocks [CognitoService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCognitoService extends _i1.Mock implements _i6.CognitoService {}
+class MockCognitoService extends _i1.Mock implements _i6.CognitoService {
+  @override
+  _i4.Future<void> configureAmplify() => (super.noSuchMethod(
+        Invocation.method(
+          #configureAmplify,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> signInUser(
+    String? username,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInUser,
+          [
+            username,
+            password,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> signOutUser() => (super.noSuchMethod(
+        Invocation.method(
+          #signOutUser,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<bool> isUserSignedIn() => (super.noSuchMethod(
+        Invocation.method(
+          #isUserSignedIn,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<String> getTokenId() => (super.noSuchMethod(
+        Invocation.method(
+          #getTokenId,
+          [],
+        ),
+        returnValue: _i4.Future<String>.value(''),
+        returnValueForMissingStub: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
+}
