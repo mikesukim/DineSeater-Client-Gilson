@@ -31,20 +31,19 @@ class HomeView extends StackedView<HomeViewModel> {
                       verticalSpaceSmall,
                       const Text(
                         'Waitlist',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: semiBoldFontWeight),
+                        style: mainText,
                       ),
                       verticalSpaceMedium,
                       FractionallySizedBox(
                         widthFactor: 0.9,
                         child: ElevatedButton(
-                            onPressed: () => print('hi'),
+                            onPressed: () => viewModel.navigateToMobileInputView(),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: kcPrimaryColor,
                                 minimumSize: const Size(200, 50),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25))
-                                // elevation: 0
+                                    borderRadius: BorderRadius.circular(25)),
+                                elevation: 0
                                 ),
                             child: const Text(
                               'Join the Waitlist',

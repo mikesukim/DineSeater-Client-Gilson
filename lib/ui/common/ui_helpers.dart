@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 const double _tinySize = 5.0;
 const double _smallSize = 10.0;
 const double _mediumSize = 25.0;
@@ -25,6 +27,20 @@ const FontWeight semiBoldFontWeight = FontWeight.w600;
 Widget gilsonIconSmall = FractionallySizedBox(
     widthFactor: 0.5, child: Image.asset('assets/Logo_Gilson.png'));
 
+const TextStyle mainText =
+    TextStyle(fontSize: 20, fontWeight: semiBoldFontWeight);
+const TextStyle subText = TextStyle(fontSize: 15, color: kcVeryLightGrey);
+const TextStyle tinyText = TextStyle(
+    fontSize: 11, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
+const TextStyle inputHintTextStyle = TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
+
+const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
+
+const inputBorderStyle = OutlineInputBorder(
+borderRadius:
+BorderRadius.all(Radius.circular(10.0)),
+borderSide: BorderSide(color: kcInputBorderColor));
+
 Widget spacedDivider = const Column(
   children: <Widget>[
     verticalSpaceMedium,
@@ -36,6 +52,7 @@ Widget spacedDivider = const Column(
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 double screenHeightFraction(BuildContext context,
@@ -57,6 +74,7 @@ double quarterScreenWidth(BuildContext context) =>
 
 double getResponsiveHorizontalSpaceMedium(BuildContext context) =>
     screenWidthFraction(context, dividedBy: 10);
+
 double getResponsiveSmallFontSize(BuildContext context) =>
     getResponsiveFontSize(context, fontSize: 14, max: 15);
 
