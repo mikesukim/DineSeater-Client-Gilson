@@ -9,6 +9,7 @@ import 'num_keypad_sheet_model.dart';
 class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
   final Function(SheetResponse response)? completer;
   final SheetRequest request;
+
   const NumKeypadSheet({
     Key? key,
     required this.completer,
@@ -22,32 +23,136 @@ class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
     Widget? child,
   ) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
+        color: Color.fromRGBO(199, 203, 210, 1),
+        // borderRadius: BorderRadius.only(
+        //   topLeft: Radius.circular(10),
+        //   topRight: Radius.circular(10),
+        // ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            request.title ?? 'Hello Stacked Sheet!!',
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '1',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '2',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '3',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ],
           ),
-          if (request.description != null) ...[
-            verticalSpaceTiny,
-            Text(
-              request.description!,
-              style: const TextStyle(fontSize: 14, color: kcMediumGrey),
-              maxLines: 3,
-              softWrap: true,
-            ),
-          ],
-          verticalSpaceLarge,
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '4',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '5',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '6',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '7',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '8',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => print('hi'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  child: Text(
+                    '9',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () => print('hi'),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                child: Text(
+                  '0',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+
         ],
       ),
     );
