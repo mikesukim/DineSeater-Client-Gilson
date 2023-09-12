@@ -107,7 +107,8 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                               child: const Text(
                                 'Next',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: semiBoldFontWeight),
+                                    fontSize: 16,
+                                    fontWeight: semiBoldFontWeight),
                               )),
                         ),
                       ],

@@ -32,14 +32,14 @@ const TextStyle mainText =
 const TextStyle subText = TextStyle(fontSize: 15, color: kcVeryLightGrey);
 const TextStyle tinyText = TextStyle(
     fontSize: 11, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
-const TextStyle inputHintTextStyle = TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
+const TextStyle inputHintTextStyle =
+    TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
 
 const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
 
 const inputBorderStyle = OutlineInputBorder(
-borderRadius:
-BorderRadius.all(Radius.circular(10.0)),
-borderSide: BorderSide(color: kcInputBorderColor));
+    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    borderSide: BorderSide(color: kcInputBorderColor));
 
 Widget spacedDivider = const Column(
   children: <Widget>[

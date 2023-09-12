@@ -37,14 +37,14 @@ class HomeView extends StackedView<HomeViewModel> {
                       FractionallySizedBox(
                         widthFactor: 0.9,
                         child: ElevatedButton(
-                            onPressed: () => viewModel.navigateToMobileInputView(),
+                            onPressed: () =>
+                                viewModel.navigateToMobileInputView(),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: kcPrimaryColor,
                                 minimumSize: const Size(200, 50),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25)),
-                                elevation: 0
-                                ),
+                                elevation: 0),
                             child: const Text(
                               'Join the Waitlist',
                               style: TextStyle(
