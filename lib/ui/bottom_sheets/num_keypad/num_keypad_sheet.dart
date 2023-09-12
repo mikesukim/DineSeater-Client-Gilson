@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dineseater_client_gilson/ui/common/app_colors.dart';
-import 'package:dineseater_client_gilson/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -23,47 +21,63 @@ class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
     Widget? child,
   ) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 0),
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(199, 203, 210, 1),
-        // borderRadius: BorderRadius.only(
-        //   topLeft: Radius.circular(10),
-        //   topRight: Radius.circular(10),
-        // ),
+        color: Color.fromRGBO(210, 212, 217, 1),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '1',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white,
+                        elevation: 1),
+                    child: const Text(
+                      '1',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '2',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white,
+                        elevation: 1),
+                    child: const Text(
+                      '2',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '3',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white,
+                        elevation: 1),
+                    child: const Text(
+                      '3',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
@@ -73,32 +87,50 @@ class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '4',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '4',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '5',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '5',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '6',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '6',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
@@ -108,32 +140,50 @@ class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '7',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '7',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '8',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '8',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                  onPressed: () => print('hi'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  child: Text(
-                    '9',
-                    style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '9',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
                   ),
                 ),
               ),
@@ -142,17 +192,54 @@ class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () => print('hi'),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                child: Text(
-                  '0',
-                  style: TextStyle(color: Colors.black),
+              const Spacer(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      '0',
+                      style: TextStyle(color: Colors.black, fontSize: 24),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: ElevatedButton(
+                    onPressed: () => print('hi'),
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(30, 45),
+                        backgroundColor: const Color.fromRGBO(210, 212, 217, 1)),
+                    child: const Icon(Icons.backspace_outlined, color: Colors.black,),
+                  ),
                 ),
               ),
             ],
           ),
-
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(3, 3, 3, 0),
+                  child: SizedBox(
+                    height: 80,
+                  ),
+                ),
+              ),
+              Spacer()
+            ],
+          ),
         ],
       ),
     );

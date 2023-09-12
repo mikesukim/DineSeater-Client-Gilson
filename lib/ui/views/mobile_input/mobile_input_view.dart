@@ -59,7 +59,7 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                             TextFormField(
                               //TODO: phoneController.value length <= 3, disable delete button
                               controller: viewModel.phoneController,
-                              keyboardType: TextInputType.none,
+                              keyboardType: TextInputType.phone,
                               //TODO: validator
                               validator: (String? value) {
                                 print(value);
