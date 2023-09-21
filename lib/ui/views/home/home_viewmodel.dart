@@ -6,12 +6,12 @@ class HomeViewModel extends BaseViewModel {
   final _navigationService = NavigationService();
 
   List<WaitList> waitlist = [
-    WaitList(name: 'Ilsan Noh', partySize: 2),
-    WaitList(name: 'Seattle Kim', partySize: 3),
-    WaitList(name: 'Kayy', partySize: 1),
-    WaitList(name: 'Item', partySize: 6),
-    WaitList(name: 'Item', partySize: 3),
-    WaitList(name: 'Item', partySize: 2)
+    WaitList(name: 'Ilsan Noh', partySize: 2, isGrill: false),
+    WaitList(name: 'Seattle Kim', partySize: 3, isGrill: true),
+    WaitList(name: 'Kayy', partySize: 1, isGrill: false),
+    WaitList(name: 'Item', partySize: 6, isGrill: false),
+    WaitList(name: 'Item', partySize: 3, isGrill: true),
+    WaitList(name: 'Item', partySize: 2, isGrill: true)
   ];
 
   void navigateToMobileInputView() {
@@ -22,6 +22,8 @@ class HomeViewModel extends BaseViewModel {
 class WaitList {
   late String name;
   late int partySize;
+  late bool isGrill;
 
-  WaitList({required this.name, required this.partySize});
+  WaitList(
+      {required this.name, required this.partySize, required this.isGrill});
 }
