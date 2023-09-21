@@ -215,11 +215,15 @@ class NumKeypadSheet extends StackedView<NumKeypadSheetModel> {
                   child: ElevatedButton(
                     onPressed: () => print('hi'),
                     style: ElevatedButton.styleFrom(
-                      elevation: 0,
+                        elevation: 0,
                         padding: EdgeInsets.zero,
                         minimumSize: const Size(30, 45),
-                        backgroundColor: const Color.fromRGBO(210, 212, 217, 1)),
-                    child: const Icon(Icons.backspace_outlined, color: Colors.black,),
+                        backgroundColor:
+                            const Color.fromRGBO(210, 212, 217, 1)),
+                    child: const Icon(
+                      Icons.backspace_outlined,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),

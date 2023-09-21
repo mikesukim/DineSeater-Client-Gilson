@@ -55,7 +55,10 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                               style: subText,
                             ),
                             verticalSpaceMedium,
-                            MaterialButton(onPressed: viewModel.showBottomSheet, child: Text('show'),),
+                            MaterialButton(
+                              onPressed: viewModel.showBottomSheet,
+                              child: Text('show'),
+                            ),
                             TextFormField(
                               //TODO: phoneController.value length <= 3, disable delete button
                               controller: viewModel.phoneController,
