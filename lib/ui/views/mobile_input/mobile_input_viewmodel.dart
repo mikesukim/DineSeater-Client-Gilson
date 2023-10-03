@@ -16,11 +16,9 @@ class MobileInputViewModel extends BaseViewModel {
   }
 
   void showBottomSheet() {
-
     _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.numKeypad,
-      isScrollControlled: false,
-      barrierColor: Colors.transparent
-    );
+        variant: BottomSheetType.numKeypad,
+        isScrollControlled: false,
+        barrierColor: Colors.transparent);
   }
 }

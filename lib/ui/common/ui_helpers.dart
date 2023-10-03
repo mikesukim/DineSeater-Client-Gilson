@@ -24,9 +24,18 @@ const Widget verticalSpaceMassive = SizedBox(height: _massiveSize);
 const FontWeight mediumFontWeight = FontWeight.w500;
 const FontWeight semiBoldFontWeight = FontWeight.w600;
 
-Widget gilsonIconSmall = Image.asset('assets/Logo_Gilson.png', scale: 2.0,);
-Widget mealIconSmall = Image.asset('assets/meal.png', scale: 3.0,);
-Widget grillIconSmall = Image.asset('assets/grill.png', scale: 3.3,);
+Widget gilsonIconSmall = Image.asset(
+  'assets/Logo_Gilson.png',
+  scale: 2.0,
+);
+Widget mealIconSmall = Image.asset(
+  'assets/meal.png',
+  scale: 3.0,
+);
+Widget grillIconSmall = Image.asset(
+  'assets/grill.png',
+  scale: 3.3,
+);
 
 const TextStyle mainText =
     TextStyle(fontSize: 20, fontWeight: semiBoldFontWeight);

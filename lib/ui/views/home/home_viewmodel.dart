@@ -14,8 +14,8 @@ class HomeViewModel extends BaseViewModel {
     WaitList(name: 'Item', partySize: 2, isGrill: true)
   ];
 
-  void navigateToMobileInputView() {
-    _navigationService.navigateToMobileInputView();
+  void navigateToMealTypeView() {
+    _navigationService.navigateToMealTypeView();
   }
 }
 

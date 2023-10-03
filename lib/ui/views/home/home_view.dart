@@ -31,7 +31,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       widthFactor: 0.9,
                       child: ElevatedButton(
                           onPressed: () =>
-                              viewModel.navigateToMobileInputView(),
+                              viewModel.navigateToMealTypeView(),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: kcPrimaryColor,
                               minimumSize: const Size(200, 50),
