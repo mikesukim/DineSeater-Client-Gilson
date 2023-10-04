@@ -167,7 +167,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                             FractionallySizedBox(
                               widthFactor: 1.0,
                               child: ElevatedButton(
-                                  onPressed: () => print('hi'),
+                                  onPressed: viewModel.navigateToPartySizeView,
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: kcPrimaryColor,
                                       minimumSize: const Size(200, 50),

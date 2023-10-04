@@ -19,7 +19,6 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        // resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
