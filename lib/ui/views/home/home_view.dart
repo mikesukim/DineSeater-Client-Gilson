@@ -30,8 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     FractionallySizedBox(
                       widthFactor: 0.9,
                       child: ElevatedButton(
-                          onPressed: () =>
-                              viewModel.navigateToMealTypeView(),
+                          onPressed: () => viewModel.navigateToMealTypeView(),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: kcPrimaryColor,
                               minimumSize: const Size(200, 50),
@@ -59,7 +58,7 @@ class HomeView extends StackedView<HomeViewModel> {
                         const Text(
                           'Waitlist',
                           style: TextStyle(
-                              fontSize: 24, fontWeight: mediumFontWeight),
+                              fontSize: 26, fontWeight: mediumFontWeight),
                         ),
                         verticalSpaceMedium,
                         const Padding(
@@ -73,7 +72,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                   Text(
                                     'Name',
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         fontWeight: semiBoldFontWeight),
                                   ),
                                 ],
@@ -81,65 +80,74 @@ class HomeView extends StackedView<HomeViewModel> {
                               Text(
                                 'Party size',
                                 style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     fontWeight: semiBoldFontWeight),
                               )
                             ],
                           ),
                         ),
-                        verticalSpaceSmall,
+                        verticalSpaceMedium,
                         FractionallySizedBox(
                           widthFactor: 0.95,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: viewModel.waitlist.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  height: 50,
-                                  color: (index == 0)
-                                      ? kcLightPrimaryColor
-                                      : Colors.transparent,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: (viewModel.waitlist[index].isGrill)
-                                          ? 14.0
-                                          : 16.0,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            (viewModel.waitlist[index].isGrill)
-                                                ? grillIconSmall
-                                                : mealIconSmall,
-                                            (viewModel.waitlist[index].isGrill)
-                                                ? const SizedBox(width: 16)
-                                                : const SizedBox(width: 20),
-                                            Text(
-                                              viewModel.waitlist[index].name,
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: mediumFontWeight),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(viewModel
-                                                .waitlist[index].partySize
-                                                .toString()),
-                                            const SizedBox(
-                                              width: 30,
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: viewModel.waitlist.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                height: 60,
+                                color: (index == 0)
+                                    ? kcLightPrimaryColor
+                                    : Colors.transparent,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: (viewModel.waitlist[index].isGrill)
+                                        ? 14.0
+                                        : 16.0,
                                   ),
-                                );
-                              }),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          (viewModel.waitlist[index].isGrill)
+                                              ? grillIconSmall
+                                              : mealIconSmall,
+                                          (viewModel.waitlist[index].isGrill)
+                                              ? const SizedBox(width: 16)
+                                              : const SizedBox(width: 20),
+                                          Text(
+                                            viewModel.waitlist[index].name,
+                                            style: const TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: mediumFontWeight),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            viewModel.waitlist[index].partySize
+                                                .toString(),
+                                            style:
+                                                const TextStyle(fontSize: 17),
+                                          ),
+                                          const SizedBox(
+                                            width: 50,
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const Divider(
+                              color: Colors.transparent,
+                            ),
+                          ),
                         )
                       ],
                     ),

@@ -30,11 +30,11 @@ Widget gilsonIconSmall = Image.asset(
 );
 Widget mealIconSmall = Image.asset(
   'assets/meal.png',
-  scale: 3.0,
+  scale: 2.6,
 );
 Widget grillIconSmall = Image.asset(
   'assets/grill.png',
-  scale: 3.3,
+  scale: 3.0,
 );
 
 const TextStyle mainText =
