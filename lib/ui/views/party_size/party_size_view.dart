@@ -81,8 +81,7 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                                   // filled: true,
                                   // fillColor: kcInputBackgroundColor,
                                   enabledBorder: inputBorderStyle,
-                                  focusedBorder: inputBorderStyle
-                              ),
+                                  focusedBorder: inputBorderStyle),
                             ),
                             // verticalSpaceMedium,
                             // const SizedBox(height: 90.0),
@@ -95,7 +94,7 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                               style: subText,
                             ),
                             verticalSpaceMedium,
-                        //TODO: set button max width instead of percentage
+                            //TODO: set button max width instead of percentage
                             FractionallySizedBox(
                               widthFactor: 1.0,
                               child: ElevatedButton(
@@ -104,7 +103,8 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                                       backgroundColor: kcPrimaryColor,
                                       minimumSize: const Size(200, 50),
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(25)),
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
                                       elevation: 0),
                                   child: const Text(
                                     'Next',

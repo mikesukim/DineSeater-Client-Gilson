@@ -11,7 +11,6 @@ class PartySizeViewModel extends BaseViewModel {
 
   TextEditingController phoneController = TextEditingController();
 
-
   void showBottomSheet() {
     _bottomSheetService.showCustomSheet(
         variant: BottomSheetType.numKeypad,
