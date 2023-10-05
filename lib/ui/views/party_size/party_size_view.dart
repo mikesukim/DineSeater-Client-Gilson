@@ -1,19 +1,17 @@
-import 'package:dineseater_client_gilson/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
-import 'mobile_input_viewmodel.dart';
+import 'party_size_viewmodel.dart';
 
-class MobileInputView extends StackedView<MobileInputViewModel> {
-  const MobileInputView({Key? key}) : super(key: key);
+class PartySizeView extends StackedView<PartySizeViewModel> {
+  const PartySizeView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    MobileInputViewModel viewModel,
+    PartySizeViewModel viewModel,
     Widget? child,
   ) {
     return GestureDetector(
@@ -45,13 +43,17 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                             gilsonIconSmall,
                             verticalSpaceSmall,
                             const Text(
-                              'What\'s your mobile number?',
+                              'How many people in your party?',
                               style: mainText,
                             ),
                             verticalSpaceTiny,
-                            const Text(
-                              'You will receive texts about your visit.',
-                              style: subText,
+                            const FractionallySizedBox(
+                              widthFactor: 0.7,
+                              child: Text(
+                                'For parties larger than 7, please speak with our restaurant staff.',
+                                style: subText,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                             verticalSpaceMedium,
                             MaterialButton(
@@ -59,7 +61,6 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                               child: Text('show'),
                             ),
                             TextFormField(
-                              //TODO: phoneController.value length <= 3, disable delete button
                               controller: viewModel.phoneController,
                               keyboardType: TextInputType.phone,
                               //TODO: validator
@@ -74,45 +75,45 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                                 }
                                 return null;
                               },
-                              inputFormatters: [
-                                PhoneInputFormatter(
-                                  allowEndlessPhone: false,
-                                )
-                              ],
                               decoration: const InputDecoration(
-                                  hintText: '253-561-3187',
+                                  hintText: '1',
                                   hintStyle: inputHintTextStyle,
-                                  filled: true,
-                                  fillColor: kcInputBackgroundColor,
+                                  // filled: true,
+                                  // fillColor: kcInputBackgroundColor,
                                   enabledBorder: inputBorderStyle,
-                                  focusedBorder: inputBorderStyle),
+                                  focusedBorder: inputBorderStyle
+                              ),
                             ),
-                            verticalSpaceMedium,
-                            const Text(
-                              'By continuing below, you agree to Dineseater sharing your party size, name and mobile number with the restaurant.',
-                              textAlign: TextAlign.center,
-                              style: tinyText,
-                            ),
-                            const SizedBox(height: 90.0),
+                            // verticalSpaceMedium,
+                            // const SizedBox(height: 90.0),
                           ],
                         ),
+                        Column(
+                          children: [
+                            const Text(
+                              'Estimated wait: 15-25 minutes',
+                              style: subText,
+                            ),
+                            verticalSpaceMedium,
                         //TODO: set button max width instead of percentage
-                        FractionallySizedBox(
-                          widthFactor: 1.0,
-                          child: ElevatedButton(
-                              onPressed: () => print('hi'),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: kcPrimaryColor,
-                                  minimumSize: const Size(200, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25)),
-                                  elevation: 0),
-                              child: const Text(
-                                'Next',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: semiBoldFontWeight),
-                              )),
+                            FractionallySizedBox(
+                              widthFactor: 1.0,
+                              child: ElevatedButton(
+                                  onPressed: () => print('hi'),
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kcPrimaryColor,
+                                      minimumSize: const Size(200, 50),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(25)),
+                                      elevation: 0),
+                                  child: const Text(
+                                    'Next',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: semiBoldFontWeight),
+                                  )),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -127,8 +128,8 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
   }
 
   @override
-  MobileInputViewModel viewModelBuilder(
+  PartySizeViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      MobileInputViewModel();
+      PartySizeViewModel();
 }

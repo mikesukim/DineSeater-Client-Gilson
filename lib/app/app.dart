@@ -8,6 +8,7 @@ import 'package:dineseater_client_gilson/services/cognito_service.dart';
 import 'package:dineseater_client_gilson/ui/views/mobile_input/mobile_input_view.dart';
 import 'package:dineseater_client_gilson/ui/bottom_sheets/num_keypad/num_keypad_sheet.dart';
 import 'package:dineseater_client_gilson/ui/views/meal_type/meal_type_view.dart';
+import 'package:dineseater_client_gilson/ui/views/party_size/party_size_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -16,6 +17,7 @@ import 'package:dineseater_client_gilson/ui/views/meal_type/meal_type_view.dart'
     MaterialRoute(page: StartupView),
     MaterialRoute(page: MobileInputView),
     MaterialRoute(page: MealTypeView),
+    MaterialRoute(page: PartySizeView),
 // @stacked-route
   ],
   dependencies: [

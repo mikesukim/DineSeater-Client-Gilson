@@ -50,9 +50,10 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: (viewModel.selectedButton == 0)
-                                                ? kcPrimaryColor
-                                                : kcLightGreyWithOpacity,
+                                            color:
+                                                (viewModel.selectedButton == 0)
+                                                    ? kcPrimaryColor
+                                                    : kcLightGreyWithOpacity,
                                             width: 2),
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(20))),
@@ -71,21 +72,25 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                           child: Image.asset(
                                             'assets/meal.png',
                                             scale: 2,
-                                            color: (viewModel.selectedButton == 0)
-                                                ? Colors.white
-                                                : kcVeryLightGrey,
+                                            color:
+                                                (viewModel.selectedButton == 0)
+                                                    ? Colors.white
+                                                    : kcVeryLightGrey,
                                           ),
                                         ),
                                         verticalSpaceMedium,
                                         Text(
                                           'Regular Meal',
                                           style: TextStyle(
-                                              color: (viewModel.selectedButton == 0)
-                                                  ? Colors.black
-                                                  : kcVeryLightGrey,
+                                              color:
+                                                  (viewModel.selectedButton ==
+                                                          0)
+                                                      ? Colors.black
+                                                      : kcVeryLightGrey,
                                               fontSize: 17,
                                               fontWeight:
-                                                  (viewModel.selectedButton == 0)
+                                                  (viewModel.selectedButton ==
+                                                          0)
                                                       ? semiBoldFontWeight
                                                       : FontWeight.normal),
                                         ),
@@ -98,9 +103,10 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: (viewModel.selectedButton == 1)
-                                                ? kcPrimaryColor
-                                                : kcLightGreyWithOpacity,
+                                            color:
+                                                (viewModel.selectedButton == 1)
+                                                    ? kcPrimaryColor
+                                                    : kcLightGreyWithOpacity,
                                             width: 2),
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(20))),
@@ -118,9 +124,10 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                   : kcLightGreyWithOpacity,
                                           child: Image.asset(
                                             'assets/grill.png',
-                                            color: (viewModel.selectedButton == 1)
-                                                ? Colors.white
-                                                : kcVeryLightGrey,
+                                            color:
+                                                (viewModel.selectedButton == 1)
+                                                    ? Colors.white
+                                                    : kcVeryLightGrey,
                                             scale: 2,
                                           ),
                                         ),
@@ -128,12 +135,15 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                         Text(
                                           'Barbecue Grill',
                                           style: TextStyle(
-                                              color: (viewModel.selectedButton == 1)
-                                                  ? Colors.black
-                                                  : kcVeryLightGrey,
+                                              color:
+                                                  (viewModel.selectedButton ==
+                                                          1)
+                                                      ? Colors.black
+                                                      : kcVeryLightGrey,
                                               fontSize: 17,
                                               fontWeight:
-                                                  (viewModel.selectedButton == 1)
+                                                  (viewModel.selectedButton ==
+                                                          1)
                                                       ? semiBoldFontWeight
                                                       : FontWeight.normal),
                                         )
@@ -157,7 +167,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                             FractionallySizedBox(
                               widthFactor: 1.0,
                               child: ElevatedButton(
-                                  onPressed: () => print('hi'),
+                                  onPressed: viewModel.navigateToPartySizeView,
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: kcPrimaryColor,
                                       minimumSize: const Size(200, 50),
