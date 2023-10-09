@@ -3,15 +3,15 @@ import 'package:stacked/stacked.dart';
 
 import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
-import 'party_size_viewmodel.dart';
+import 'customer_name_viewmodel.dart';
 
-class PartySizeView extends StackedView<PartySizeViewModel> {
-  const PartySizeView({Key? key}) : super(key: key);
+class CustomerNameView extends StackedView<CustomerNameViewModel> {
+  const CustomerNameView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    PartySizeViewModel viewModel,
+    CustomerNameViewModel viewModel,
     Widget? child,
   ) {
     return GestureDetector(
@@ -43,40 +43,33 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                             gilsonIconSmall,
                             verticalSpaceSmall,
                             const Text(
-                              'How many people in your party?',
+                              'What\'s your name?',
                               style: mainText,
                             ),
                             verticalSpaceTiny,
                             const FractionallySizedBox(
                               widthFactor: 0.8,
                               child: Text(
-                                'For parties larger than 7, please speak with our restaurant staff.',
+                                'Your name will help us identify you.',
                                 style: subText,
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             verticalSpaceMedium,
-                            MaterialButton(
-                              onPressed: viewModel.showBottomSheet,
-                              child: Text('show'),
-                            ),
                             TextFormField(
-                              controller: viewModel.phoneController,
-                              keyboardType: TextInputType.phone,
+                              controller: viewModel.nameController,
+                              keyboardType: TextInputType.name,
                               //TODO: validator
                               validator: (String? value) {
                                 print(value);
-                                String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                                RegExp regExp = RegExp(pattern);
                                 if (value!.isEmpty) {
-                                  return 'Please enter mobile number.';
-                                } else if (!regExp.hasMatch(value)) {
-                                  return 'Please enter valid mobile number.';
-                                }
+                                  return 'Please enter your name.';
+                                } else {
                                 return null;
+                                }
                               },
                               decoration: const InputDecoration(
-                                  hintText: '1',
+                                  hintText: 'Michael',
                                   hintStyle: inputHintTextStyle,
                                   // filled: true,
                                   // fillColor: kcInputBackgroundColor,
@@ -98,13 +91,13 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                             FractionallySizedBox(
                               widthFactor: 1.0,
                               child: ElevatedButton(
-                                  onPressed: viewModel.navigateToCustomerNameView,
+                                  onPressed: viewModel.navigateToMobileInputView,
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: kcPrimaryColor,
                                       minimumSize: const Size(200, 50),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(25)),
+                                          BorderRadius.circular(25)),
                                       elevation: 0),
                                   child: const Text(
                                     'Next',
@@ -128,8 +121,8 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
   }
 
   @override
-  PartySizeViewModel viewModelBuilder(
+  CustomerNameViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      PartySizeViewModel();
+      CustomerNameViewModel();
 }
