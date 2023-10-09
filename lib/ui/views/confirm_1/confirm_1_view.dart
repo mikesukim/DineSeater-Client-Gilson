@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../common/app_colors.dart';
+import '../../common/ui_helpers.dart';
 import 'confirm_1_viewmodel.dart';
 
 class Confirm1View extends StackedView<Confirm1ViewModel> {
@@ -13,9 +15,81 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () => viewModel.navigateBack(),
+                  child: const Text(
+                    'Back',
+                    style: backButtonStyle,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.9,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      gilsonIconSmall,
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/confirm1.png',
+                            scale: 2.5,
+                          ),
+                          verticalSpaceLarge,
+                          const Text('Kayla, party of 3', style: mainText),
+                          verticalSpaceTiny,
+                          const Text('(253) 561 - 3187', style: subText),
+                          TextButton(
+                              onPressed: viewModel.navigateToMealTypeView,
+                              child: const Text(
+                                'Edit my information',
+                                style: TextStyle(fontSize: 15),
+                              ))
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text(
+                            'Estimated wait: 15-25 minutes',
+                            style: subText,
+                          ),
+                          verticalSpaceMedium,
+                          //TODO: set button max width instead of percentage
+                          FractionallySizedBox(
+                            widthFactor: 1.0,
+                            child: ElevatedButton(
+                                onPressed: viewModel.navigateToConfirm2View,
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: kcPrimaryColor,
+                                    minimumSize: const Size(200, 50),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
+                                    elevation: 0),
+                                child: const Text(
+                                  'Join the waitlist',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: semiBoldFontWeight),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

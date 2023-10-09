@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../common/app_colors.dart';
+import '../../common/ui_helpers.dart';
 import 'confirm_2_viewmodel.dart';
 
 class Confirm2View extends StackedView<Confirm2ViewModel> {
@@ -13,9 +15,68 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Column(
+            children: [
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: null,
+                  child: Text(
+                    'Back',
+                    style: backButtonStyle,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.9,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      gilsonIconSmall,
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/confirm2.png',
+                            scale: 2.5,
+                          ),
+                          verticalSpaceLarge,
+                          const Text('You\'re on the list!',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          const Text('We\'ll text you once ready!',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 1.0,
+                        child: ElevatedButton(
+                            onPressed: viewModel.navigateToHome,
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: kcPrimaryColor,
+                                minimumSize: const Size(200, 50),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(25)),
+                                elevation: 0),
+                            child: const Text(
+                              'Go to Home',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: semiBoldFontWeight),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

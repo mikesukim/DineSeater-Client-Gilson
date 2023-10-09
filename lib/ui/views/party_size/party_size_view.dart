@@ -48,7 +48,7 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                             ),
                             verticalSpaceTiny,
                             const FractionallySizedBox(
-                              widthFactor: 0.7,
+                              widthFactor: 0.8,
                               child: Text(
                                 'For parties larger than 7, please speak with our restaurant staff.',
                                 style: subText,
@@ -98,7 +98,7 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                             FractionallySizedBox(
                               widthFactor: 1.0,
                               child: ElevatedButton(
-                                  onPressed: () => print('hi'),
+                                  onPressed: viewModel.navigateToCustomerNameView,
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: kcPrimaryColor,
                                       minimumSize: const Size(200, 50),

@@ -1,4 +1,5 @@
 import 'package:dineseater_client_gilson/app/app.bottomsheets.dart';
+import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,6 +14,10 @@ class MobileInputViewModel extends BaseViewModel {
 
   void navigateBack() {
     _navigatorService.back();
+  }
+
+  void navigateToConfirm1view() {
+    _navigatorService.navigateToConfirm1View();
   }
 
   void showBottomSheet() {

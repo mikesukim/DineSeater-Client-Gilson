@@ -5,7 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 class MealTypeViewModel extends BaseViewModel {
   final _navigatorService = NavigationService();
 
-  int selectedButton = -1;
+  int selectedButton = 0;
 
   void onTapMealType(int index) {
     selectedButton = index;
