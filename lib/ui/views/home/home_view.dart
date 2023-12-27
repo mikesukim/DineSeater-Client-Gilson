@@ -38,7 +38,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       FractionallySizedBox(
                         widthFactor: 0.9,
                         child: ElevatedButton(
-                            onPressed: () => print('hi'),
+                            onPressed: () => throw Exception(),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: kcPrimaryColor,
                                 minimumSize: const Size(200, 50),
