@@ -55,14 +55,16 @@ class CognitoService {
     }
   }
 
-  Future<String> getTokenId() async {
+  Future<String?> getIdToken() async {
     try {
-      final authSession = (await Amplify.Auth.fetchAuthSession(
-        options: CognitoSessionOptions(getAWSCredentials: true),
-      )) as CognitoAuthSession;
-      return authSession.userPoolTokens!.idToken;
-    } on AmplifyException catch (e) {
-      safePrint('error occurred while retrieving Token ID : ${e.message}');
+      final cognitoPlugin = Amplify.Auth.getPlugin(AmplifyAuthCognito.pluginKey);
+      final result = await cognitoPlugin.fetchAuthSession();
+      return result.userPoolTokensResult.value.idToken.raw;
+    } on SignedOutException catch (e) {
+      safePrint('User is not signed in: ${e.message}');
+      rethrow;
+    } on AuthException catch (e) {
+      safePrint('Error getting id token: ${e.message}');
       rethrow;
     }
   }

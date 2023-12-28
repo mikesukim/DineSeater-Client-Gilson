@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'firebase_options.dart';
 import 'firebase_messaging_service.dart';
 
@@ -26,7 +27,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessagingService().initialize();
+  await FirebaseMessagingService().initialize();
+
+  // Crashlytics init
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   runApp(const MainApp());
 }
