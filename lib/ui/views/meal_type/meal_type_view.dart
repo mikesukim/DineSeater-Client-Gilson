@@ -1,3 +1,4 @@
+import 'package:dineseater_client_gilson/model/wait_list.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -158,11 +159,11 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                         ),
                         Column(
                           children: [
-                            const Text(
-                              'Estimated wait: 15-25 minutes',
-                              style: subText,
-                            ),
-                            verticalSpaceMedium,
+                            // const Text(
+                            //   'Estimated wait: 15-25 minutes',
+                            //   style: subText,
+                            // ),
+                            // verticalSpaceMedium,
                             //TODO: set button max width instead of percentage
                             FractionallySizedBox(
                               widthFactor: 1.0,
@@ -199,6 +200,9 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
   @override
   MealTypeViewModel viewModelBuilder(
     BuildContext context,
-  ) =>
-      MealTypeViewModel();
+  ) {
+    Waiting waiting = ModalRoute.of(context)?.settings.arguments as Waiting;
+
+    return MealTypeViewModel(waiting: waiting);
+  }
 }

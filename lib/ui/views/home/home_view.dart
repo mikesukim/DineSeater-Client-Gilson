@@ -91,7 +91,7 @@ class HomeView extends StackedView<HomeViewModel> {
                           widthFactor: 0.95,
                           child: ListView.separated(
                             shrinkWrap: true,
-                            itemCount: viewModel.waitlist.length,
+                            itemCount: viewModel.waitingList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
                                 height: 60,
@@ -100,9 +100,10 @@ class HomeView extends StackedView<HomeViewModel> {
                                     : Colors.transparent,
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                    left: (viewModel.waitlist[index].isGrill)
-                                        ? 14.0
-                                        : 16.0,
+                                    left:
+                                        (viewModel.waitingList[index].isGrill!)
+                                            ? 14.0
+                                            : 16.0,
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -110,14 +111,16 @@ class HomeView extends StackedView<HomeViewModel> {
                                     children: [
                                       Row(
                                         children: [
-                                          (viewModel.waitlist[index].isGrill)
+                                          (viewModel
+                                                  .waitingList[index].isGrill!)
                                               ? grillIconSmall
                                               : mealIconSmall,
-                                          (viewModel.waitlist[index].isGrill)
+                                          (viewModel
+                                                  .waitingList[index].isGrill!)
                                               ? const SizedBox(width: 16)
                                               : const SizedBox(width: 20),
                                           Text(
-                                            viewModel.waitlist[index].name,
+                                            viewModel.waitingList[index].name!,
                                             style: const TextStyle(
                                                 fontSize: 17,
                                                 fontWeight: mediumFontWeight),
@@ -127,7 +130,8 @@ class HomeView extends StackedView<HomeViewModel> {
                                       Row(
                                         children: [
                                           Text(
-                                            viewModel.waitlist[index].partySize
+                                            viewModel
+                                                .waitingList[index].partySize
                                                 .toString(),
                                             style:
                                                 const TextStyle(fontSize: 17),

@@ -1,3 +1,4 @@
+import 'package:dineseater_client_gilson/model/wait_list.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -35,87 +36,95 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 0.9,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            gilsonIconSmall,
-                            verticalSpaceSmall,
-                            const Text(
-                              'How many people in your party?',
-                              style: mainText,
-                            ),
-                            verticalSpaceTiny,
-                            const FractionallySizedBox(
-                              widthFactor: 0.8,
-                              child: Text(
-                                'For parties larger than 7, please speak with our restaurant staff.',
-                                style: subText,
-                                textAlign: TextAlign.center,
+                    child: Form(
+                      key: viewModel.partySizeFormKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              gilsonIconSmall,
+                              verticalSpaceSmall,
+                              const Text(
+                                'How many people in your party?',
+                                style: mainText,
                               ),
-                            ),
-                            verticalSpaceMedium,
-                            MaterialButton(
-                              onPressed: viewModel.showBottomSheet,
-                              child: Text('show'),
-                            ),
-                            TextFormField(
-                              controller: viewModel.phoneController,
-                              keyboardType: TextInputType.phone,
-                              //TODO: validator
-                              validator: (String? value) {
-                                print(value);
-                                String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                                RegExp regExp = RegExp(pattern);
-                                if (value!.isEmpty) {
-                                  return 'Please enter mobile number.';
-                                } else if (!regExp.hasMatch(value)) {
-                                  return 'Please enter valid mobile number.';
-                                }
-                                return null;
-                              },
-                              decoration: const InputDecoration(
-                                  hintText: '1',
-                                  hintStyle: inputHintTextStyle,
-                                  // filled: true,
-                                  // fillColor: kcInputBackgroundColor,
-                                  enabledBorder: inputBorderStyle,
-                                  focusedBorder: inputBorderStyle),
-                            ),
-                            // verticalSpaceMedium,
-                            // const SizedBox(height: 90.0),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            const Text(
-                              'Estimated wait: 15-25 minutes',
-                              style: subText,
-                            ),
-                            verticalSpaceMedium,
-                            //TODO: set button max width instead of percentage
-                            FractionallySizedBox(
-                              widthFactor: 1.0,
-                              child: ElevatedButton(
-                                  onPressed: viewModel.navigateToCustomerNameView,
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kcPrimaryColor,
-                                      minimumSize: const Size(200, 50),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25)),
-                                      elevation: 0),
-                                  child: const Text(
-                                    'Next',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: semiBoldFontWeight),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ],
+                              verticalSpaceTiny,
+                              const FractionallySizedBox(
+                                widthFactor: 0.8,
+                                child: Text(
+                                  'For parties larger than 7, please speak with our restaurant staff.',
+                                  style: subText,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              verticalSpaceMedium,
+                              // MaterialButton(
+                              //   onPressed: viewModel.showBottomSheet,
+                              //   child: Text('show'),
+                              // ),
+                              TextFormField(
+                                autofocus: true,
+                                controller: viewModel.partySizeController,
+                                keyboardType: TextInputType.number,
+                                validator: (String? value) {
+                                  String pattern = r'^([1-9][0-9]{0,1})$';
+                                  RegExp regExp = RegExp(pattern);
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a number of party size.';
+                                  } else if (!regExp.hasMatch(value)) {
+                                    return 'Please enter valid number of party size.';
+                                  }
+                                  return null;
+                                },
+                                decoration: const InputDecoration(
+                                    hintText: '1',
+                                    hintStyle: inputHintTextStyle,
+                                    // filled: true,
+                                    // fillColor: kcInputBackgroundColor,
+                                    enabledBorder: inputBorderStyle,
+                                    focusedBorder: inputBorderStyle),
+                              ),
+                              // verticalSpaceMedium,
+                              // const SizedBox(height: 90.0),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              // const Text(
+                              //   'Estimated wait: 15-25 minutes',
+                              //   style: subText,
+                              // ),
+                              // verticalSpaceMedium,
+                              //TODO: set button max width instead of percentage
+                              FractionallySizedBox(
+                                widthFactor: 1.0,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      if (viewModel
+                                          .partySizeFormKey.currentState!
+                                          .validate()) {
+                                        viewModel.navigateToCustomerNameView();
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: kcPrimaryColor,
+                                        minimumSize: const Size(200, 50),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25)),
+                                        elevation: 0),
+                                    child: const Text(
+                                      'Next',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: semiBoldFontWeight),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -130,6 +139,9 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
   @override
   PartySizeViewModel viewModelBuilder(
     BuildContext context,
-  ) =>
-      PartySizeViewModel();
+  ) {
+    Waiting waiting = ModalRoute.of(context)?.settings.arguments as Waiting;
+
+    return PartySizeViewModel(waiting: waiting);
+  }
 }

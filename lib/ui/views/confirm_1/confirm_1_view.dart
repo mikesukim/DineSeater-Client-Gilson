@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../model/wait_list.dart';
 import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'confirm_1_viewmodel.dart';
@@ -44,9 +45,11 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
                             scale: 2.5,
                           ),
                           verticalSpaceLarge,
-                          const Text('Kayla, party of 3', style: mainText),
+                          Text(
+                              '${viewModel.waiting.name}, party of ${viewModel.waiting.partySize}',
+                              style: mainText),
                           verticalSpaceTiny,
-                          const Text('(253) 561 - 3187', style: subText),
+                          Text(viewModel.formattedMobileNumber, style: subText),
                           TextButton(
                               onPressed: viewModel.navigateToMealTypeView,
                               child: const Text(
@@ -57,11 +60,11 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
                       ),
                       Column(
                         children: [
-                          const Text(
-                            'Estimated wait: 15-25 minutes',
-                            style: subText,
-                          ),
-                          verticalSpaceMedium,
+                          // const Text(
+                          //   'Estimated wait: 15-25 minutes',
+                          //   style: subText,
+                          // ),
+                          // verticalSpaceMedium,
                           //TODO: set button max width instead of percentage
                           FractionallySizedBox(
                             widthFactor: 1.0,
@@ -97,6 +100,9 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
   @override
   Confirm1ViewModel viewModelBuilder(
     BuildContext context,
-  ) =>
-      Confirm1ViewModel();
+  ) {
+    Waiting waiting = ModalRoute.of(context)?.settings.arguments as Waiting;
+
+    return Confirm1ViewModel(waiting: waiting);
+  }
 }

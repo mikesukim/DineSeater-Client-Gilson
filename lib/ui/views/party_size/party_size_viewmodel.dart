@@ -5,12 +5,21 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.bottomsheets.dart';
 import '../../../app/app.locator.dart';
+import '../../../model/wait_list.dart';
 
 class PartySizeViewModel extends BaseViewModel {
   final _navigatorService = NavigationService();
   final _bottomSheetService = locator<BottomSheetService>();
+  final partySizeFormKey = GlobalKey<FormState>();
 
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController partySizeController = TextEditingController();
+  Waiting waiting;
+
+  PartySizeViewModel({required this.waiting}) {
+    if (waiting.partySize != null) {
+      partySizeController.text = waiting.partySize.toString();
+    }
+  }
 
   void showBottomSheet() {
     _bottomSheetService.showCustomSheet(
@@ -24,6 +33,8 @@ class PartySizeViewModel extends BaseViewModel {
   }
 
   void navigateToCustomerNameView() {
-    _navigatorService.navigateToCustomerNameView();
+    waiting.partySize = int.parse(partySizeController.text);
+
+    _navigatorService.navigateTo(Routes.customerNameView, arguments: waiting);
   }
 }

@@ -5,19 +5,24 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../model/wait_list.dart';
 
 class MobileInputViewModel extends BaseViewModel {
   final _navigatorService = NavigationService();
   final _bottomSheetService = locator<BottomSheetService>();
+  final mobileInputFormKey = GlobalKey<FormState>();
 
-  TextEditingController phoneController = TextEditingController();
+  Waiting waiting;
 
-  void navigateBack() {
-    _navigatorService.back();
-  }
+  TextEditingController phoneController = TextEditingController(text: '+1 ');
 
-  void navigateToConfirm1view() {
-    _navigatorService.navigateToConfirm1View();
+  MobileInputViewModel({required this.waiting}) {
+    if (waiting.mobileNumber != null) {
+      String formattedMobileNumber = waiting.mobileNumber!;
+      formattedMobileNumber =
+          '${formattedMobileNumber.substring(0, 2)} (${formattedMobileNumber.substring(2, 5)}) ${formattedMobileNumber.substring(5, 8)} ${formattedMobileNumber.substring(8, 12)}';
+      phoneController.text = formattedMobileNumber;
+    }
   }
 
   void showBottomSheet() {
@@ -25,5 +30,18 @@ class MobileInputViewModel extends BaseViewModel {
         variant: BottomSheetType.numKeypad,
         isScrollControlled: false,
         barrierColor: Colors.transparent);
+  }
+
+  void navigateBack() {
+    _navigatorService.back();
+  }
+
+  void navigateToConfirm1view() {
+    String mobileNumber = phoneController.text.replaceAll('(', '');
+    mobileNumber = mobileNumber.replaceAll(')', '');
+    mobileNumber = mobileNumber.replaceAll(' ', '');
+    waiting.mobileNumber = mobileNumber;
+
+    _navigatorService.navigateTo(Routes.confirm1View, arguments: waiting);
   }
 }

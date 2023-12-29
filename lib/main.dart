@@ -44,6 +44,7 @@ class MainApp extends StatelessWidget {
         StackedService.routeObserver,
       ],
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: false),
     );
   }
 }

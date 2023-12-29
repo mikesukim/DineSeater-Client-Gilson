@@ -60,14 +60,12 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
                                 backgroundColor: kcPrimaryColor,
                                 minimumSize: const Size(200, 50),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(25)),
+                                    borderRadius: BorderRadius.circular(25)),
                                 elevation: 0),
                             child: const Text(
                               'Go to Home',
                               style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: semiBoldFontWeight),
+                                  fontSize: 16, fontWeight: semiBoldFontWeight),
                             )),
                       ),
                     ],
