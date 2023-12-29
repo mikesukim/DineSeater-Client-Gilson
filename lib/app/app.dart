@@ -6,6 +6,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:dineseater_client_gilson/services/cognito_service.dart';
 import 'package:dineseater_client_gilson/ui/views/mobile_input/mobile_input_view.dart';
+import 'package:dineseater_client_gilson/services/dineseater_api_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -20,6 +21,7 @@ import 'package:dineseater_client_gilson/ui/views/mobile_input/mobile_input_view
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: CognitoService),
+    LazySingleton(classType: DineseaterApiService),
 // @stacked-service
   ],
   bottomsheets: [
