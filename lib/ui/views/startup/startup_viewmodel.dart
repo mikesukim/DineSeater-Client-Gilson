@@ -21,8 +21,6 @@ class StartupViewModel extends BaseViewModel {
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
     try {
-      // env init
-      await dotenv.load(fileName: ".env");
 
       // Firebase init
       await Firebase.initializeApp(
