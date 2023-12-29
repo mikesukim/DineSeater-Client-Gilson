@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 
 import '../app/app.locator.dart';
+import '../model/waiting_item.dart';
 import '../model/waiting_list_response.dart';
 import 'cognito_service.dart';
 
@@ -14,7 +15,7 @@ class DineseaterApiService {
   final _cognitoService = locator<CognitoService>();
   final String _baseUrl = dotenv.env['DINESEATER_API_URL']!;
 
-  Future<WaitingListResponse> getWaitingList() async {
+  Future<List<WaitingItem>> getWaitingList() async {
     logger.i('getWaitingList');
     final token = await _cognitoService.getIdToken();
     final url = Uri.parse('$_baseUrl/business/waitinglist');
@@ -27,7 +28,8 @@ class DineseaterApiService {
     }
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-      return WaitingListResponse.fromJson(jsonResponse);
+      final waitingListResponse = WaitingListResponse.fromJson(jsonResponse);
+      return waitingListResponse.waitings;
     } else {
       logger.e('Failed to load waiting list with status code: ${response.statusCode}');
       throw Exception('Failed to load waiting list');
