@@ -22,7 +22,9 @@ class StartupView extends StackedView<StartupViewModel> {
         child: Padding(
           padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
           child: Center(
-            child: Column(
+            child:
+            // TODO : switch to popup and block the process
+            viewModel.hasError ? Text(viewModel.error.toString()) : Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
