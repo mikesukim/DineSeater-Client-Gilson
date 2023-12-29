@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dineseater_client_gilson/app/app.locator.dart';
 import 'package:dineseater_client_gilson/app/app.router.dart';
@@ -14,6 +14,7 @@ import '../../../firebase_options.dart';
 import '../../../services/cognito_service.dart';
 
 class StartupViewModel extends BaseViewModel {
+  var logger = Logger();
   final _navigationService = locator<NavigationService>();
   final _cognitoService = locator<CognitoService>();
 
@@ -34,22 +35,26 @@ class StartupViewModel extends BaseViewModel {
 
       // Amplify auth configuration
       await _cognitoService.configureAmplify();
+
+      logger.i('runStartupLogic completed');
     } catch (e) {
-      // TODO: log error
-      setError('runStartupLogic error: $e');
+      final errorMessage = 'runStartupLogic error: $e';
+      logger.e(errorMessage);
+      setError(errorMessage);
     }
 
     // login check
     final isLoggedIn = await _cognitoService.isUserSignedIn();
-    safePrint('isLoggedIn: $isLoggedIn');
+    logger.i('isLoggedIn: $isLoggedIn');
     if (!isLoggedIn) {
       try {
         final username = dotenv.env['COGNITO_TESTING_USER_ID']!;
         final password = dotenv.env['COGNITO_TESTING_USER_PASSWORD']!;
         await _cognitoService.signInUser(username, password);
       } catch (e) {
-        // TODO: log error
-        setError('signInUser error: $e');
+        final errorMessage = 'signInUser error: $e';
+        logger.e(errorMessage);
+        setError(errorMessage);
       }
     }
 
