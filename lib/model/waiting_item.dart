@@ -41,7 +41,10 @@ class DetailAttribute {
   @JsonKey(name: 'is_meal')
   late bool isMeal;
 
-  DetailAttribute();
+  DetailAttribute({
+    required this.isMeal,
+    required this.isGrill,
+  });
 
   factory DetailAttribute.fromJson(Map<String, dynamic> json) =>
       _$DetailAttributeFromJson(json);

@@ -28,9 +28,10 @@ Map<String, dynamic> _$WaitingItemToJson(WaitingItem instance) =>
     };
 
 DetailAttribute _$DetailAttributeFromJson(Map<String, dynamic> json) =>
-    DetailAttribute()
-      ..isGrill = json['is_grill'] as bool
-      ..isMeal = json['is_meal'] as bool;
+    DetailAttribute(
+      isMeal: json['is_meal'] as bool,
+      isGrill: json['is_grill'] as bool,
+    );
 
 Map<String, dynamic> _$DetailAttributeToJson(DetailAttribute instance) =>
     <String, dynamic>{

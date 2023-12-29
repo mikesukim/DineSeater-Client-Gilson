@@ -6,8 +6,9 @@
 import 'dart:async' as _i6;
 import 'dart:ui' as _i7;
 
-import 'package:dineseater_client_gilson/model/waiting_list_response.dart'
-    as _i3;
+import 'package:dineseater_client_gilson/model/waiting_item.dart' as _i3;
+import 'package:dineseater_client_gilson/model/waiting_item_post_request.dart'
+    as _i10;
 import 'package:dineseater_client_gilson/services/cognito_service.dart' as _i8;
 import 'package:dineseater_client_gilson/services/dineseater_api_service.dart'
     as _i9;
@@ -37,9 +38,8 @@ class _FakeLogger_0 extends _i1.SmartFake implements _i2.Logger {
         );
 }
 
-class _FakeWaitingListResponse_1 extends _i1.SmartFake
-    implements _i3.WaitingListResponse {
-  _FakeWaitingListResponse_1(
+class _FakeWaitingItem_1 extends _i1.SmartFake implements _i3.WaitingItem {
+  _FakeWaitingItem_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -760,26 +760,39 @@ class MockDineseaterApiService extends _i1.Mock
       ) as _i2.Logger);
 
   @override
-  _i6.Future<_i3.WaitingListResponse> getWaitingList() => (super.noSuchMethod(
+  _i6.Future<List<_i3.WaitingItem>> getWaitingList() => (super.noSuchMethod(
         Invocation.method(
           #getWaitingList,
           [],
         ),
-        returnValue: _i6.Future<_i3.WaitingListResponse>.value(
-            _FakeWaitingListResponse_1(
+        returnValue:
+            _i6.Future<List<_i3.WaitingItem>>.value(<_i3.WaitingItem>[]),
+        returnValueForMissingStub:
+            _i6.Future<List<_i3.WaitingItem>>.value(<_i3.WaitingItem>[]),
+      ) as _i6.Future<List<_i3.WaitingItem>>);
+
+  @override
+  _i6.Future<_i3.WaitingItem> addWaitingItem(
+          _i10.WaitingItemPostRequest? waitingItemPostRequest) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addWaitingItem,
+          [waitingItemPostRequest],
+        ),
+        returnValue: _i6.Future<_i3.WaitingItem>.value(_FakeWaitingItem_1(
           this,
           Invocation.method(
-            #getWaitingList,
-            [],
+            #addWaitingItem,
+            [waitingItemPostRequest],
           ),
         )),
-        returnValueForMissingStub: _i6.Future<_i3.WaitingListResponse>.value(
-            _FakeWaitingListResponse_1(
+        returnValueForMissingStub:
+            _i6.Future<_i3.WaitingItem>.value(_FakeWaitingItem_1(
           this,
           Invocation.method(
-            #getWaitingList,
-            [],
+            #addWaitingItem,
+            [waitingItemPostRequest],
           ),
         )),
-      ) as _i6.Future<_i3.WaitingListResponse>);
+      ) as _i6.Future<_i3.WaitingItem>);
 }
