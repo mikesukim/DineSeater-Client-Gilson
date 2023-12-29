@@ -3,6 +3,7 @@ import 'package:dineseater_client_gilson/app/app.bottomsheets.dart';
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
 import 'package:dineseater_client_gilson/app/app.locator.dart';
 import 'package:dineseater_client_gilson/app/app.router.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
@@ -10,6 +11,7 @@ Future<void> main() async {
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 

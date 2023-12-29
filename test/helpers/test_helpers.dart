@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:dineseater_client_gilson/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:dineseater_client_gilson/services/cognito_service.dart';
+import 'package:dineseater_client_gilson/services/dineseater_api_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -12,6 +13,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<CognitoService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<DineseaterApiService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -19,6 +21,7 @@ void registerServices() {
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
   getAndRegisterCognitoService();
+  getAndRegisterDineseaterApiService();
 // @stacked-mock-register
 }
 
@@ -76,6 +79,13 @@ MockCognitoService getAndRegisterCognitoService() {
   _removeRegistrationIfExists<CognitoService>();
   final service = MockCognitoService();
   locator.registerSingleton<CognitoService>(service);
+  return service;
+}
+
+MockDineseaterApiService getAndRegisterDineseaterApiService() {
+  _removeRegistrationIfExists<DineseaterApiService>();
+  final service = MockDineseaterApiService();
+  locator.registerSingleton<DineseaterApiService>(service);
   return service;
 }
 // @stacked-mock-create

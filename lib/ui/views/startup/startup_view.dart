@@ -23,19 +23,21 @@ class StartupView extends StackedView<StartupViewModel> {
           padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
           child: Center(
             child:
-            // TODO : switch to popup and block the process
-            viewModel.hasError ? Text(viewModel.error.toString()) : Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                verticalSpaceLarge,
-                Image.asset('assets/Logo_Gilson.png'),
-                Image.asset(
-                  'assets/Logo_DineSeater_white.png',
-                  width: 75,
-                ),
-              ],
-            ),
+                // TODO : switch to popup and block the process
+                viewModel.hasError
+                    ? Text(viewModel.error.toString())
+                    : Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          verticalSpaceLarge,
+                          Image.asset('assets/Logo_Gilson.png'),
+                          Image.asset(
+                            'assets/Logo_DineSeater_white.png',
+                            width: 75,
+                          ),
+                        ],
+                      ),
           ),
         ),
       ),

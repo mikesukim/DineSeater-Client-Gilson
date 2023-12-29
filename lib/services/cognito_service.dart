@@ -57,7 +57,8 @@ class CognitoService {
 
   Future<String?> getIdToken() async {
     try {
-      final cognitoPlugin = Amplify.Auth.getPlugin(AmplifyAuthCognito.pluginKey);
+      final cognitoPlugin =
+          Amplify.Auth.getPlugin(AmplifyAuthCognito.pluginKey);
       final result = await cognitoPlugin.fetchAuthSession();
       return result.userPoolTokensResult.value.idToken.raw;
     } on SignedOutException catch (e) {
