@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dineseater_client_gilson/model/waiting_item_post_request.dart';
+import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_post_response.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
@@ -41,7 +41,7 @@ class DineseaterApiService {
   }
 
   Future<WaitingItem> addWaitingItem(
-      WaitingItemPostRequest waitingItemPostRequest) async {
+      WaitingItemAddRequest waitingItemPostRequest) async {
     logger.i('PostWaitingItem');
     final token = await _cognitoService.getIdToken();
     final url = Uri.parse('$_baseUrl/business/waitinglist');

@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'action_enum.dart';
 
-part 'waiting_item_post_request.g.dart';
+part 'waiting_item_add_request.g.dart';
 
 @JsonSerializable()
-class WaitingItemPostRequest {
+class WaitingItemAddRequest {
   @JsonKey(name: 'action')
   late ActionType action;
 
@@ -19,15 +19,15 @@ class WaitingItemPostRequest {
   @JsonKey(name: 'phone_number')
   late String phoneNumber;
 
-  WaitingItemPostRequest({
+  WaitingItemAddRequest({
     required this.action,
     required this.numberOfCustomers,
     required this.detailAttribute,
     required this.phoneNumber,
   });
 
-  factory WaitingItemPostRequest.fromJson(Map<String, dynamic> json) =>
-      _$WaitingItemPostRequestFromJson(json);
+  factory WaitingItemAddRequest.fromJson(Map<String, dynamic> json) =>
+      _$WaitingItemAddRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WaitingItemPostRequestToJson(this);
+  Map<String, dynamic> toJson() => _$WaitingItemAddRequestToJson(this);
 }

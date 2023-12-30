@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'waiting_item_post_request.dart';
+part of 'waiting_item_add_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WaitingItemPostRequest _$WaitingItemPostRequestFromJson(
+WaitingItemAddRequest _$WaitingItemAddRequestFromJson(
         Map<String, dynamic> json) =>
-    WaitingItemPostRequest(
+    WaitingItemAddRequest(
       action: $enumDecode(_$ActionTypeEnumMap, json['action']),
       numberOfCustomers: json['number_of_customers'] as int,
       detailAttribute: DetailAttribute.fromJson(
@@ -16,8 +16,8 @@ WaitingItemPostRequest _$WaitingItemPostRequestFromJson(
       phoneNumber: json['phone_number'] as String,
     );
 
-Map<String, dynamic> _$WaitingItemPostRequestToJson(
-        WaitingItemPostRequest instance) =>
+Map<String, dynamic> _$WaitingItemAddRequestToJson(
+        WaitingItemAddRequest instance) =>
     <String, dynamic>{
       'action': _$ActionTypeEnumMap[instance.action]!,
       'number_of_customers': instance.numberOfCustomers,
