@@ -22,98 +22,135 @@ class HomeView extends StackedView<HomeViewModel> {
           child: Center(
             child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      gilsonIconSmall,
-                      verticalSpaceSmall,
-                      const Text(
-                        'Waitlist',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: semiBoldFontWeight),
-                      ),
-                      verticalSpaceMedium,
-                      FractionallySizedBox(
-                        widthFactor: 0.9,
-                        child: ElevatedButton(
-                            onPressed: () => throw Exception(),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: kcPrimaryColor,
-                                minimumSize: const Size(200, 50),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25))
-                                // elevation: 0
-                                ),
-                            child: const Text(
-                              'Join the Waitlist',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: semiBoldFontWeight),
-                            )),
-                      )
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    gilsonIconSmall,
+                    verticalSpaceSmall,
+                    FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: ElevatedButton(
+                          onPressed: () => viewModel.navigateToMealTypeView(),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: kcPrimaryColor,
+                              minimumSize: const Size(200, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)),
+                              elevation: 0),
+                          child: const Text(
+                            'Join the Waitlist',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: semiBoldFontWeight),
+                          )),
+                    )
+                  ],
                 ),
-                verticalSpaceMedium,
+                verticalSpaceSmall,
+                const Divider(
+                  height: 40.0,
+                ),
                 Expanded(
                   flex: 2,
                   child: FractionallySizedBox(
                     widthFactor: 0.95,
                     child: Column(
                       children: [
+                        const Text(
+                          'Waitlist',
+                          style: TextStyle(
+                              fontSize: 26, fontWeight: mediumFontWeight),
+                        ),
+                        verticalSpaceMedium,
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Name',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: mediumFontWeight),
+                              Row(
+                                children: [
+                                  SizedBox(width: 50),
+                                  Text(
+                                    'Name',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: semiBoldFontWeight),
+                                  ),
+                                ],
                               ),
                               Text(
                                 'Party size',
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: mediumFontWeight),
+                                    fontSize: 18,
+                                    fontWeight: semiBoldFontWeight),
                               )
                             ],
                           ),
                         ),
-                        verticalSpaceSmall,
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: viewModel.waitlist.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              height: 35,
-                              color: (index == 0)
-                                  ? kcLightGreyWithOpacity
-                                  : Colors.transparent,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 44.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      viewModel.waitlist[index].name,
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: mediumFontWeight),
-                                    ),
-                                    Text(viewModel.waitlist[index].partySize
-                                        .toString())
-                                  ],
+                        verticalSpaceMedium,
+                        FractionallySizedBox(
+                          widthFactor: 0.95,
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: viewModel.waitingList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                height: 60,
+                                color: (index == 0)
+                                    ? kcLightPrimaryColor
+                                    : Colors.transparent,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left:
+                                        (viewModel.waitingList[index].isGrill!)
+                                            ? 14.0
+                                            : 16.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          (viewModel
+                                                  .waitingList[index].isGrill!)
+                                              ? grillIconSmall
+                                              : mealIconSmall,
+                                          (viewModel
+                                                  .waitingList[index].isGrill!)
+                                              ? const SizedBox(width: 16)
+                                              : const SizedBox(width: 20),
+                                          Text(
+                                            viewModel.waitingList[index].name!,
+                                            style: const TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: mediumFontWeight),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            viewModel
+                                                .waitingList[index].partySize
+                                                .toString(),
+                                            style:
+                                                const TextStyle(fontSize: 17),
+                                          ),
+                                          const SizedBox(
+                                            width: 50,
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const Divider(
-                            indent: 16.0,
-                            endIndent: 44.0,
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const Divider(
+                              color: Colors.transparent,
+                            ),
                           ),
                         )
                       ],

@@ -7,6 +7,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:dineseater_client_gilson/services/cognito_service.dart';
 import 'package:dineseater_client_gilson/ui/views/mobile_input/mobile_input_view.dart';
 import 'package:dineseater_client_gilson/services/dineseater_api_service.dart';
+import 'package:dineseater_client_gilson/ui/bottom_sheets/num_keypad/num_keypad_sheet.dart';
+import 'package:dineseater_client_gilson/ui/views/meal_type/meal_type_view.dart';
+import 'package:dineseater_client_gilson/ui/views/party_size/party_size_view.dart';
+import 'package:dineseater_client_gilson/ui/views/customer_name/customer_name_view.dart';
+import 'package:dineseater_client_gilson/ui/views/confirm_1/confirm_1_view.dart';
+import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -14,6 +20,11 @@ import 'package:dineseater_client_gilson/services/dineseater_api_service.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: MobileInputView),
+    MaterialRoute(page: MealTypeView),
+    MaterialRoute(page: PartySizeView),
+    MaterialRoute(page: CustomerNameView),
+    MaterialRoute(page: Confirm1View),
+    MaterialRoute(page: Confirm2View),
 // @stacked-route
   ],
   dependencies: [
@@ -26,7 +37,8 @@ import 'package:dineseater_client_gilson/services/dineseater_api_service.dart';
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
-    // @stacked-bottom-sheet
+    StackedBottomsheet(classType: NumKeypadSheet),
+// @stacked-bottom-sheet
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
