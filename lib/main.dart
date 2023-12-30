@@ -3,31 +3,15 @@ import 'package:dineseater_client_gilson/app/app.bottomsheets.dart';
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
 import 'package:dineseater_client_gilson/app/app.locator.dart';
 import 'package:dineseater_client_gilson/app/app.router.dart';
-import 'package:stacked_services/stacked_services.dart';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'firebase_messaging_service.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // env init
-  await dotenv.load(fileName: ".env");
-
-  // Stacked init
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
-
-  // Firebase init
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FirebaseMessagingService().initialize();
-
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 

@@ -17,7 +17,10 @@ class StartupView extends StackedView<StartupViewModel> {
     return Scaffold(
       backgroundColor: kcPrimaryColor,
       body: SafeArea(
-        child: Stack(
+        // TODO : switch to popup and block the process
+        child: viewModel.hasError
+            ? Text(viewModel.error.toString())
+            : Stack(
           children: [
             Center(child: Image.asset('assets/Logo_Gilson.png')),
             Align(

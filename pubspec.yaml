@@ -5,18 +5,24 @@ version: 0.1.0
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
+  flutter: ">=3.3.0"
 
 dependencies:
-  amplify_auth_cognito: ^0.6.13
-  amplify_flutter: ^0.6.13
-  firebase_core: ^2.14.0
-  firebase_messaging: ^14.6.3
+  amplify_flutter: ^1.0.0
+  amplify_auth_cognito: ^1.0.0
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.7.9
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.1.0
   stacked: ^3.4.0
   stacked_services: ^1.1.0
   flutter_device_type: ^0.4.0
+  firebase_crashlytics: ^3.4.8
+  logger: ^1.4.0
+  http: ^1.1.0
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
   flutter_multi_formatter: ^2.11.7
   numpad_layout: ^0.0.3
 
