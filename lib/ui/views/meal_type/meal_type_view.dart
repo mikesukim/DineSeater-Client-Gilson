@@ -1,4 +1,4 @@
-import 'package:dineseater_client_gilson/model/wait_list.dart';
+import 'package:dineseater_client_gilson/model/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

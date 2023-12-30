@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../model/wait_list.dart';
+import '../../../model/waiting.dart';
 import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'confirm_1_viewmodel.dart';

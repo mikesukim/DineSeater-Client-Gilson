@@ -1,5 +1,3 @@
-// TODO : delete this file
-
 class Waiting {
   String? name;
   int? partySize;

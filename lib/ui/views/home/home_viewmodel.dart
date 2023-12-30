@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.router.dart';
-import '../../../model/wait_list.dart';
+import '../../../model/waiting.dart';
 
 class HomeViewModel extends BaseViewModel {
   final _navigationService = NavigationService();

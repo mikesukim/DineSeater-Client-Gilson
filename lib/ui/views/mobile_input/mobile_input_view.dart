@@ -2,7 +2,7 @@ import 'package:dineseater_client_gilson/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
 import 'package:stacked/stacked.dart';
-import '../../../model/wait_list.dart';
+import '../../../model/waiting.dart';
 import '../../common/ui_helpers.dart';
 import 'mobile_input_viewmodel.dart';
 

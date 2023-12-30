@@ -2,7 +2,7 @@ import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../model/wait_list.dart';
+import '../../../model/waiting.dart';
 
 class Confirm1ViewModel extends BaseViewModel {
   final _navigatorService = NavigationService();

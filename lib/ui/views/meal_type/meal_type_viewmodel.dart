@@ -1,5 +1,5 @@
 import 'package:dineseater_client_gilson/app/app.router.dart';
-import 'package:dineseater_client_gilson/model/wait_list.dart';
+import 'package:dineseater_client_gilson/model/waiting.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
