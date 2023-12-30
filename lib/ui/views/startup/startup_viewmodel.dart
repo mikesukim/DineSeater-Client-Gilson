@@ -41,6 +41,9 @@ class StartupViewModel extends BaseViewModel {
       setError(errorMessage);
     }
 
+    // device registration for notification
+    // TODO : add device token registration
+
     // login check
     final isLoggedIn = await _cognitoService.isUserSignedIn();
     logger.i('isLoggedIn: $isLoggedIn');
