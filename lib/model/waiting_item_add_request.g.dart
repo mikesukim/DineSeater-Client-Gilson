@@ -9,12 +9,11 @@ part of 'waiting_item_add_request.dart';
 WaitingItemAddRequest _$WaitingItemAddRequestFromJson(
         Map<String, dynamic> json) =>
     WaitingItemAddRequest(
-      action: $enumDecode(_$ActionTypeEnumMap, json['action']),
       numberOfCustomers: json['number_of_customers'] as int,
       detailAttribute: DetailAttribute.fromJson(
           json['detail_attribute'] as Map<String, dynamic>),
       phoneNumber: json['phone_number'] as String,
-    );
+    )..action = $enumDecode(_$ActionTypeEnumMap, json['action']);
 
 Map<String, dynamic> _$WaitingItemAddRequestToJson(
         WaitingItemAddRequest instance) =>

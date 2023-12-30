@@ -20,11 +20,10 @@ class WaitingItemAddRequest {
   late String phoneNumber;
 
   WaitingItemAddRequest({
-    required this.action,
     required this.numberOfCustomers,
     required this.detailAttribute,
     required this.phoneNumber,
-  });
+  }) : action = ActionType.ADD;
 
   factory WaitingItemAddRequest.fromJson(Map<String, dynamic> json) =>
       _$WaitingItemAddRequestFromJson(json);

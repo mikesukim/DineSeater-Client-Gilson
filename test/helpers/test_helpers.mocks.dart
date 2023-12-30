@@ -7,6 +7,8 @@ import 'dart:async' as _i6;
 import 'dart:ui' as _i7;
 
 import 'package:dineseater_client_gilson/model/waiting_item.dart' as _i3;
+import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart'
+    as _i10;
 import 'package:dineseater_client_gilson/services/cognito_service.dart' as _i8;
 import 'package:dineseater_client_gilson/services/dineseater_api_service.dart'
     as _i9;
@@ -770,7 +772,8 @@ class MockDineseaterApiService extends _i1.Mock
       ) as _i6.Future<List<_i3.WaitingItem>>);
 
   @override
-  _i6.Future<_i3.WaitingItem> addWaitingItem(dynamic waitingItemPostRequest) =>
+  _i6.Future<_i3.WaitingItem> addWaitingItem(
+          _i10.WaitingItemAddRequest? waitingItemPostRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addWaitingItem,
