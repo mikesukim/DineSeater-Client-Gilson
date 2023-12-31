@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
@@ -9,8 +7,6 @@ import 'package:dineseater_client_gilson/app/app.locator.dart';
 import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../firebase_messaging_service.dart';
-import '../../../firebase_options.dart';
 import '../../../services/cognito_service.dart';
 
 class StartupViewModel extends BaseViewModel {
@@ -21,16 +17,6 @@ class StartupViewModel extends BaseViewModel {
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
     try {
-
-      // Firebase init
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-      await FirebaseMessagingService().initialize();
-
-      // Crashlytics init
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-
       // Amplify auth configuration
       await _cognitoService.configureAmplify();
 
