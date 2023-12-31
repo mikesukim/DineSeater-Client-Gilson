@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
 import 'package:dineseater_client_gilson/app/app.locator.dart';
@@ -8,11 +10,13 @@ import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../services/cognito_service.dart';
+import '../../../services/dineseater_api_service.dart';
 
 class StartupViewModel extends BaseViewModel {
   var logger = Logger();
   final _navigationService = locator<NavigationService>();
   final _cognitoService = locator<CognitoService>();
+  final _dineSeaterApiService = locator<DineseaterApiService>();
 
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
@@ -26,9 +30,6 @@ class StartupViewModel extends BaseViewModel {
       logger.e(errorMessage);
       setError(errorMessage);
     }
-
-    // device registration for notification
-    // TODO : add device token registration
 
     // login check
     final isLoggedIn = await _cognitoService.isUserSignedIn();
@@ -48,7 +49,21 @@ class StartupViewModel extends BaseViewModel {
     final idToken = await _cognitoService.getIdToken();
     log('idToken: $idToken');
 
-    // Wait for 1 second
+    // device registration for notification
+    // registration is done only once after app installation
+    String? deviceToken = await FirebaseMessaging.instance.getToken();
+    log('Device token: $deviceToken');
+    final LocalStorage appInitFlagsStorage = LocalStorage('app_init_flags');
+    await appInitFlagsStorage.ready;
+    if (appInitFlagsStorage.getItem('isDeviceTokenRegistered') == null ||
+        appInitFlagsStorage.getItem('isDeviceTokenRegistered') == false) {
+      logger.i("Device token is not registered yet. Registering...");
+      _dineSeaterApiService.registerDeviceToken(deviceToken!);
+      appInitFlagsStorage.setItem('isDeviceTokenRegistered', true);
+      logger.i("Device token is registered.");
+    }
+
+    // Wait for 1 second for no reason
     await Future.delayed(const Duration(seconds: 1));
 
     // Navigate to Home
