@@ -18,10 +18,6 @@ class FirebaseMessagingService {
           'User declined or has not yet granted permission for notifications');
     }
 
-    // Get the device token for this device
-    String? deviceToken = await _firebaseMessaging.getToken();
-    print('Device token: $deviceToken');
-
     // Configure how to handle incoming notifications
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Received message: ${message.notification?.title}');

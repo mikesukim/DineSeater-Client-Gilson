@@ -73,4 +73,28 @@ class DineseaterApiService {
       throw Exception('Failed to load waiting list');
     }
   }
+
+  // device registration for notification
+  Future<void> registerDeviceToken(String deviceToken) async {
+    logger.i('registerDeviceToken');
+    final token = await _cognitoService.getIdToken();
+    final url = Uri.parse('$_baseUrl/business/device_token_registration');
+    final http.Response response;
+    try {
+      response = await http.post(url,
+          headers: {'Authorization': token!},
+          body: json.encode({'device_token': deviceToken}));
+    } catch (e) {
+      logger.e('Error while registering device token: $e');
+      rethrow;
+    }
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      logger.i('registerDeviceToken success: $jsonResponse');
+    } else {
+      logger.e(
+          'Failed to register device token with status code: ${response.statusCode}');
+      throw Exception('Failed to register device token');
+    }
+  }
 }
