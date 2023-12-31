@@ -13,6 +13,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/cognito_service.dart';
 import '../services/dineseater_api_service.dart';
+import '../services/waiting_storage_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -30,4 +31,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => CognitoService());
   locator.registerLazySingleton(() => DineseaterApiService());
+  locator.registerLazySingleton(() => WaitingStorageService());
 }

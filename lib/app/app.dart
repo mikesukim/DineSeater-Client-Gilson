@@ -13,6 +13,7 @@ import 'package:dineseater_client_gilson/ui/views/party_size/party_size_view.dar
 import 'package:dineseater_client_gilson/ui/views/customer_name/customer_name_view.dart';
 import 'package:dineseater_client_gilson/ui/views/confirm_1/confirm_1_view.dart';
 import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart';
+import 'package:dineseater_client_gilson/services/waiting_storage_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -33,6 +34,7 @@ import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart'
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: CognitoService),
     LazySingleton(classType: DineseaterApiService),
+    LazySingleton(classType: WaitingStorageService),
 // @stacked-service
   ],
   bottomsheets: [
