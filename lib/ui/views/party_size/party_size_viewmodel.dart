@@ -5,7 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.bottomsheets.dart';
 import '../../../app/app.locator.dart';
-import '../../../model/wait_list.dart';
+import '../../../model/waiting.dart';
 
 class PartySizeViewModel extends BaseViewModel {
   final _navigatorService = NavigationService();
