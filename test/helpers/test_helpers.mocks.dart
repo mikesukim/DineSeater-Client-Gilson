@@ -12,6 +12,8 @@ import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart'
 import 'package:dineseater_client_gilson/services/cognito_service.dart' as _i8;
 import 'package:dineseater_client_gilson/services/dineseater_api_service.dart'
     as _i9;
+import 'package:dineseater_client_gilson/services/waiting_storage_service.dart'
+    as _i11;
 import 'package:flutter/material.dart' as _i5;
 import 'package:logger/logger.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -795,4 +797,21 @@ class MockDineseaterApiService extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i3.WaitingItem>);
+
+  @override
+  _i6.Future<void> registerDeviceToken(String? deviceToken) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerDeviceToken,
+          [deviceToken],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
+
+/// A class which mocks [WaitingStorageService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockWaitingStorageService extends _i1.Mock
+    implements _i11.WaitingStorageService {}

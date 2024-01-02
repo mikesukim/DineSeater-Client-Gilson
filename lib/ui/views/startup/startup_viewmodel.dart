@@ -11,12 +11,14 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../services/cognito_service.dart';
 import '../../../services/dineseater_api_service.dart';
+import '../../../services/waiting_storage_service.dart';
 
 class StartupViewModel extends BaseViewModel {
   var logger = Logger();
   final _navigationService = locator<NavigationService>();
   final _cognitoService = locator<CognitoService>();
   final _dineSeaterApiService = locator<DineseaterApiService>();
+  final _waitingStorageService = locator<WaitingStorageService>();
 
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
@@ -63,8 +65,8 @@ class StartupViewModel extends BaseViewModel {
       logger.i("Device token is registered.");
     }
 
-    // Wait for 1 second for no reason
-    await Future.delayed(const Duration(seconds: 1));
+    // WaitingStorageService init
+    await _waitingStorageService.init();
 
     // Navigate to Home
     _navigationService.replaceWithHomeView();
