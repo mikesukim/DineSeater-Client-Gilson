@@ -5,8 +5,7 @@ import 'package:stacked/stacked.dart';
 
 class WaitingStorageService with ListenableServiceMixin {
   var logger = Logger();
-  late ReactiveList<WaitingItem> _waitings =
-      ReactiveList<WaitingItem>();
+  late ReactiveList<WaitingItem> _waitings = ReactiveList<WaitingItem>();
   final LocalStorage _waitingStorage = LocalStorage('waitingStorage');
   final String _waitingsKey = 'waitings';
 
@@ -22,12 +21,13 @@ class WaitingStorageService with ListenableServiceMixin {
 
     try {
       // load waitings from storage
-      final waitingsFromStorageDynamic = await _waitingStorage.getItem(_waitingsKey);
+      final waitingsFromStorageDynamic =
+          await _waitingStorage.getItem(_waitingsKey);
       if (waitingsFromStorageDynamic != null) {
         final waitingsFromStorage = Map<String, WaitingItem>.fromEntries(
           (waitingsFromStorageDynamic as Map<String, dynamic>).entries.map(
                 (e) => MapEntry(e.key, WaitingItem.fromJson(e.value)),
-          ),
+              ),
         );
         _waitings = ReactiveList.from(waitingsFromStorage.values);
       }
@@ -36,6 +36,10 @@ class WaitingStorageService with ListenableServiceMixin {
       rethrow;
     }
     logger.i('loading waitings from storage completed');
+  }
+
+  WaitingItem getWaiting(int index) {
+    return _waitings[index];
   }
 
   Future<void> addWaiting(WaitingItem waiting) async {
