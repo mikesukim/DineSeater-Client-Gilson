@@ -9,6 +9,7 @@ import 'package:dineseater_client_gilson/app/app.locator.dart';
 import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../firebase_messaging_service.dart';
 import '../../../services/cognito_service.dart';
 import '../../../services/dineseater_api_service.dart';
 import '../../../services/waiting_storage_service.dart';
@@ -43,6 +44,17 @@ class StartupViewModel extends BaseViewModel {
       appInitFlagsStorage.setItem(
           'lastOpenedDate', DateTime.now().toIso8601String());
     }
+
+
+    // Firebase messaging init for notification
+    try {
+      await FirebaseMessagingService().initialize();
+    } catch (e) {
+      final errorMessage = 'FirebaseMessagingService initialize error: $e';
+      logger.e(errorMessage);
+      setError(errorMessage);
+    }
+
 
     // Amplify auth configuration
     try {

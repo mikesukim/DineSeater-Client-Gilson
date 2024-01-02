@@ -10,7 +10,6 @@ import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'firebase_messaging_service.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -35,9 +34,6 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-
-  // Firebase messaging init
-  await FirebaseMessagingService().initialize();
 
   runApp(const MainApp());
 }

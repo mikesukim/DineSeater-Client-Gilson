@@ -16,8 +16,7 @@ class HomeViewModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices =>
       [_waitingStorageService];
 
-  int getCount() {
-    logger.i('getCounter: ${_waitingStorageService.waitings}');
+  int getWaitingCount() {
     return _waitingStorageService.waitings.length;
   }
 
