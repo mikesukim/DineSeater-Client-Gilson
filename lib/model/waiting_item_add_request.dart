@@ -10,6 +10,9 @@ class WaitingItemAddRequest {
   @JsonKey(name: 'action')
   late ActionType action;
 
+  @JsonKey(name: 'name')
+  late String name;
+
   @JsonKey(name: 'number_of_customers')
   late int numberOfCustomers;
 
@@ -23,6 +26,7 @@ class WaitingItemAddRequest {
     required this.numberOfCustomers,
     required this.detailAttribute,
     required this.phoneNumber,
+    required this.name,
   }) : action = ActionType.ADD;
 
   factory WaitingItemAddRequest.fromJson(Map<String, dynamic> json) =>

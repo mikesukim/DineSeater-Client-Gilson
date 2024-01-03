@@ -13,12 +13,14 @@ WaitingItemAddRequest _$WaitingItemAddRequestFromJson(
       detailAttribute: DetailAttribute.fromJson(
           json['detail_attribute'] as Map<String, dynamic>),
       phoneNumber: json['phone_number'] as String,
+      name: json['name'] as String,
     )..action = $enumDecode(_$ActionTypeEnumMap, json['action']);
 
 Map<String, dynamic> _$WaitingItemAddRequestToJson(
         WaitingItemAddRequest instance) =>
     <String, dynamic>{
       'action': _$ActionTypeEnumMap[instance.action]!,
+      'name': instance.name,
       'number_of_customers': instance.numberOfCustomers,
       'detail_attribute': instance.detailAttribute,
       'phone_number': instance.phoneNumber,

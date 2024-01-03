@@ -40,6 +40,7 @@ class Confirm1ViewModel extends BaseViewModel {
   Future<void> addWaitingItem(Waiting waiting) async {
     final request = WaitingItemAddRequest(
         numberOfCustomers: waiting.partySize!,
+        name: waiting.name!,
         detailAttribute: DetailAttribute(
           isGrill: waiting.isGrill!,
           isMeal: !(waiting.isGrill!),

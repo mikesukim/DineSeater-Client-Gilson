@@ -40,6 +40,30 @@ class DineseaterApiService {
     }
   }
 
+  Future<List<WaitingItem>> getWaitingListAfter(DateTime lastModified) async {
+    logger.i('getWaitingListAfter');
+    final token = await _cognitoService.getIdToken();
+    // TODO : change to correct url once API is implemented.
+    final url = Uri.parse('$_baseUrl/business/waitinglist');
+    final http.Response response;
+    try {
+      response = await http.get(url, headers: {'Authorization': token!});
+    } catch (e) {
+      logger.e('Error while requesting waiting list: $e');
+      rethrow;
+    }
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      final waitingListResponse = WaitingListResponse.fromJson(jsonResponse);
+      logger.i('getWaitingListAfter success: ${waitingListResponse.message}');
+      return waitingListResponse.waitings;
+    } else {
+      logger.e(
+          'Failed to load waiting list with status code: ${response.statusCode}');
+      throw Exception('Failed to load waiting list');
+    }
+  }
+
   Future<WaitingItem> addWaitingItem(
       WaitingItemAddRequest waitingItemPostRequest) async {
     logger.i('PostWaitingItem');

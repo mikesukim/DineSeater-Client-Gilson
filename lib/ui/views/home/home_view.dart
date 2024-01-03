@@ -99,7 +99,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                 widthFactor: 0.95,
                                 child: ListView.separated(
                                   shrinkWrap: true,
-                                  itemCount: viewModel.getCount(),
+                                  itemCount: viewModel.getWaitingCount(),
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Container(

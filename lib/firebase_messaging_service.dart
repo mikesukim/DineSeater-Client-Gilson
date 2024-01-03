@@ -1,7 +1,15 @@
+import 'dart:convert';
+
+import 'package:dineseater_client_gilson/services/waiting_storage_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'app/app.locator.dart';
+import 'model/waiting_item.dart';
 
 class FirebaseMessagingService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  final _waiting_storage_service = locator<WaitingStorageService>();
 
   Future<void> initialize() async {
     // Request permission to receive notifications
@@ -21,8 +29,10 @@ class FirebaseMessagingService {
     // Configure how to handle incoming notifications
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Received message: ${message.notification?.title}');
-      // Handle the received message
       print('Received data: ${message.data}');
+      final waiting = json.decode(message.data['waiting']);
+      final waitingItem = WaitingItem.fromJson(waiting);
+      _waiting_storage_service.updateWaitings([waitingItem]);
     });
 
     // Configure how to handle notification taps

@@ -18,24 +18,28 @@ class WaitingStorageService with ListenableServiceMixin {
   // init WaitingStorageService
   Future<void> init() async {
     await _waitingStorage.ready;
+  }
 
-    try {
-      // load waitings from storage
-      final waitingsFromStorageDynamic =
-          await _waitingStorage.getItem(_waitingsKey);
-      if (waitingsFromStorageDynamic != null) {
-        final waitingsFromStorage = Map<String, WaitingItem>.fromEntries(
-          (waitingsFromStorageDynamic as Map<String, dynamic>).entries.map(
-                (e) => MapEntry(e.key, WaitingItem.fromJson(e.value)),
-              ),
-        );
-        _waitings = ReactiveList.from(waitingsFromStorage.values);
+  Future<void> resetWaitingsAs(List<WaitingItem> waitings) async {
+    await addWaitingListToStorage(waitings);
+    _waitings = ReactiveList.from(waitings);
+    logger.i('update completed');
+    notifyListeners();
+  }
+
+  Future<void> updateWaitings(List<WaitingItem> waitings) async {
+    await addWaitingListToStorage(waitings);
+    for (var waiting in waitings) {
+      final index = _waitings
+          .indexWhere((element) => element.waitingId == waiting.waitingId);
+      if (index != -1) {
+        _waitings[index] = waiting;
+      } else {
+        _waitings.add(waiting);
       }
-    } catch (e) {
-      logger.e('loading waitings from storage error: $e');
-      rethrow;
     }
-    logger.i('loading waitings from storage completed');
+    logger.i('update completed');
+    notifyListeners();
   }
 
   WaitingItem getWaiting(int index) {
@@ -64,6 +68,23 @@ class WaitingStorageService with ListenableServiceMixin {
       await _waitingStorage.setItem(_waitingsKey, waitingsFromStorageDynamic);
     } else {
       await _waitingStorage.setItem(_waitingsKey, {waiting.waitingId: waiting});
+    }
+  }
+
+  Future<void> addWaitingListToStorage(List<WaitingItem> waitings) async {
+    final waitingsFromStorageDynamic =
+        await _waitingStorage.getItem(_waitingsKey);
+    if (waitingsFromStorageDynamic != null) {
+      for (var waiting in waitings) {
+        waitingsFromStorageDynamic[waiting.waitingId] = waiting;
+      }
+      await _waitingStorage.setItem(_waitingsKey, waitingsFromStorageDynamic);
+    } else {
+      Map<String, WaitingItem> waitingsMap = {};
+      for (var waiting in waitings) {
+        waitingsMap[waiting.waitingId] = waiting;
+      }
+      await _waitingStorage.setItem(_waitingsKey, waitingsMap);
     }
   }
 
