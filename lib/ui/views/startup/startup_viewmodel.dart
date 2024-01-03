@@ -73,14 +73,15 @@ class StartupViewModel extends BaseViewModel {
         final username = dotenv.env['COGNITO_TESTING_USER_ID']!;
         final password = dotenv.env['COGNITO_TESTING_USER_PASSWORD']!;
         await _cognitoService.signInUser(username, password);
-        final idToken = await _cognitoService.getIdToken();
-        log('idToken: $idToken');
       } catch (e) {
         final errorMessage = 'signInUser error: $e';
         logger.e(errorMessage);
         setError(errorMessage);
       }
     }
+    final idToken = await _cognitoService.getIdToken();
+    log('idToken: $idToken');
+
 
     // device registration for notification
     // registration is done only once after app installation

@@ -9,8 +9,7 @@ class Waiting {
   Waiting({this.name, this.partySize, this.isGrill, this.mobileNumber});
 
   Waiting.from(WaitingItem waitingItem) {
-    name =
-        waitingItem.waitingId.substring(0, 10); // TODO : change to actual name
+    name = waitingItem.name;
     partySize = waitingItem.numberOfCustomers;
     isGrill = waitingItem.detailAttribute.isGrill;
     mobileNumber = waitingItem.phoneNumber;

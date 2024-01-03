@@ -7,6 +7,9 @@ class WaitingItem {
   @JsonKey(name: 'business_name')
   late String businessName;
 
+  @JsonKey(name: 'name')
+  late String name;
+
   @JsonKey(name: 'waiting_id')
   late String waitingId;
 
@@ -24,6 +27,9 @@ class WaitingItem {
 
   @JsonKey(name: 'date_created')
   late String dateCreated;
+
+  @JsonKey(name: 'last_modified')
+  late String lastModified;
 
   WaitingItem();
 
