@@ -9,6 +9,11 @@ class WaitingStorageService with ListenableServiceMixin {
   final LocalStorage _waitingStorage = LocalStorage('waitingStorage');
   final String _waitingsKey = 'waitings';
 
+  // This is a safeguard to avoid redundant updates of waiting items.
+  // When a device triggers an update or adds a WaitingItem, same device may still receive the notification
+  // that contains the same WaitingItem, for which the device has already updated locally.
+  WaitingItem? _lastModifiedWaitingItem;
+
   WaitingStorageService() {
     listenToReactiveValues([_waitings]);
   }
@@ -21,14 +26,15 @@ class WaitingStorageService with ListenableServiceMixin {
   }
 
   Future<void> resetWaitingsAs(List<WaitingItem> waitings) async {
-    await addWaitingListToStorage(waitings);
+    await _addWaitingListToStorage(waitings);
     _waitings = ReactiveList.from(waitings);
     logger.i('update completed');
     notifyListeners();
   }
 
+  // updateWaitings should only be called only once when app is initialized
   Future<void> updateWaitings(List<WaitingItem> waitings) async {
-    await addWaitingListToStorage(waitings);
+    await _addWaitingListToStorage(waitings);
     for (var waiting in waitings) {
       final index = _waitings
           .indexWhere((element) => element.waitingId == waiting.waitingId);
@@ -47,20 +53,42 @@ class WaitingStorageService with ListenableServiceMixin {
   }
 
   Future<void> addWaiting(WaitingItem waiting) async {
-    await addWaitingToStorage(waiting);
+    if (_isLocallyUpdatedAlready(waiting)) {
+      return;
+    }
+    await _addWaitingToStorage(waiting);
     _waitings.add(waiting);
+    _lastModifiedWaitingItem = waiting;
     logger.i('addWaiting completed');
     notifyListeners();
   }
 
+  // update waiting
+  Future<void> updateWaiting(WaitingItem waiting) async {
+    if (_isLocallyUpdatedAlready(waiting)) {
+      return;
+    }
+    await _addWaitingToStorage(waiting);
+    final index = _waitings
+        .indexWhere((element) => element.waitingId == waiting.waitingId);
+    if (index != -1) {
+      _waitings[index] = waiting;
+    } else {
+      _waitings.add(waiting);
+    }
+    _lastModifiedWaitingItem = waiting;
+    logger.i('update completed');
+    notifyListeners();
+  }
+
   Future<void> removeWaiting(String waitingId) async {
-    await removeWaitingFromStorage(waitingId);
+    await _removeWaitingFromStorage(waitingId);
     _waitings.removeWhere((element) => element.waitingId == waitingId);
     logger.i('removeWaiting completed');
     notifyListeners();
   }
 
-  Future<void> addWaitingToStorage(WaitingItem waiting) async {
+  Future<void> _addWaitingToStorage(WaitingItem waiting) async {
     final waitingsFromStorageDynamic =
         await _waitingStorage.getItem(_waitingsKey);
     if (waitingsFromStorageDynamic != null) {
@@ -71,7 +99,7 @@ class WaitingStorageService with ListenableServiceMixin {
     }
   }
 
-  Future<void> addWaitingListToStorage(List<WaitingItem> waitings) async {
+  Future<void> _addWaitingListToStorage(List<WaitingItem> waitings) async {
     final waitingsFromStorageDynamic =
         await _waitingStorage.getItem(_waitingsKey);
     if (waitingsFromStorageDynamic != null) {
@@ -88,12 +116,27 @@ class WaitingStorageService with ListenableServiceMixin {
     }
   }
 
-  Future<void> removeWaitingFromStorage(String waitingId) async {
+  Future<void> _removeWaitingFromStorage(String waitingId) async {
     final waitingsFromStorageDynamic =
         await _waitingStorage.getItem(_waitingsKey);
     if (waitingsFromStorageDynamic != null) {
       waitingsFromStorageDynamic.remove(waitingId);
       await _waitingStorage.setItem(_waitingsKey, waitingsFromStorageDynamic);
     }
+  }
+
+  bool _isLocallyUpdatedAlready(WaitingItem newWaitingItem) {
+    if (_lastModifiedWaitingItem == null) {
+      return false;
+    }
+    DateTime lastModifiedWaitingItemDateTime =
+        DateTime.parse(_lastModifiedWaitingItem!.lastModified);
+    DateTime newWaitingItemDateTime =
+        DateTime.parse(newWaitingItem.lastModified);
+    if (newWaitingItemDateTime.isAfter(lastModifiedWaitingItemDateTime)) {
+      return false;
+    }
+    logger.i('newWaitingItem is already updated locally');
+    return true;
   }
 }

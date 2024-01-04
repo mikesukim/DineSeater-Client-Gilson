@@ -1,7 +1,7 @@
 import 'package:dineseater_client_gilson/model/waiting_item.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'action_enum.dart';
+import 'action_type.dart';
 
 part 'waiting_item_add_request.g.dart';
 

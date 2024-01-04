@@ -948,20 +948,10 @@ class MockWaitingStorageService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> removeWaiting(String? waitingId) => (super.noSuchMethod(
-        Invocation.method(
-          #removeWaiting,
-          [waitingId],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
-  _i7.Future<void> addWaitingToStorage(_i3.WaitingItem? waiting) =>
+  _i7.Future<void> updateWaiting(_i3.WaitingItem? waiting) =>
       (super.noSuchMethod(
         Invocation.method(
-          #addWaitingToStorage,
+          #updateWaiting,
           [waiting],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -969,21 +959,9 @@ class MockWaitingStorageService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> addWaitingListToStorage(List<_i3.WaitingItem>? waitings) =>
-      (super.noSuchMethod(
+  _i7.Future<void> removeWaiting(String? waitingId) => (super.noSuchMethod(
         Invocation.method(
-          #addWaitingListToStorage,
-          [waitings],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
-  _i7.Future<void> removeWaitingFromStorage(String? waitingId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #removeWaitingFromStorage,
+          #removeWaiting,
           [waitingId],
         ),
         returnValue: _i7.Future<void>.value(),

@@ -32,7 +32,7 @@ class FirebaseMessagingService {
       print('Received data: ${message.data}');
       final waiting = json.decode(message.data['waiting']);
       final waitingItem = WaitingItem.fromJson(waiting);
-      _waiting_storage_service.updateWaitings([waitingItem]);
+      _waiting_storage_service.updateWaiting(waitingItem);
     });
 
     // Configure how to handle notification taps

@@ -16,7 +16,8 @@ WaitingItem _$WaitingItemFromJson(Map<String, dynamic> json) => WaitingItem()
   ..phoneNumber = json['phone_number'] as String
   ..numberOfCustomers = json['number_of_customers'] as int
   ..dateCreated = json['date_created'] as String
-  ..lastModified = json['last_modified'] as String;
+  ..lastModified = json['last_modified'] as String
+  ..dateTextSent = json['date_text_sent'] as String?;
 
 Map<String, dynamic> _$WaitingItemToJson(WaitingItem instance) =>
     <String, dynamic>{
@@ -29,6 +30,7 @@ Map<String, dynamic> _$WaitingItemToJson(WaitingItem instance) =>
       'number_of_customers': instance.numberOfCustomers,
       'date_created': instance.dateCreated,
       'last_modified': instance.lastModified,
+      'date_text_sent': instance.dateTextSent,
     };
 
 DetailAttribute _$DetailAttributeFromJson(Map<String, dynamic> json) =>

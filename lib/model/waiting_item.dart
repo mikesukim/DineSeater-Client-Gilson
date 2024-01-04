@@ -31,6 +31,9 @@ class WaitingItem {
   @JsonKey(name: 'last_modified')
   late String lastModified;
 
+  @JsonKey(name: 'date_text_sent')
+  late String? dateTextSent;
+
   WaitingItem();
 
   factory WaitingItem.fromJson(Map<String, dynamic> json) =>
