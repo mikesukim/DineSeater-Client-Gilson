@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_post_response.dart';
+import 'package:dineseater_client_gilson/model/waiting_item_update_request.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 
@@ -95,6 +96,40 @@ class DineseaterApiService {
       logger
           .e('Failed to post waiting with status code: ${response.statusCode}');
       throw Exception('Failed to load waiting list');
+    }
+  }
+
+  Future<WaitingItem> updateWaitingItem(
+      WaitingItemUpdateRequest waitingItemUpdateRequest) async {
+    logger.i('updateWaitingItem');
+    final token = await _cognitoService.getIdToken();
+    final url = Uri.parse('$_baseUrl/business/waitinglist');
+
+    final headers = {
+      'Authorization': token!,
+    };
+
+    final body = waitingItemUpdateRequest.toJson();
+    final bodyJson = json.encode(body);
+
+    final http.Response response;
+
+    try {
+      response = await http.post(url, headers: headers, body: bodyJson);
+    } catch (e) {
+      logger.e('Error while updating waiting item: $e');
+      rethrow;
+    }
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      final waitingItemPostResponse =
+          WaitingItemPostResponse.fromJson(jsonResponse);
+      logger.i('updateWaitingItem success: ${waitingItemPostResponse.message}');
+      return waitingItemPostResponse.waiting;
+    } else {
+      logger.e(
+          'Failed to update waiting with status code: ${response.statusCode}');
+      throw Exception('Failed to update waiting');
     }
   }
 

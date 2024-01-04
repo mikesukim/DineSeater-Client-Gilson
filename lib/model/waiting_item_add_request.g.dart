@@ -28,6 +28,7 @@ Map<String, dynamic> _$WaitingItemAddRequestToJson(
 
 const _$ActionTypeEnumMap = {
   ActionType.ADD: 'add',
+  ActionType.NOTIFY: 'notify',
   ActionType.REPORT_MISSED: 'report_missed',
   ActionType.REPORT_ARRIVAL: 'report_arrival',
 };
