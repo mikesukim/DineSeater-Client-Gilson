@@ -23,158 +23,170 @@ class HomeView extends StackedView<HomeViewModel> {
               child: Padding(
                 padding:
                     EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          gilsonIconSmall,
-                          verticalSpaceSmall,
-                          FractionallySizedBox(
-                            widthFactor: 0.9,
-                            child: ElevatedButton(
-                                onPressed: () =>
-                                    viewModel.navigateToMealTypeView(),
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: kcPrimaryColor,
-                                    minimumSize: const Size(200, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                    elevation: 0),
-                                child: const Text(
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 16.0),
+                              child: gilsonIconSmall,
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                  onPressed:
+                                      viewModel.navigateToEmployeeModeView,
+                                  icon: const Icon(
+                                      Icons.manage_accounts_outlined)),
+                            ),
+                          ],
+                        ),
+                        verticalSpaceSmall,
+                        FractionallySizedBox(
+                          widthFactor: 0.9,
+                          child: ElevatedButton(
+                              onPressed: () =>
+                                  viewModel.navigateToMealTypeView(),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kcPrimaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25)),
+                                  elevation: 0),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
                                   'Join the Waitlist',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: semiBoldFontWeight),
-                                )),
-                          )
-                        ],
-                      ),
-                      verticalSpaceSmall,
-                      const Divider(
-                        height: 40.0,
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: FractionallySizedBox(
-                          widthFactor: 0.95,
-                          child: Column(
-                            children: [
-                              const Text(
-                                'Waitlist',
-                                style: TextStyle(
-                                    fontSize: 26, fontWeight: mediumFontWeight),
-                              ),
-                              verticalSpaceMedium,
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(width: 50),
-                                        Text(
-                                          'Name',
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: semiBoldFontWeight),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Party size',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: semiBoldFontWeight),
-                                    )
-                                  ],
                                 ),
-                              ),
-                              verticalSpaceMedium,
-                              FractionallySizedBox(
-                                widthFactor: 0.95,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  itemCount: viewModel.getWaitingCount(),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                      height: 60,
-                                      color: (index == 0)
-                                          ? kcLightPrimaryColor
-                                          : Colors.transparent,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          left: (viewModel
-                                                  .getWaiting(index)
-                                                  .isGrill!)
-                                              ? 14.0
-                                              : 16.0,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                (viewModel
-                                                        .getWaiting(index)
-                                                        .isGrill!)
-                                                    ? grillIconSmall
-                                                    : mealIconSmall,
-                                                (viewModel
-                                                        .getWaiting(index)
-                                                        .isGrill!)
-                                                    ? const SizedBox(width: 16)
-                                                    : const SizedBox(width: 20),
-                                                Text(
-                                                  viewModel
-                                                      .getWaiting(index)
-                                                      .name!,
-                                                  style: const TextStyle(
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          mediumFontWeight),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  viewModel
-                                                      .getWaiting(index)
-                                                      .partySize
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                      fontSize: 17),
-                                                ),
-                                                const SizedBox(
-                                                  width: 50,
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
+                              )),
+                        )
+                      ],
+                    ),
+                    verticalSpaceSmall,
+                    const Divider(
+                      height: 40.0,
+                    ),
+                    Expanded(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Waitlist',
+                              style: TextStyle(
+                                  fontSize: 26, fontWeight: mediumFontWeight),
+                            ),
+                            verticalSpaceMedium,
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 50),
+                                      Text(
+                                        'Name',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: semiBoldFontWeight),
                                       ),
-                                    );
-                                  },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) =>
-                                          const Divider(
-                                    color: Colors.transparent,
+                                    ],
                                   ),
+                                  Text(
+                                    'Party size',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: semiBoldFontWeight),
+                                  )
+                                ],
+                              ),
+                            ),
+                            verticalSpaceMedium,
+                            Expanded(
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: viewModel.getWaitingCount(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    height: 60,
+                                    color: (index == 0)
+                                        ? kcLightPrimaryColor
+                                        : Colors.transparent,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: (viewModel
+                                                .getWaiting(index)
+                                                .isGrill!)
+                                            ? 14.0
+                                            : 16.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              (viewModel
+                                                      .getWaiting(index)
+                                                      .isGrill!)
+                                                  ? grillIconSmall
+                                                  : mealIconSmall,
+                                              (viewModel
+                                                      .getWaiting(index)
+                                                      .isGrill!)
+                                                  ? const SizedBox(width: 16)
+                                                  : const SizedBox(width: 20),
+                                              Text(
+                                                viewModel
+                                                    .getWaiting(index)
+                                                    .name!,
+                                                style: const TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight:
+                                                        mediumFontWeight),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                viewModel
+                                                    .getWaiting(index)
+                                                    .partySize
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              ),
+                                              const SizedBox(
+                                                width: 50,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) =>
+                                        const Divider(
+                                  color: Colors.transparent,
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),

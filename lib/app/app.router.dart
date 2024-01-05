@@ -11,6 +11,10 @@ import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart'
     as _i9;
 import 'package:dineseater_client_gilson/ui/views/customer_name/customer_name_view.dart'
     as _i7;
+import 'package:dineseater_client_gilson/ui/views/employee_mode/employee_mode_view.dart'
+    as _i10;
+import 'package:dineseater_client_gilson/ui/views/employee_mode_archive/employee_mode_archive_view.dart'
+    as _i11;
 import 'package:dineseater_client_gilson/ui/views/home/home_view.dart' as _i2;
 import 'package:dineseater_client_gilson/ui/views/meal_type/meal_type_view.dart'
     as _i5;
@@ -20,10 +24,10 @@ import 'package:dineseater_client_gilson/ui/views/party_size/party_size_view.dar
     as _i6;
 import 'package:dineseater_client_gilson/ui/views/startup/startup_view.dart'
     as _i3;
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i11;
+import 'package:stacked_services/stacked_services.dart' as _i13;
 
 class Routes {
   static const homeView = '/home-view';
@@ -42,6 +46,10 @@ class Routes {
 
   static const confirm2View = '/confirm2-view';
 
+  static const employeeModeView = '/employee-mode-view';
+
+  static const employeeModeArchiveView = '/employee-mode-archive-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -51,6 +59,8 @@ class Routes {
     customerNameView,
     confirm1View,
     confirm2View,
+    employeeModeView,
+    employeeModeArchiveView,
   };
 }
 
@@ -88,54 +98,74 @@ class StackedRouter extends _i1.RouterBase {
       Routes.confirm2View,
       page: _i9.Confirm2View,
     ),
+    _i1.RouteDef(
+      Routes.employeeModeView,
+      page: _i10.EmployeeModeView,
+    ),
+    _i1.RouteDef(
+      Routes.employeeModeArchiveView,
+      page: _i11.EmployeeModeArchiveView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.MobileInputView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.MobileInputView(),
         settings: data,
       );
     },
     _i5.MealTypeView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.MealTypeView(),
         settings: data,
       );
     },
     _i6.PartySizeView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.PartySizeView(),
         settings: data,
       );
     },
     _i7.CustomerNameView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.CustomerNameView(),
         settings: data,
       );
     },
     _i8.Confirm1View: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.Confirm1View(),
         settings: data,
       );
     },
     _i9.Confirm2View: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.Confirm2View(),
+        settings: data,
+      );
+    },
+    _i10.EmployeeModeView: (data) {
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i10.EmployeeModeView(),
+        settings: data,
+      );
+    },
+    _i11.EmployeeModeArchiveView: (data) {
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i11.EmployeeModeArchiveView(),
         settings: data,
       );
     },
@@ -148,7 +178,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i11.NavigationService {
+extension NavigatorStateExtension on _i13.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -261,6 +291,34 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToEmployeeModeView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.employeeModeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToEmployeeModeArchiveView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.employeeModeArchiveView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -367,6 +425,34 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.confirm2View,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithEmployeeModeView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.employeeModeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithEmployeeModeArchiveView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.employeeModeArchiveView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

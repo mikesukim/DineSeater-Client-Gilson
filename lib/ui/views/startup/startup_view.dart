@@ -22,7 +22,11 @@ class StartupView extends StackedView<StartupViewModel> {
             ? Text(viewModel.error.toString())
             : Stack(
                 children: [
-                  Center(child: Image.asset('assets/Logo_Gilson.png')),
+                  Center(
+                      child: Image.asset(
+                    'assets/Logo_Gilson.png',
+                    scale: 1.5,
+                  )),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Image.asset(

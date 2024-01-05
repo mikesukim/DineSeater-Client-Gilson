@@ -29,7 +29,7 @@ const FontWeight semiBoldFontWeight = FontWeight.w600;
 
 Widget gilsonIconSmall = Image.asset(
   'assets/Logo_Gilson.png',
-  scale: 2.0,
+  scale: 3.0,
 );
 Widget mealIconSmall = Image.asset(
   'assets/meal.png',
@@ -38,6 +38,20 @@ Widget mealIconSmall = Image.asset(
 Widget grillIconSmall = Image.asset(
   'assets/grill.png',
   scale: 3.0,
+);
+Widget mealIconMedium = Image.asset(
+  'assets/meal.png',
+  scale: 1.4,
+);
+Widget grillIconMedium = Image.asset(
+  'assets/grill.png',
+  scale: 1.2,
+);
+Widget employeeModeCancel = Image.asset(
+  'assets/employee_mode_cancel.png',
+);
+Widget employeeModeConfirm = Image.asset(
+  'assets/employee_mode_confirm.png',
 );
 
 const TextStyle mainText =
@@ -49,6 +63,8 @@ const TextStyle inputHintTextStyle =
     TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
 
 const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
+const blackBackButtonStyle = TextStyle(color: Colors.black, fontSize: 16);
+
 
 const inputBorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),

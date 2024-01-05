@@ -18,175 +18,185 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        // resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leadingWidth: 60,
+          toolbarHeight: 40,
+          leading: TextButton(
+            onPressed: () => viewModel.navigateBack(),
+            child: const Text(
+              'Back',
+              style: backButtonStyle,
+            ),
+          ),
+        ),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
+          child: Center(
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () => viewModel.navigateBack(),
-                    child: const Text(
-                      'Back',
-                      style: backButtonStyle,
-                    ),
-                  ),
-                ),
                 Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 0.9,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
                           children: [
                             gilsonIconSmall,
-                            verticalSpaceSmall,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                GestureDetector(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:
-                                                (viewModel.selectedButton == 0)
-                                                    ? kcPrimaryColor
-                                                    : kcLightGreyWithOpacity,
-                                            width: 2),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20))),
-                                    height: 170,
-                                    width: 170,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CircleAvatar(
-                                          maxRadius: 40,
-                                          backgroundColor:
-                                              (viewModel.selectedButton == 0)
-                                                  ? kcPrimaryColor
-                                                  : kcLightGreyWithOpacity,
-                                          child: Image.asset(
-                                            'assets/meal.png',
-                                            scale: 2,
-                                            color:
-                                                (viewModel.selectedButton == 0)
-                                                    ? Colors.white
-                                                    : kcVeryLightGrey,
+                            verticalSpaceMedium,
+                            Expanded(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: GestureDetector(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: (viewModel
+                                                              .selectedButton ==
+                                                          0)
+                                                      ? kcPrimaryColor
+                                                      : kcLightGreyWithOpacity,
+                                                  width: 2),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(20))),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                maxRadius: 40,
+                                                backgroundColor:
+                                                    (viewModel.selectedButton ==
+                                                            0)
+                                                        ? kcPrimaryColor
+                                                        : kcLightGreyWithOpacity,
+                                                child: Image.asset(
+                                                  'assets/meal.png',
+                                                  scale: 2,
+                                                  color:
+                                                      (viewModel.selectedButton ==
+                                                              0)
+                                                          ? Colors.white
+                                                          : kcVeryLightGrey,
+                                                ),
+                                              ),
+                                              verticalSpaceMedium,
+                                              Text(
+                                                'Regular Meal',
+                                                style: TextStyle(
+                                                    color: (viewModel
+                                                                .selectedButton ==
+                                                            0)
+                                                        ? Colors.black
+                                                        : kcVeryLightGrey,
+                                                    fontSize: 17,
+                                                    fontWeight: (viewModel
+                                                                .selectedButton ==
+                                                            0)
+                                                        ? semiBoldFontWeight
+                                                        : FontWeight.normal),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        verticalSpaceMedium,
-                                        Text(
-                                          'Regular Meal',
-                                          style: TextStyle(
-                                              color:
-                                                  (viewModel.selectedButton ==
-                                                          0)
-                                                      ? Colors.black
-                                                      : kcVeryLightGrey,
-                                              fontSize: 17,
-                                              fontWeight:
-                                                  (viewModel.selectedButton ==
-                                                          0)
-                                                      ? semiBoldFontWeight
-                                                      : FontWeight.normal),
-                                        ),
-                                      ],
+                                      ),
+                                      onTap: () => viewModel.onTapMealType(0),
                                     ),
                                   ),
-                                  onTap: () => viewModel.onTapMealType(0),
-                                ),
-                                GestureDetector(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:
-                                                (viewModel.selectedButton == 1)
-                                                    ? kcPrimaryColor
-                                                    : kcLightGreyWithOpacity,
-                                            width: 2),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20))),
-                                    height: 170,
-                                    width: 170,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CircleAvatar(
-                                          maxRadius: 40,
-                                          backgroundColor:
-                                              (viewModel.selectedButton == 1)
-                                                  ? kcPrimaryColor
-                                                  : kcLightGreyWithOpacity,
-                                          child: Image.asset(
-                                            'assets/grill.png',
-                                            color:
-                                                (viewModel.selectedButton == 1)
-                                                    ? Colors.white
-                                                    : kcVeryLightGrey,
-                                            scale: 2,
+                                  Expanded(
+                                    flex: 1,
+                                    child: GestureDetector(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: (viewModel
+                                                              .selectedButton ==
+                                                          1)
+                                                      ? kcPrimaryColor
+                                                      : kcLightGreyWithOpacity,
+                                                  width: 2),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(20))),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircleAvatar(
+                                                maxRadius: 40,
+                                                backgroundColor:
+                                                    (viewModel.selectedButton ==
+                                                            1)
+                                                        ? kcPrimaryColor
+                                                        : kcLightGreyWithOpacity,
+                                                child: Image.asset(
+                                                  'assets/grill.png',
+                                                  color:
+                                                      (viewModel.selectedButton ==
+                                                              1)
+                                                          ? Colors.white
+                                                          : kcVeryLightGrey,
+                                                  scale: 2,
+                                                ),
+                                              ),
+                                              verticalSpaceMedium,
+                                              Text(
+                                                'Barbecue Grill',
+                                                style: TextStyle(
+                                                    color: (viewModel
+                                                                .selectedButton ==
+                                                            1)
+                                                        ? Colors.black
+                                                        : kcVeryLightGrey,
+                                                    fontSize: 17,
+                                                    fontWeight: (viewModel
+                                                                .selectedButton ==
+                                                            1)
+                                                        ? semiBoldFontWeight
+                                                        : FontWeight.normal),
+                                              )
+                                            ],
                                           ),
                                         ),
-                                        verticalSpaceMedium,
-                                        Text(
-                                          'Barbecue Grill',
-                                          style: TextStyle(
-                                              color:
-                                                  (viewModel.selectedButton ==
-                                                          1)
-                                                      ? Colors.black
-                                                      : kcVeryLightGrey,
-                                              fontSize: 17,
-                                              fontWeight:
-                                                  (viewModel.selectedButton ==
-                                                          1)
-                                                      ? semiBoldFontWeight
-                                                      : FontWeight.normal),
-                                        )
-                                      ],
+                                      ),
+                                      onTap: () => viewModel.onTapMealType(1),
                                     ),
                                   ),
-                                  onTap: () => viewModel.onTapMealType(1),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
+                            const Expanded(flex: 2, child: SizedBox())
                           ],
                         ),
-                        Column(
-                          children: [
-                            // const Text(
-                            //   'Estimated wait: 15-25 minutes',
-                            //   style: subText,
-                            // ),
-                            // verticalSpaceMedium,
-                            //TODO: set button max width instead of percentage
-                            FractionallySizedBox(
-                              widthFactor: 1.0,
-                              child: ElevatedButton(
-                                  onPressed: viewModel.navigateToPartySizeView,
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kcPrimaryColor,
-                                      minimumSize: const Size(200, 50),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25)),
-                                      elevation: 0),
-                                  child: const Text(
-                                    'Next',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: semiBoldFontWeight),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: ElevatedButton(
+                            onPressed: viewModel.navigateToPartySizeView,
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: kcPrimaryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
+                                elevation: 0),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 16.0),
+                              child: Text(
+                                'Next',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: semiBoldFontWeight),
+                              ),
+                            )),
+                      ),
+                    ],
                   ),
                 )
               ],

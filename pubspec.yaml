@@ -25,6 +25,7 @@ dependencies:
   json_serializable: ^6.7.1
   flutter_multi_formatter: ^2.11.7
   numpad_layout: ^0.0.3
+  flutter_timer_countdown: ^1.0.7
   localstorage: ^4.0.1+4
 
 dev_dependencies:
