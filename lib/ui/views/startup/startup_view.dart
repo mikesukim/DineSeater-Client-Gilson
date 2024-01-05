@@ -21,17 +21,21 @@ class StartupView extends StackedView<StartupViewModel> {
         child: viewModel.hasError
             ? Text(viewModel.error.toString())
             : Stack(
-          children: [
-            Center(child: Image.asset('assets/Logo_Gilson.png')),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Image.asset(
-                'assets/Logo_DineSeater_white.png',
-                width: 75,
+                children: [
+                  Center(
+                      child: Image.asset(
+                    'assets/Logo_Gilson.png',
+                    scale: 1.5,
+                  )),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Image.asset(
+                      'assets/Logo_DineSeater_white.png',
+                      width: 75,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -13,6 +13,8 @@ import 'package:dineseater_client_gilson/ui/views/party_size/party_size_view.dar
 import 'package:dineseater_client_gilson/ui/views/customer_name/customer_name_view.dart';
 import 'package:dineseater_client_gilson/ui/views/confirm_1/confirm_1_view.dart';
 import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart';
+import 'package:dineseater_client_gilson/ui/views/employee_mode/employee_mode_view.dart';
+import 'package:dineseater_client_gilson/ui/views/employee_mode_archive/employee_mode_archive_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -25,6 +27,8 @@ import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart'
     MaterialRoute(page: CustomerNameView),
     MaterialRoute(page: Confirm1View),
     MaterialRoute(page: Confirm2View),
+    MaterialRoute(page: EmployeeModeView),
+    MaterialRoute(page: EmployeeModeArchiveView),
 // @stacked-route
   ],
   dependencies: [
