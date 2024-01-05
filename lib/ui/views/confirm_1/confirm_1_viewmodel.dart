@@ -7,10 +7,12 @@ import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
 import '../../../model/waiting_item.dart';
 import '../../../services/dineseater_api_service.dart';
+import '../../../services/waiting_storage_service.dart';
 
 class Confirm1ViewModel extends BaseViewModel {
   final _navigatorService = NavigationService();
   final _dineseaterApiService = locator<DineseaterApiService>();
+  final _waitingStorageService = locator<WaitingStorageService>();
 
   Waiting waiting;
   late String formattedMobileNumber;
@@ -29,20 +31,23 @@ class Confirm1ViewModel extends BaseViewModel {
     _navigatorService.navigateTo(Routes.mealTypeView, arguments: waiting);
   }
 
-  void navigateToConfirm2View() {
-    addWaitingItem(waiting);
+  Future<void> navigateToConfirm2View() async {
+    // TODO : add loading until addWaitingItem is done
+    await addWaitingItem(waiting);
     _navigatorService.navigateTo(Routes.confirm2View, arguments: waiting);
   }
 
-  void addWaitingItem(Waiting waiting) {
+  Future<void> addWaitingItem(Waiting waiting) async {
     final request = WaitingItemAddRequest(
         numberOfCustomers: waiting.partySize!,
+        name: waiting.name!,
         detailAttribute: DetailAttribute(
           isGrill: waiting.isGrill!,
           isMeal: !(waiting.isGrill!),
         ),
         phoneNumber: waiting.mobileNumber!);
 
-    _dineseaterApiService.addWaitingItem(request);
+    WaitingItem addedWaiting = await _dineseaterApiService.addWaitingItem(request);
+    await _waitingStorageService.addWaiting(addedWaiting);
   }
 }
