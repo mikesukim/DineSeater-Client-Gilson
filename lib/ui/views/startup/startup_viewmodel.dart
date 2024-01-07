@@ -45,7 +45,6 @@ class StartupViewModel extends BaseViewModel {
           'lastOpenedDate', DateTime.now().toIso8601String());
     }
 
-
     // Firebase messaging init for notification
     try {
       await FirebaseMessagingService().initialize();
@@ -54,7 +53,6 @@ class StartupViewModel extends BaseViewModel {
       logger.e(errorMessage);
       setError(errorMessage);
     }
-
 
     // Amplify auth configuration
     try {
@@ -81,7 +79,6 @@ class StartupViewModel extends BaseViewModel {
     }
     final idToken = await _cognitoService.getIdToken();
     log('idToken: $idToken');
-
 
     // device registration for notification
     // registration is done only once after app installation

@@ -65,7 +65,6 @@ const TextStyle inputHintTextStyle =
 const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
 const blackBackButtonStyle = TextStyle(color: Colors.black, fontSize: 16);
 
-
 const inputBorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
     borderSide: BorderSide(color: kcInputBorderColor));

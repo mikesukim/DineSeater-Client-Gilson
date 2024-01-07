@@ -47,7 +47,8 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                             Expanded(
                               flex: 1,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Expanded(
                                     flex: 1,
@@ -72,19 +73,19 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                             children: [
                                               CircleAvatar(
                                                 maxRadius: 40,
-                                                backgroundColor:
-                                                    (viewModel.selectedButton ==
-                                                            0)
-                                                        ? kcPrimaryColor
-                                                        : kcLightGreyWithOpacity,
+                                                backgroundColor: (viewModel
+                                                            .selectedButton ==
+                                                        0)
+                                                    ? kcPrimaryColor
+                                                    : kcLightGreyWithOpacity,
                                                 child: Image.asset(
                                                   'assets/meal.png',
                                                   scale: 2,
-                                                  color:
-                                                      (viewModel.selectedButton ==
-                                                              0)
-                                                          ? Colors.white
-                                                          : kcVeryLightGrey,
+                                                  color: (viewModel
+                                                              .selectedButton ==
+                                                          0)
+                                                      ? Colors.white
+                                                      : kcVeryLightGrey,
                                                 ),
                                               ),
                                               verticalSpaceMedium,
@@ -133,18 +134,18 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                             children: [
                                               CircleAvatar(
                                                 maxRadius: 40,
-                                                backgroundColor:
-                                                    (viewModel.selectedButton ==
-                                                            1)
-                                                        ? kcPrimaryColor
-                                                        : kcLightGreyWithOpacity,
+                                                backgroundColor: (viewModel
+                                                            .selectedButton ==
+                                                        1)
+                                                    ? kcPrimaryColor
+                                                    : kcLightGreyWithOpacity,
                                                 child: Image.asset(
                                                   'assets/grill.png',
-                                                  color:
-                                                      (viewModel.selectedButton ==
-                                                              1)
-                                                          ? Colors.white
-                                                          : kcVeryLightGrey,
+                                                  color: (viewModel
+                                                              .selectedButton ==
+                                                          1)
+                                                      ? Colors.white
+                                                      : kcVeryLightGrey,
                                                   scale: 2,
                                                 ),
                                               ),
@@ -192,7 +193,8 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                               child: Text(
                                 'Next',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: semiBoldFontWeight),
+                                    fontSize: 16,
+                                    fontWeight: semiBoldFontWeight),
                               ),
                             )),
                       ),
