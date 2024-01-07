@@ -105,8 +105,7 @@ class WaitingStorageService with ListenableServiceMixin {
       } else {
         _archivedWaitings.add(waiting);
       }
-      _waitings
-          .removeWhere((element) => element.waitingId == waiting.waitingId);
+      removeWaitingAtWaitings(waiting.waitingId);
     } else {
       final index = _waitings
           .indexWhere((element) => element.waitingId == waiting.waitingId);
@@ -115,6 +114,7 @@ class WaitingStorageService with ListenableServiceMixin {
       } else {
         _waitings.add(waiting);
       }
+      removeWaitingAtArchivedWaitings(waiting.waitingId);
     }
     _lastModifiedWaitingItem = waiting;
     logger.i('update completed');
@@ -126,6 +126,20 @@ class WaitingStorageService with ListenableServiceMixin {
     _waitings.removeWhere((element) => element.waitingId == waitingId);
     _archivedWaitings.removeWhere((element) => element.waitingId == waitingId);
     logger.i('removeWaiting completed');
+    notifyListeners();
+  }
+
+  Future<void> removeWaitingAtWaitings(String waitingId) async {
+    await _removeWaitingFromStorage(waitingId);
+    _waitings.removeWhere((element) => element.waitingId == waitingId);
+    logger.i('removeWaitingAtWaitings completed');
+    notifyListeners();
+  }
+
+  Future<void> removeWaitingAtArchivedWaitings(String waitingId) async {
+    await _removeWaitingFromStorage(waitingId);
+    _archivedWaitings.removeWhere((element) => element.waitingId == waitingId);
+    logger.i('removeWaitingAtArchivedWaitings completed');
     notifyListeners();
   }
 

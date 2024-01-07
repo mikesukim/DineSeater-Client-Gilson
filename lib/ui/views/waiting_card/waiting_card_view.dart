@@ -159,7 +159,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                     children: [
                                       ElevatedButton(
                                         onPressed: () =>
-                                            viewModel.onTapBackToList(),
+                                            viewModel.onTapBackToList(context, index, waiting),
                                         style: ElevatedButton.styleFrom(
                                             elevation: 0,
                                             padding: EdgeInsets.zero,
