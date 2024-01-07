@@ -32,8 +32,9 @@ class Confirm1ViewModel extends BaseViewModel {
   }
 
   Future<void> navigateToConfirm2View() async {
-    // TODO : add loading until addWaitingItem is done
+    setBusy(true);
     await addWaitingItem(waiting);
+    setBusy(false);
     _navigatorService.navigateTo(Routes.confirm2View, arguments: waiting);
   }
 

@@ -29,59 +29,72 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    gilsonIconSmall,
-                    Column(
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          SafeArea(
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          'assets/confirm1.png',
-                          scale: 2.5,
+                        gilsonIconSmall,
+                        Column(
+                          children: [
+                            Image.asset(
+                              'assets/confirm1.png',
+                              scale: 2.5,
+                            ),
+                            verticalSpaceLarge,
+                            Text(
+                                '${viewModel.waiting.name}, party of ${viewModel.waiting.partySize}',
+                                style: mainText),
+                            verticalSpaceTiny,
+                            Text(viewModel.formattedMobileNumber,
+                                style: subText),
+                            TextButton(
+                                onPressed: viewModel.navigateToMealTypeView,
+                                child: const Text(
+                                  'Edit my information',
+                                  style: TextStyle(fontSize: 15),
+                                ))
+                          ],
                         ),
-                        verticalSpaceLarge,
-                        Text(
-                            '${viewModel.waiting.name}, party of ${viewModel.waiting.partySize}',
-                            style: mainText),
-                        verticalSpaceTiny,
-                        Text(viewModel.formattedMobileNumber, style: subText),
-                        TextButton(
-                            onPressed: viewModel.navigateToMealTypeView,
-                            child: const Text(
-                              'Edit my information',
-                              style: TextStyle(fontSize: 15),
-                            ))
+                        FractionallySizedBox(
+                          widthFactor: 0.9,
+                          child: ElevatedButton(
+                              onPressed: viewModel.navigateToConfirm2View,
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kcPrimaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25)),
+                                  elevation: 0),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
+                                  'Join the waitlist',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: semiBoldFontWeight),
+                                ),
+                              )),
+                        ),
                       ],
                     ),
-                    FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: ElevatedButton(
-                          onPressed: viewModel.navigateToConfirm2View,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: kcPrimaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25)),
-                              elevation: 0),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                            child: Text(
-                              'Join the waitlist',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: semiBoldFontWeight),
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
+          if (viewModel.isBusy)
+            const ModalBarrier(
+              color: Colors.black26,
+              dismissible: false,
+            ),
+          if (viewModel.isBusy) const CircularProgressIndicator()
+        ],
       ),
     );
   }

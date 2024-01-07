@@ -23,9 +23,11 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemUpdateRequest waitingItemUpdateRequest = WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.NOTIFY;
-    //TODO: add loading
+
+    setBusy(true);
     await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
     await _waitingStorageService.updateWaiting(waitingItem);
+    setBusy(false);
 
     notifyListeners();
   }
@@ -45,9 +47,11 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemUpdateRequest waitingItemUpdateRequest = WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_MISSED;
-    //TODO: add loading
+
+    setBusy(true);
     await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
     await _waitingStorageService.updateWaiting(waitingItem);
+    setBusy(false);
 
     notifyListeners();
   }
@@ -61,9 +65,11 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemUpdateRequest waitingItemUpdateRequest = WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_ARRIVAL;
-    //TODO: add loading
+
+    setBusy(true);
     await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
     await _waitingStorageService.updateWaiting(waitingItem);
+    setBusy(false);
 
     notifyListeners();
   }

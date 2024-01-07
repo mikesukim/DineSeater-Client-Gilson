@@ -7,7 +7,7 @@ import 'confirm_2_viewmodel.dart';
 
 class Confirm2View extends StackedView<Confirm2ViewModel> {
   const Confirm2View({Key? key}) : super(key: key);
-  // TODO : There should be to 'back' button on this page.
+
   @override
   Widget builder(
     BuildContext context,
