@@ -35,6 +35,8 @@ class FirebaseMessagingService {
       _waiting_storage_service.updateWaiting(waitingItem);
     });
 
+    // TODO : do the same thing as above when app is in background
+
     // Configure how to handle notification taps
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('Message opened: ${message.notification?.title}');

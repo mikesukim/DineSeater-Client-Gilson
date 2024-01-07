@@ -16,21 +16,6 @@ class HomeViewModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices =>
       [_waitingStorageService];
 
-  List<Waiting> waitingList = [
-    Waiting(name: 'Ilsan Noh', partySize: 2, isGrill: false),
-    Waiting(name: 'Seattle Kim', partySize: 3, isGrill: true),
-    Waiting(name: 'Kay K', partySize: 1, isGrill: false),
-    Waiting(name: 'Seeun P', partySize: 6, isGrill: false),
-    Waiting(name: 'Yulmoo Mom', partySize: 3, isGrill: true),
-    Waiting(name: 'Aron Cho', partySize: 2, isGrill: true),
-    Waiting(name: 'Ilsan Noh', partySize: 2, isGrill: false),
-    Waiting(name: 'Seattle Kim', partySize: 3, isGrill: true),
-    Waiting(name: 'Kay K', partySize: 1, isGrill: false),
-    Waiting(name: 'Seeun P', partySize: 6, isGrill: false),
-    Waiting(name: 'Yulmoo Mom', partySize: 3, isGrill: true),
-    Waiting(name: 'Aron Cho', partySize: 2, isGrill: true)
-  ];
-
   void navigateToEmployeeModeView() {
     _navigationService.navigateToEmployeeModeView();
   }
