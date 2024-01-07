@@ -92,8 +92,7 @@ MockDineseaterApiService getAndRegisterDineseaterApiService() {
   return service;
 }
 
-
-MockWaitingStorageService getAndRegisterWaitingStorageService() { 
+MockWaitingStorageService getAndRegisterWaitingStorageService() {
   _removeRegistrationIfExists<WaitingStorageService>();
   final service = MockWaitingStorageService();
   locator.registerSingleton<WaitingStorageService>(service);

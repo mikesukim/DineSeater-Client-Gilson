@@ -34,6 +34,7 @@ class HomeViewModel extends ReactiveViewModel {
   void navigateToEmployeeModeView() {
     _navigationService.navigateToEmployeeModeView();
   }
+
   int getWaitingCount() {
     return _waitingStorageService.waitings.length;
   }

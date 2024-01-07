@@ -11,14 +11,6 @@ class EmployeeModeArchiveViewModel extends BaseViewModel {
     Waiting(name: 'Seattle Kim', partySize: 3, isGrill: true),
   ];
 
-  void onTapBackToList() {
-    print('back to list');
-  }
-
-  void onTapEditCard() {
-    print('edit card');
-  }
-
   void navigateBack() {
     _navigatorService.back();
   }

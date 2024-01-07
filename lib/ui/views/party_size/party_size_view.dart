@@ -98,7 +98,8 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: kcPrimaryColor,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25)),
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
                                     elevation: 0),
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -111,7 +112,6 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                                 )),
                           ),
                         ),
-
                       ],
                     ),
                   ),
