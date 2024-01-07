@@ -17,6 +17,7 @@ class HomeViewModel extends ReactiveViewModel {
       [_waitingStorageService];
 
   void navigateToEmployeeModeView() {
+    //TODO : add authentication so only employees can access this view
     _navigationService.navigateToEmployeeModeView();
   }
 

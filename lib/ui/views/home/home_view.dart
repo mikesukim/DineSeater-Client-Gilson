@@ -9,6 +9,8 @@ import 'home_viewmodel.dart';
 class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
+  // TODO: check all UIs to improve
+
   @override
   Widget builder(
     BuildContext context,

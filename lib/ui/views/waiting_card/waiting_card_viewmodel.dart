@@ -6,6 +6,7 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../model/action_type.dart';
+import '../../../model/waiting.dart';
 import '../../../model/waiting_item.dart';
 import '../../../model/waiting_item_update_request.dart';
 import '../../../model/waiting_status.dart';
@@ -24,14 +25,11 @@ class WaitingCardViewModel extends BaseViewModel {
   WaitingCardViewModel() {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
-    // stopWatchTimer.setPresetMinuteTime(5);
     stopWatchTimer.setPresetSecondTime(20);
   }
 
   Future<void> onTapTableReady(BuildContext context, int index) async {
     try {
-      // throw Exception('table ready error');
-
       isTableReady = true;
 
       stopWatchTimer.onStartTimer();
@@ -57,10 +55,6 @@ class WaitingCardViewModel extends BaseViewModel {
   // TODO: display confirm alert dialog
   Future<void> onTapCancel(BuildContext context, int index) async {
     try {
-      // throw Exception('cancel error');
-
-      isTableReady = false;
-
       WaitingItem waitingItem = _waitingStorageService.waitings[index];
       waitingItem.status = WaitingStatus.MISSED.name;
       WaitingItemUpdateRequest waitingItemUpdateRequest =
@@ -84,10 +78,6 @@ class WaitingCardViewModel extends BaseViewModel {
   // TODO: display confirm alert dialog
   Future<void> onTapConfirm(BuildContext context, int index) async {
     try {
-      // throw Exception('confirm error');
-
-      isTableReady = false;
-
       WaitingItem waitingItem = _waitingStorageService.waitings[index];
       waitingItem.status = WaitingStatus.ARRIVED.name;
       WaitingItemUpdateRequest waitingItemUpdateRequest =
@@ -114,14 +104,34 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void onTapBackToList() {
+  Future<void> onTapBackToList(BuildContext context, int index, Waiting waiting) async {
+    try {
+      WaitingItem waitingItem = _waitingStorageService.archivedWaitings[index];
+      waitingItem.status = WaitingStatus.WAITING.name;
+      WaitingItemUpdateRequest waitingItemUpdateRequest =
+        WaitingItemUpdateRequest();
+      waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
+      waitingItemUpdateRequest.action = ActionType.REPORT_BACK_INITIAL_STATUS;
+
+      setBusy(true);
+      await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+      await _waitingStorageService.updateWaiting(waitingItem);
+      setBusy(false);
+
+      stopWatchTimer.onStopTimer();
+    } catch (e) {
+      // TODO : differentiate the error
+      showAlertDialog(context, 'Exception Caught', 'An exception occurred: $e');
+    }
     print('back to list');
   }
 
   void onTapEditCard() {
+    // TODO : can delete this I think
     print('edit card');
   }
 
+  // TODO : move to view class
   void showAlertDialog(BuildContext context, String title, String content) {
     showDialog(
       context: context,

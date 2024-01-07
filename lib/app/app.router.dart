@@ -182,8 +182,8 @@ class StackedRouter extends _i1.RouterBase {
     _i12.WaitingCardView: (data) {
       final args = data.getArgs<WaitingCardViewArguments>(nullOk: false);
       return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) =>
-            _i12.WaitingCardView(args.index, args.waiting, key: args.key),
+        builder: (context) => _i12.WaitingCardView(args.index, args.waiting,
+            key: args.key, isArchive: args.isArchive),
         settings: data,
       );
     },
@@ -201,6 +201,7 @@ class WaitingCardViewArguments {
     required this.index,
     required this.waiting,
     this.key,
+    this.isArchive = false,
   });
 
   final int index;
@@ -209,20 +210,28 @@ class WaitingCardViewArguments {
 
   final _i13.Key? key;
 
+  final bool isArchive;
+
   @override
   String toString() {
-    return '{"index": "$index", "waiting": "$waiting", "key": "$key"}';
+    return '{"index": "$index", "waiting": "$waiting", "key": "$key", "isArchive": "$isArchive"}';
   }
 
   @override
   bool operator ==(covariant WaitingCardViewArguments other) {
     if (identical(this, other)) return true;
-    return other.index == index && other.waiting == waiting && other.key == key;
+    return other.index == index &&
+        other.waiting == waiting &&
+        other.key == key &&
+        other.isArchive == isArchive;
   }
 
   @override
   int get hashCode {
-    return index.hashCode ^ waiting.hashCode ^ key.hashCode;
+    return index.hashCode ^
+        waiting.hashCode ^
+        key.hashCode ^
+        isArchive.hashCode;
   }
 }
 
@@ -371,6 +380,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required int index,
     required _i14.Waiting waiting,
     _i13.Key? key,
+    bool isArchive = false,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -378,8 +388,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.waitingCardView,
-        arguments:
-            WaitingCardViewArguments(index: index, waiting: waiting, key: key),
+        arguments: WaitingCardViewArguments(
+            index: index, waiting: waiting, key: key, isArchive: isArchive),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -530,6 +540,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required int index,
     required _i14.Waiting waiting,
     _i13.Key? key,
+    bool isArchive = false,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -537,8 +548,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.waitingCardView,
-        arguments:
-            WaitingCardViewArguments(index: index, waiting: waiting, key: key),
+        arguments: WaitingCardViewArguments(
+            index: index, waiting: waiting, key: key, isArchive: isArchive),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
