@@ -24,14 +24,11 @@ class WaitingCardViewModel extends BaseViewModel {
   WaitingCardViewModel() {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
-    // stopWatchTimer.setPresetMinuteTime(5);
     stopWatchTimer.setPresetSecondTime(20);
   }
 
   Future<void> onTapTableReady(BuildContext context, int index) async {
     try {
-      // throw Exception('table ready error');
-
       isTableReady = true;
 
       stopWatchTimer.onStartTimer();
@@ -57,10 +54,6 @@ class WaitingCardViewModel extends BaseViewModel {
   // TODO: display confirm alert dialog
   Future<void> onTapCancel(BuildContext context, int index) async {
     try {
-      // throw Exception('cancel error');
-
-      isTableReady = false;
-
       WaitingItem waitingItem = _waitingStorageService.waitings[index];
       waitingItem.status = WaitingStatus.MISSED.name;
       WaitingItemUpdateRequest waitingItemUpdateRequest =
@@ -84,10 +77,6 @@ class WaitingCardViewModel extends BaseViewModel {
   // TODO: display confirm alert dialog
   Future<void> onTapConfirm(BuildContext context, int index) async {
     try {
-      // throw Exception('confirm error');
-
-      isTableReady = false;
-
       WaitingItem waitingItem = _waitingStorageService.waitings[index];
       waitingItem.status = WaitingStatus.ARRIVED.name;
       WaitingItemUpdateRequest waitingItemUpdateRequest =
@@ -115,10 +104,12 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   void onTapBackToList() {
+    // TODO : warn employee text will be sent again to customer
     print('back to list');
   }
 
   void onTapEditCard() {
+    // TODO : can delete this I think
     print('edit card');
   }
 
