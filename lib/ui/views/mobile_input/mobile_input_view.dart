@@ -59,7 +59,6 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                               widthFactor: 0.9,
                               child: TextFormField(
                                 autofocus: true,
-                                //TODO: phoneController.value length <= 3, disable delete button
                                 controller: viewModel.phoneController,
                                 keyboardType: TextInputType.phone,
                                 validator: (String? value) {
@@ -89,6 +88,11 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                                     fillColor: kcInputBackgroundColor,
                                     enabledBorder: inputBorderStyle,
                                     focusedBorder: inputBorderStyle),
+                                onChanged: (value) {
+                                  if (value.length <= 3) {
+                                    viewModel.phoneController.text = '+1 ';
+                                  }
+                                },
                               ),
                             ),
                             verticalSpaceMedium,

@@ -60,6 +60,7 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                                 shrinkWrap: true,
                                 itemCount: viewModel.getWaitingCount(),
                                 itemBuilder: (BuildContext context, int index) {
+                                  // TODO: on tap card, display detail view
                                   return WaitingCardView(
                                       index, viewModel.getWaiting(index));
                                 }),
