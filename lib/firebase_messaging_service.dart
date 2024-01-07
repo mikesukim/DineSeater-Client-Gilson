@@ -26,21 +26,28 @@ class FirebaseMessagingService {
           'User declined or has not yet granted permission for notifications');
     }
 
+    // TODO : know how to receive notifications while app is not running at all.
+    // if this implemented, then every post request when app is launch is not needed.
+
     // Configure how to handle incoming notifications
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Received message: ${message.notification?.title}');
-      print('Received data: ${message.data}');
-      final waiting = json.decode(message.data['waiting']);
-      final waitingItem = WaitingItem.fromJson(waiting);
-      _waiting_storage_service.updateWaiting(waitingItem);
+      _handleMessage(message);
     });
 
-    // TODO : do the same thing as above when app is in background
-
-    // Configure how to handle notification taps
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('Message opened: ${message.notification?.title}');
-      // Handle notification tap
-    });
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
+  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    print('Handling a background message ${message..notification?.title}');
+    _handleMessage(message);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    print('Received data: ${message.data}');
+    final waiting = json.decode(message.data['waiting']);
+    final waitingItem = WaitingItem.fromJson(waiting);
+    _waiting_storage_service.updateWaiting(waitingItem);
+  }
+
+
 }
