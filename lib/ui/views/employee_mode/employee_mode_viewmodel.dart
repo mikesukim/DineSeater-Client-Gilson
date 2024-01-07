@@ -22,51 +22,8 @@ class EmployeeModeViewModel extends BaseViewModel {
     Waiting(name: 'Aron Cho', partySize: 2, isGrill: true)
   ];
 
-  late List<bool> isTableReady;
-
-  late List<bool> isTimerEnd;
-
-  EmployeeModeViewModel() {
-    isTableReady = List.filled(waitingList.length, false, growable: true);
-    isTimerEnd = List.filled(waitingList.length, false, growable: true);
-  }
-
   void onTapCard(int index) {
     print('$index is tapped');
-  }
-
-  void onTapTableReady(int index) {
-    isTableReady[index] = true;
-
-    notifyListeners();
-  }
-
-  void onTimerEnd(int index) {
-    isTimerEnd[index] = true;
-
-    notifyListeners();
-  }
-
-  void onTapCancel(int index) {
-    isTableReady[index] = false;
-    isTableReady.removeAt(index);
-    isTimerEnd.removeAt(index);
-
-    // TODO: archive
-    waitingList.removeAt(index);
-
-    notifyListeners();
-  }
-
-  void onTapConfirm(int index) {
-    isTableReady[index] = false;
-    isTableReady.removeAt(index);
-    isTimerEnd.removeAt(index);
-
-    // TODO: archive
-    waitingList.removeAt(index);
-
-    notifyListeners();
   }
 
   void navigateBack() {

@@ -47,7 +47,8 @@ class Confirm1ViewModel extends BaseViewModel {
         ),
         phoneNumber: waiting.mobileNumber!);
 
-    WaitingItem addedWaiting = await _dineseaterApiService.addWaitingItem(request);
+    WaitingItem addedWaiting =
+        await _dineseaterApiService.addWaitingItem(request);
     await _waitingStorageService.addWaiting(addedWaiting);
   }
 }

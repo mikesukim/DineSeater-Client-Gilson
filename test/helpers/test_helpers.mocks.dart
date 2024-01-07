@@ -9,11 +9,13 @@ import 'dart:ui' as _i8;
 import 'package:dineseater_client_gilson/model/waiting_item.dart' as _i3;
 import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart'
     as _i11;
+import 'package:dineseater_client_gilson/model/waiting_item_update_request.dart'
+    as _i12;
 import 'package:dineseater_client_gilson/services/cognito_service.dart' as _i9;
 import 'package:dineseater_client_gilson/services/dineseater_api_service.dart'
     as _i10;
 import 'package:dineseater_client_gilson/services/waiting_storage_service.dart'
-    as _i12;
+    as _i13;
 import 'package:flutter/material.dart' as _i6;
 import 'package:logger/logger.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -825,6 +827,31 @@ class MockDineseaterApiService extends _i1.Mock
       ) as _i7.Future<_i3.WaitingItem>);
 
   @override
+  _i7.Future<_i3.WaitingItem> updateWaitingItem(
+          _i12.WaitingItemUpdateRequest? waitingItemUpdateRequest) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateWaitingItem,
+          [waitingItemUpdateRequest],
+        ),
+        returnValue: _i7.Future<_i3.WaitingItem>.value(_FakeWaitingItem_1(
+          this,
+          Invocation.method(
+            #updateWaitingItem,
+            [waitingItemUpdateRequest],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i3.WaitingItem>.value(_FakeWaitingItem_1(
+          this,
+          Invocation.method(
+            #updateWaitingItem,
+            [waitingItemUpdateRequest],
+          ),
+        )),
+      ) as _i7.Future<_i3.WaitingItem>);
+
+  @override
   _i7.Future<void> registerDeviceToken(String? deviceToken) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -840,7 +867,7 @@ class MockDineseaterApiService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockWaitingStorageService extends _i1.Mock
-    implements _i12.WaitingStorageService {
+    implements _i13.WaitingStorageService {
   @override
   _i2.Logger get logger => (super.noSuchMethod(
         Invocation.getter(#logger),
@@ -873,6 +900,19 @@ class MockWaitingStorageService extends _i1.Mock
         returnValueForMissingStub: _FakeReactiveList_2<_i3.WaitingItem>(
           this,
           Invocation.getter(#waitings),
+        ),
+      ) as _i4.ReactiveList<_i3.WaitingItem>);
+
+  @override
+  _i4.ReactiveList<_i3.WaitingItem> get archivedWaitings => (super.noSuchMethod(
+        Invocation.getter(#archivedWaitings),
+        returnValue: _FakeReactiveList_2<_i3.WaitingItem>(
+          this,
+          Invocation.getter(#archivedWaitings),
+        ),
+        returnValueForMissingStub: _FakeReactiveList_2<_i3.WaitingItem>(
+          this,
+          Invocation.getter(#archivedWaitings),
         ),
       ) as _i4.ReactiveList<_i3.WaitingItem>);
 
@@ -932,6 +972,28 @@ class MockWaitingStorageService extends _i1.Mock
           this,
           Invocation.method(
             #getWaiting,
+            [index],
+          ),
+        ),
+      ) as _i3.WaitingItem);
+
+  @override
+  _i3.WaitingItem getArchivedWaiting(int? index) => (super.noSuchMethod(
+        Invocation.method(
+          #getArchivedWaiting,
+          [index],
+        ),
+        returnValue: _FakeWaitingItem_1(
+          this,
+          Invocation.method(
+            #getArchivedWaiting,
+            [index],
+          ),
+        ),
+        returnValueForMissingStub: _FakeWaitingItem_1(
+          this,
+          Invocation.method(
+            #getArchivedWaiting,
             [index],
           ),
         ),

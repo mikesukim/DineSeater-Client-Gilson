@@ -105,7 +105,8 @@ class WaitingStorageService with ListenableServiceMixin {
       } else {
         _archivedWaitings.add(waiting);
       }
-      _waitings.removeWhere((element) => element.waitingId == waiting.waitingId);
+      _waitings
+          .removeWhere((element) => element.waitingId == waiting.waitingId);
     } else {
       final index = _waitings
           .indexWhere((element) => element.waitingId == waiting.waitingId);
