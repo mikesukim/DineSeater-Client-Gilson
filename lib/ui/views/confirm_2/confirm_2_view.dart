@@ -20,13 +20,7 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
         elevation: 0,
         leadingWidth: 60,
         toolbarHeight: 40,
-        leading: TextButton(
-          onPressed: () => viewModel.navigateBack(),
-          child: const Text(
-            'Back',
-            style: backButtonStyle,
-          ),
-        ),
+        leading: null,
       ),
       body: SafeArea(
         child: Center(
