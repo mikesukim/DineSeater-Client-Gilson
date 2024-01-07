@@ -2,25 +2,25 @@ import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
+import '../../../services/waiting_storage_service.dart';
 
-class EmployeeModeViewModel extends BaseViewModel {
+class EmployeeModeViewModel extends ReactiveViewModel {
   final _navigatorService = NavigationService();
+  final _waitingStorageService = locator<WaitingStorageService>();
 
-  List<Waiting> waitingList = [
-    Waiting(name: 'Ilsan Noh', partySize: 2, isGrill: false),
-    Waiting(name: 'Seattle Kim', partySize: 3, isGrill: true),
-    Waiting(name: 'Kay K', partySize: 1, isGrill: false),
-    Waiting(name: 'Seeun P', partySize: 6, isGrill: false),
-    Waiting(name: 'Yulmoo Mom', partySize: 3, isGrill: true),
-    Waiting(name: 'Aron Cho', partySize: 2, isGrill: true),
-    Waiting(name: 'Ilsan Noh', partySize: 2, isGrill: false),
-    Waiting(name: 'Seattle Kim', partySize: 3, isGrill: true),
-    Waiting(name: 'Kay K', partySize: 1, isGrill: false),
-    Waiting(name: 'Seeun P', partySize: 6, isGrill: false),
-    Waiting(name: 'Yulmoo Mom', partySize: 3, isGrill: true),
-    Waiting(name: 'Aron Cho', partySize: 2, isGrill: true)
-  ];
+  @override
+  List<ListenableServiceMixin> get listenableServices =>
+      [_waitingStorageService];
+
+  int getWaitingCount() {
+    return _waitingStorageService.waitings.length;
+  }
+
+  Waiting getWaiting(int index) {
+    return Waiting.from(_waitingStorageService.waitings[index]);
+  }
 
   void onTapCard(int index) {
     print('$index is tapped');
