@@ -6,6 +6,7 @@ import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
 import '../../../services/waiting_storage_service.dart';
 
+// TODO: timers should not be reset when coming back from other view.
 class EmployeeModeViewModel extends ReactiveViewModel {
   final _navigatorService = NavigationService();
   final _waitingStorageService = locator<WaitingStorageService>();

@@ -52,6 +52,7 @@ class EmployeeModeArchiveView
                                   shrinkWrap: true,
                                   itemCount: viewModel.getArchivedWaitingCount(),
                                   itemBuilder: (BuildContext context, int index) {
+                                    // TODO: on tap card, display detail view
                                     return WaitingCardView(
                                       index,
                                       viewModel.getArchivedWaiting(index),

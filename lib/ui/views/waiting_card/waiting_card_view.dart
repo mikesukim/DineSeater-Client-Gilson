@@ -1,7 +1,7 @@
 import 'package:dineseater_client_gilson/model/waiting.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
@@ -57,17 +57,25 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                       ? grillIconMedium
                                       : mealIconMedium,
                                   if (viewModel.isTableReady)
-                                    TimerCountdown(
-                                      endTime: DateTime.now()
-                                          .add(const Duration(seconds: 10
-                                              //       minutes: 5
-                                              )),
-                                      format:
-                                          CountDownTimerFormat.minutesSeconds,
-                                      enableDescriptions: false,
-                                      spacerWidth: 2,
-                                      onEnd: () => viewModel.onTimerEnd(index),
-                                    )
+                                    StreamBuilder<int>(
+                                      stream: viewModel.stopWatchTimer.rawTime,
+                                      initialData: viewModel
+                                          .stopWatchTimer.rawTime.value,
+                                      builder: (context, snap) {
+                                        final value = snap.data!;
+                                        final displayTime =
+                                            StopWatchTimer.getDisplayTime(value,
+                                                hours: false,
+                                                milliSecond: false);
+                                        return Column(
+                                          children: <Widget>[
+                                            Text(
+                                              displayTime,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
                                 ],
                               ),
                             ),
@@ -97,8 +105,8 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(4.0),
                                   child: ElevatedButton(
-                                    onPressed: () =>
-                                        viewModel.onTapTableReady(index),
+                                    onPressed: () => viewModel.onTapTableReady(
+                                        context, index),
                                     style: ElevatedButton.styleFrom(
                                         padding: EdgeInsets.zero,
                                         shape: RoundedRectangleBorder(
@@ -126,7 +134,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                     icon: employeeModeCancel,
                                     iconSize: 60,
                                     onPressed: () =>
-                                        viewModel.onTapCancel(index),
+                                        viewModel.onTapCancel(context, index),
                                   ),
                                 )),
                           if (!isArchive && viewModel.isTableReady)
@@ -139,7 +147,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                     icon: employeeModeConfirm,
                                     iconSize: 60,
                                     onPressed: () =>
-                                        viewModel.onTapConfirm(index),
+                                        viewModel.onTapConfirm(context, index),
                                   ),
                                 )),
                           if (isArchive)
