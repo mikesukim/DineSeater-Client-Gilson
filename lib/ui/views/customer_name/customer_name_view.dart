@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../model/waiting.dart';
@@ -32,61 +33,62 @@ class CustomerNameView extends StackedView<CustomerNameViewModel> {
           ),
         ),
         body: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Form(
-                    key: viewModel.nameFormKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            gilsonIconSmall,
-                            verticalSpaceMedium,
-                            const Text(
-                              'What\'s your name?',
-                              style: mainText,
-                            ),
-                            verticalSpaceTiny,
-                            const FractionallySizedBox(
-                              widthFactor: 0.8,
-                              child: Text(
-                                'Your name will help us identify you.',
-                                style: subText,
-                                textAlign: TextAlign.center,
+          child: Padding(
+            padding:
+                EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 8.0),
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Form(
+                      key: viewModel.nameFormKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              gilsonIconSmall,
+                              verticalSpaceMedium,
+                              const Text(
+                                'What\'s your name?',
+                                style: mainText,
                               ),
-                            ),
-                            verticalSpaceMedium,
-                            FractionallySizedBox(
-                              widthFactor: 0.9,
-                              child: TextFormField(
-                                autofocus: true,
-                                controller: viewModel.nameController,
-                                keyboardType: TextInputType.name,
-                                validator: (String? value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your name.';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                decoration: const InputDecoration(
-                                    hintText: 'Michael',
-                                    hintStyle: inputHintTextStyle,
-                                    // filled: true,
-                                    // fillColor: kcInputBackgroundColor,
-                                    enabledBorder: inputBorderStyle,
-                                    focusedBorder: inputBorderStyle),
+                              verticalSpaceTiny,
+                              const FractionallySizedBox(
+                                widthFactor: 0.8,
+                                child: Text(
+                                  'Your name will help us identify you.',
+                                  style: subText,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        FractionallySizedBox(
-                          widthFactor: 0.9,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
+                              verticalSpaceMedium,
+                              FractionallySizedBox(
+                                widthFactor: 0.9,
+                                child: TextFormField(
+                                  autofocus: true,
+                                  controller: viewModel.nameController,
+                                  keyboardType: TextInputType.name,
+                                  validator: (String? value) {
+                                    if (value!.isEmpty) {
+                                      return 'Please enter your name.';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                      hintText: 'Michael',
+                                      hintStyle: inputHintTextStyle,
+                                      // filled: true,
+                                      // fillColor: kcInputBackgroundColor,
+                                      enabledBorder: inputBorderStyle,
+                                      focusedBorder: inputBorderStyle),
+                                ),
+                              ),
+                            ],
+                          ),
+                          FractionallySizedBox(
+                            widthFactor: 0.9,
                             child: ElevatedButton(
                                 onPressed: () {
                                   if (viewModel.nameFormKey.currentState!
@@ -110,12 +112,12 @@ class CustomerNameView extends StackedView<CustomerNameViewModel> {
                                   ),
                                 )),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

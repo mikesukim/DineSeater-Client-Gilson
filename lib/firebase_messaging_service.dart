@@ -37,7 +37,9 @@ class FirebaseMessagingService {
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+
+  Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
     print('Handling a background message ${message..notification?.title}');
     _handleMessage(message);
   }
@@ -48,6 +50,4 @@ class FirebaseMessagingService {
     final waitingItem = WaitingItem.fromJson(waiting);
     _waiting_storage_service.updateWaiting(waitingItem);
   }
-
-
 }
