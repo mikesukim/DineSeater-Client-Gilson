@@ -1031,6 +1031,28 @@ class MockWaitingStorageService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
+  _i7.Future<void> removeWaitingAtWaitings(String? waitingId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeWaitingAtWaitings,
+          [waitingId],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> removeWaitingAtArchivedWaitings(String? waitingId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeWaitingAtArchivedWaitings,
+          [waitingId],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
       super.noSuchMethod(
         Invocation.method(

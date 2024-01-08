@@ -17,64 +17,65 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
     Widget? child,
   ) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => EmployeeModeViewModel(),
-      builder: (context, model, _) {
-        return Scaffold(
-          backgroundColor: kcPrimaryColor,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leadingWidth: 60,
-            toolbarHeight: 40,
-            leading: TextButton(
-              onPressed: () => viewModel.navigateBack(),
-              child: const Text(
-                'Back',
-                style: blackBackButtonStyle,
+        viewModelBuilder: () => EmployeeModeViewModel(),
+        builder: (context, model, _) {
+          return Scaffold(
+            backgroundColor: kcPrimaryColor,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leadingWidth: 60,
+              toolbarHeight: 40,
+              leading: TextButton(
+                onPressed: () => viewModel.navigateBack(),
+                child: const Text(
+                  'Back',
+                  style: blackBackButtonStyle,
+                ),
               ),
+              actions: [
+                IconButton(
+                    onPressed: viewModel.navigateToArchiveView,
+                    icon: const Icon(
+                      Icons.archive_outlined,
+                      color: Colors.black,
+                      size: 30,
+                    )),
+              ],
             ),
-            actions: [
-              IconButton(
-                  onPressed: viewModel.navigateToArchiveView,
-                  icon: const Icon(
-                    Icons.archive_outlined,
-                    color: Colors.black,
-                    size: 30,
-                  )),
-            ],
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
-              child: Center(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          gilsonIconSmall,
-                          verticalSpaceMedium,
-                          Expanded(
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: viewModel.getWaitingCount(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  // TODO: on tap card, display detail view
-                                  return WaitingCardView(
-                                      index, viewModel.getWaiting(index));
-                                }),
-                          )
-                        ],
+            body: SafeArea(
+              child: Padding(
+                padding:
+                    EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            gilsonIconSmall,
+                            verticalSpaceMedium,
+                            Expanded(
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: viewModel.getWaitingCount(),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return WaitingCardView(
+                                        index, viewModel.getWaitingItem(index));
+                                  }),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-    });
+          );
+        });
   }
 
   @override

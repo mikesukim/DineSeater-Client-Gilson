@@ -37,7 +37,8 @@ class EmployeeModeArchiveView
             ),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
+                padding:
+                    EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
                 child: Center(
                   child: Column(
                     children: [
@@ -50,9 +51,10 @@ class EmployeeModeArchiveView
                             Expanded(
                               child: ListView.builder(
                                   shrinkWrap: true,
-                                  itemCount: viewModel.getArchivedWaitingCount(),
-                                  itemBuilder: (BuildContext context, int index) {
-                                    // TODO: on tap card, display detail view
+                                  itemCount:
+                                      viewModel.getArchivedWaitingCount(),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
                                     return WaitingCardView(
                                       index,
                                       viewModel.getArchivedWaiting(index),
@@ -70,7 +72,7 @@ class EmployeeModeArchiveView
             ),
           );
         });
-    }
+  }
 
   @override
   EmployeeModeArchiveViewModel viewModelBuilder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../common/app_colors.dart';
@@ -14,60 +15,69 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
     Confirm2ViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leadingWidth: 60,
-        toolbarHeight: 40,
-        leading: null,
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    gilsonIconSmall,
-                    Column(
+    // TODO : test block sliding back to previous page
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leadingWidth: 60,
+          toolbarHeight: 40,
+          leading: null,
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding:
+                EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 8.0),
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          'assets/confirm2.png',
-                          scale: 2.5,
+                        gilsonIconSmall,
+                        Column(
+                          children: [
+                            Image.asset(
+                              'assets/confirm2.png',
+                              scale: 2.5,
+                            ),
+                            verticalSpaceLarge,
+                            const Text('You\'re on the list!',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            const Text('We\'ll text you once ready!',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                          ],
                         ),
-                        verticalSpaceLarge,
-                        const Text('You\'re on the list!',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                        const Text('We\'ll text you once ready!',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
+                        FractionallySizedBox(
+                          widthFactor: 0.9,
+                          child: ElevatedButton(
+                              onPressed: viewModel.navigateToHome,
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: kcPrimaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25)),
+                                  elevation: 0),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
+                                  'Go to Home',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: semiBoldFontWeight),
+                                ),
+                              )),
+                        ),
                       ],
                     ),
-                    FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: ElevatedButton(
-                          onPressed: viewModel.navigateToHome,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: kcPrimaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25)),
-                              elevation: 0),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                            child: Text(
-                              'Go to Home',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: semiBoldFontWeight),
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:dineseater_client_gilson/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 import '../../../model/waiting.dart';
@@ -32,84 +33,85 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
           ),
         ),
         body: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Form(
-                    key: viewModel.mobileInputFormKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            gilsonIconSmall,
-                            verticalSpaceMedium,
-                            const Text(
-                              'What\'s your mobile number?',
-                              style: mainText,
-                            ),
-                            verticalSpaceTiny,
-                            const Text(
-                              'You will receive texts about your visit.',
-                              style: subText,
-                            ),
-                            verticalSpaceMedium,
-                            FractionallySizedBox(
-                              widthFactor: 0.9,
-                              child: TextFormField(
-                                autofocus: true,
-                                controller: viewModel.phoneController,
-                                keyboardType: TextInputType.phone,
-                                validator: (String? value) {
-                                  value = value?.replaceAll('+', '');
-                                  value = value?.replaceAll('(', '');
-                                  value = value?.replaceAll(')', '');
-                                  value = value?.replaceAll(' ', '');
-                                  String pattern =
-                                      r'(^(?:[+0]9)?[0-9]{11,13}$)';
-                                  RegExp regExp = RegExp(pattern);
-                                  if (value!.isEmpty) {
-                                    return 'Please enter mobile number.';
-                                  } else if (!regExp.hasMatch(value)) {
-                                    return 'Please enter valid mobile number.';
-                                  }
-                                  return null;
-                                },
-                                inputFormatters: [
-                                  PhoneInputFormatter(
-                                    allowEndlessPhone: false,
-                                  )
-                                ],
-                                decoration: const InputDecoration(
-                                    hintText: '253-561-3187',
-                                    hintStyle: inputHintTextStyle,
-                                    filled: true,
-                                    fillColor: kcInputBackgroundColor,
-                                    enabledBorder: inputBorderStyle,
-                                    focusedBorder: inputBorderStyle),
-                                onChanged: (value) {
-                                  if (value.length <= 3) {
-                                    viewModel.phoneController.text = '+1 ';
-                                  }
-                                },
+          child: Padding(
+            padding:
+                EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 8.0),
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Form(
+                      key: viewModel.mobileInputFormKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              gilsonIconSmall,
+                              verticalSpaceMedium,
+                              const Text(
+                                'What\'s your mobile number?',
+                                style: mainText,
                               ),
-                            ),
-                            verticalSpaceMedium,
-                            const FractionallySizedBox(
-                              widthFactor: 0.9,
-                              child: Text(
-                                'By continuing below, you agree to Dineseater sharing your party size, name and mobile number with the restaurant.',
-                                textAlign: TextAlign.center,
-                                style: tinyText,
+                              verticalSpaceTiny,
+                              const Text(
+                                'You will receive texts about your visit.',
+                                style: subText,
                               ),
-                            ),
-                          ],
-                        ),
-                        FractionallySizedBox(
-                          widthFactor: 0.9,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
+                              verticalSpaceMedium,
+                              FractionallySizedBox(
+                                widthFactor: 0.9,
+                                child: TextFormField(
+                                  autofocus: true,
+                                  controller: viewModel.phoneController,
+                                  keyboardType: TextInputType.phone,
+                                  validator: (String? value) {
+                                    value = value?.replaceAll('+', '');
+                                    value = value?.replaceAll('(', '');
+                                    value = value?.replaceAll(')', '');
+                                    value = value?.replaceAll(' ', '');
+                                    String pattern =
+                                        r'(^(?:[+0]9)?[0-9]{11,13}$)';
+                                    RegExp regExp = RegExp(pattern);
+                                    if (value!.isEmpty) {
+                                      return 'Please enter mobile number.';
+                                    } else if (!regExp.hasMatch(value)) {
+                                      return 'Please enter valid mobile number.';
+                                    }
+                                    return null;
+                                  },
+                                  inputFormatters: [
+                                    PhoneInputFormatter(
+                                      allowEndlessPhone: false,
+                                    )
+                                  ],
+                                  decoration: const InputDecoration(
+                                      hintText: '253-561-3187',
+                                      hintStyle: inputHintTextStyle,
+                                      filled: true,
+                                      fillColor: kcInputBackgroundColor,
+                                      enabledBorder: inputBorderStyle,
+                                      focusedBorder: inputBorderStyle),
+                                  onChanged: (value) {
+                                    if (value.length <= 3) {
+                                      viewModel.phoneController.text = '+1 ';
+                                    }
+                                  },
+                                ),
+                              ),
+                              verticalSpaceMedium,
+                              const FractionallySizedBox(
+                                widthFactor: 0.9,
+                                child: Text(
+                                  'By continuing below, you agree to Dineseater sharing your party size, name and mobile number with the restaurant.',
+                                  textAlign: TextAlign.center,
+                                  style: tinyText,
+                                ),
+                              ),
+                            ],
+                          ),
+                          FractionallySizedBox(
+                            widthFactor: 0.9,
                             child: ElevatedButton(
                                 onPressed: () {
                                   if (viewModel.mobileInputFormKey.currentState!
@@ -133,12 +135,12 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                                   ),
                                 )),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -5,7 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:dineseater_client_gilson/model/waiting.dart' as _i14;
+import 'package:dineseater_client_gilson/model/waiting_item.dart' as _i14;
 import 'package:dineseater_client_gilson/ui/views/confirm_1/confirm_1_view.dart'
     as _i8;
 import 'package:dineseater_client_gilson/ui/views/confirm_2/confirm_2_view.dart'
@@ -206,7 +206,7 @@ class WaitingCardViewArguments {
 
   final int index;
 
-  final _i14.Waiting waiting;
+  final _i14.WaitingItem waiting;
 
   final _i13.Key? key;
 
@@ -378,7 +378,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
 
   Future<dynamic> navigateToWaitingCardView({
     required int index,
-    required _i14.Waiting waiting,
+    required _i14.WaitingItem waiting,
     _i13.Key? key,
     bool isArchive = false,
     int? routerId,
@@ -538,7 +538,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
 
   Future<dynamic> replaceWithWaitingCardView({
     required int index,
-    required _i14.Waiting waiting,
+    required _i14.WaitingItem waiting,
     _i13.Key? key,
     bool isArchive = false,
     int? routerId,

@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
-import '../../../model/waiting.dart';
+import '../../../model/waiting_item.dart';
 import '../../../services/waiting_storage_service.dart';
 
 class EmployeeModeArchiveViewModel extends ReactiveViewModel {
@@ -17,10 +17,9 @@ class EmployeeModeArchiveViewModel extends ReactiveViewModel {
     return _waitingStorageService.archivedWaitings.length;
   }
 
-  Waiting getArchivedWaiting(int index) {
-    return Waiting.from(_waitingStorageService.archivedWaitings[index]);
+  WaitingItem getArchivedWaiting(int index) {
+    return _waitingStorageService.archivedWaitings[index];
   }
-
 
   void navigateBack() {
     _navigatorService.back();

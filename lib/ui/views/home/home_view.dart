@@ -10,7 +10,7 @@ class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
   // TODO: check all UIs to improve
-
+  // TODO: show total number of waitings
   @override
   Widget builder(
     BuildContext context,
@@ -24,56 +24,28 @@ class HomeView extends StackedView<HomeViewModel> {
             body: SafeArea(
               child: Padding(
                 padding:
-                    EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
+                    EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 8.0),
                 child: Column(
                   children: [
-                    Column(
+                    Stack(
+                      alignment: Alignment.topCenter,
                       children: [
-                        Stack(
-                          alignment: Alignment.topCenter,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: gilsonIconSmall,
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: IconButton(
-                                  onPressed:
-                                      viewModel.navigateToEmployeeModeView,
-                                  icon: const Icon(
-                                      Icons.manage_accounts_outlined)),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: gilsonIconSmall,
                         ),
-                        verticalSpaceSmall,
-                        FractionallySizedBox(
-                          widthFactor: 0.9,
-                          child: ElevatedButton(
-                              onPressed: () =>
-                                  viewModel.navigateToMealTypeView(),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: kcPrimaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25)),
-                                  elevation: 0),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 16.0),
-                                child: Text(
-                                  'Join the Waitlist',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: semiBoldFontWeight),
-                                ),
-                              )),
-                        )
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                              onPressed: viewModel.navigateToEmployeeModeView,
+                              icon: const Icon(Icons.manage_accounts_outlined)),
+                        ),
                       ],
                     ),
-                    verticalSpaceSmall,
                     const Divider(
-                      height: 40.0,
+                      height: 10.0,
                     ),
+                    verticalSpaceSmall,
                     Expanded(
                       child: FractionallySizedBox(
                         widthFactor: 0.9,
@@ -187,6 +159,24 @@ class HomeView extends StackedView<HomeViewModel> {
                           ],
                         ),
                       ),
+                    ),
+                    FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: ElevatedButton(
+                          onPressed: () => viewModel.navigateToMealTypeView(),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: kcPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)),
+                              elevation: 0),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.0),
+                            child: Text(
+                              'Join the Waitlist',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: semiBoldFontWeight),
+                            ),
+                          )),
                     )
                   ],
                 ),
