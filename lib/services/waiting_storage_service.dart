@@ -8,6 +8,7 @@ class WaitingStorageService with ListenableServiceMixin {
   late ReactiveList<WaitingItem> _waitings = ReactiveList<WaitingItem>();
   late ReactiveList<WaitingItem> _archivedWaitings =
       ReactiveList<WaitingItem>();
+  // currently data is saved to storage but not used
   final LocalStorage _waitingStorage = LocalStorage('waitingStorage');
   final String _waitingsKey = 'waitings';
 
@@ -42,6 +43,8 @@ class WaitingStorageService with ListenableServiceMixin {
     }
     _waitings = ReactiveList.from(newWaitings);
     _archivedWaitings = ReactiveList.from(archivedWaitings);
+    _waitings.sort(compareByLastModified);
+    _archivedWaitings.sort(compareByLastModified);
     logger.i('update completed');
     notifyListeners();
   }
@@ -69,6 +72,8 @@ class WaitingStorageService with ListenableServiceMixin {
       }
     }
     logger.i('update completed');
+    _waitings.sort(compareByLastModified);
+    _archivedWaitings.sort(compareByLastModified);
     notifyListeners();
   }
 
@@ -87,6 +92,8 @@ class WaitingStorageService with ListenableServiceMixin {
     await _addWaitingToStorage(waiting);
     _waitings.add(waiting);
     _lastModifiedWaitingItem = waiting;
+    _waitings.sort(compareByLastModified);
+    _archivedWaitings.sort(compareByLastModified);
     logger.i('addWaiting completed');
     notifyListeners();
   }
@@ -117,6 +124,9 @@ class WaitingStorageService with ListenableServiceMixin {
       removeWaitingAtArchivedWaitings(waiting.waitingId);
     }
     _lastModifiedWaitingItem = waiting;
+    // TODO : possibly can make it more efficient, by knowing exact index to insert when adding
+    _waitings.sort(compareByLastModified);
+    _archivedWaitings.sort(compareByLastModified);
     logger.i('update completed');
     notifyListeners();
   }
@@ -194,4 +204,12 @@ class WaitingStorageService with ListenableServiceMixin {
     logger.i('newWaitingItem is already updated locally');
     return true;
   }
+
+  // Custom comparison function for sorting based on lastModified DateTime
+  int compareByLastModified(WaitingItem a, WaitingItem b) {
+    DateTime aDateTime = DateTime.parse(a.lastModified);
+    DateTime bDateTime = DateTime.parse(b.lastModified);
+    return aDateTime.compareTo(bDateTime);
+  }
+
 }
