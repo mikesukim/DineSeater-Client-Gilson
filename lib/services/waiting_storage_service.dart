@@ -207,8 +207,8 @@ class WaitingStorageService with ListenableServiceMixin {
 
   // Custom comparison function for sorting based on lastModified DateTime
   int compareByLastModified(WaitingItem a, WaitingItem b) {
-    DateTime aDateTime = DateTime.parse(a.lastModified);
-    DateTime bDateTime = DateTime.parse(b.lastModified);
+    DateTime aDateTime = DateTime.parse(a.dateCreated);
+    DateTime bDateTime = DateTime.parse(b.dateCreated);
     return aDateTime.compareTo(bDateTime);
   }
 
