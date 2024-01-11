@@ -3,6 +3,8 @@ import 'package:localstorage/localstorage.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
 
+import '../model/waiting_status.dart';
+
 class WaitingStorageService with ListenableServiceMixin {
   var logger = Logger();
   late ReactiveList<WaitingItem> _waitings = ReactiveList<WaitingItem>();
@@ -31,7 +33,7 @@ class WaitingStorageService with ListenableServiceMixin {
 
 // resetWaitingsAs should only be called only once when app is initialized
   Future<void> resetWaitingsAs(List<WaitingItem> waitings) async {
-    await _addWaitingListToStorage(waitings);
+    //await _addWaitingListToStorage(waitings);
     List<WaitingItem> archivedWaitings = [];
     List<WaitingItem> newWaitings = [];
     for (var waiting in waitings) {
@@ -51,9 +53,10 @@ class WaitingStorageService with ListenableServiceMixin {
 
   // updateWaitings should only be called only once when app is initialized
   Future<void> updateWaitings(List<WaitingItem> waitings) async {
-    await _addWaitingListToStorage(waitings);
+    //await _addWaitingListToStorage(waitings);
     for (var waiting in waitings) {
-      if (waiting.status == 'arrived' || waiting.status == 'missed') {
+      if (waiting.status == WaitingStatus.ARRIVED.name ||
+          waiting.status == WaitingStatus.MISSED.name) {
         final index = _archivedWaitings
             .indexWhere((element) => element.waitingId == waiting.waitingId);
         if (index != -1) {
@@ -89,7 +92,7 @@ class WaitingStorageService with ListenableServiceMixin {
     if (_isLocallyUpdatedAlready(waiting)) {
       return;
     }
-    await _addWaitingToStorage(waiting);
+    //await _addWaitingToStorage(waiting);
     _waitings.add(waiting);
     _lastModifiedWaitingItem = waiting;
     _waitings.sort(compareByLastModified);
@@ -100,11 +103,13 @@ class WaitingStorageService with ListenableServiceMixin {
 
   // update waiting
   Future<void> updateWaiting(WaitingItem waiting) async {
-    if (_isLocallyUpdatedAlready(waiting)) {
-      return;
-    }
-    await _addWaitingToStorage(waiting);
-    if (waiting.status == 'arrived' || waiting.status == 'missed') {
+    logger.i('updateWaiting : ${waiting.name} , ${waiting.status}');
+    // if (_isLocallyUpdatedAlready(waiting)) {
+    //   return;
+    // }
+    //await _addWaitingToStorage(waiting);
+    if (waiting.status == WaitingStatus.ARRIVED.name ||
+        waiting.status == WaitingStatus.MISSED.name) {
       final index = _archivedWaitings
           .indexWhere((element) => element.waitingId == waiting.waitingId);
       if (index != -1) {
@@ -112,7 +117,7 @@ class WaitingStorageService with ListenableServiceMixin {
       } else {
         _archivedWaitings.add(waiting);
       }
-      removeWaitingAtWaitings(waiting.waitingId);
+      await removeWaitingAtWaitings(waiting.waitingId);
     } else {
       final index = _waitings
           .indexWhere((element) => element.waitingId == waiting.waitingId);
@@ -121,7 +126,7 @@ class WaitingStorageService with ListenableServiceMixin {
       } else {
         _waitings.add(waiting);
       }
-      removeWaitingAtArchivedWaitings(waiting.waitingId);
+      await removeWaitingAtArchivedWaitings(waiting.waitingId);
     }
     _lastModifiedWaitingItem = waiting;
     // TODO : possibly can make it more efficient, by knowing exact index to insert when adding
@@ -132,7 +137,7 @@ class WaitingStorageService with ListenableServiceMixin {
   }
 
   Future<void> removeWaiting(String waitingId) async {
-    await _removeWaitingFromStorage(waitingId);
+    //await _removeWaitingFromStorage(waitingId);
     _waitings.removeWhere((element) => element.waitingId == waitingId);
     _archivedWaitings.removeWhere((element) => element.waitingId == waitingId);
     logger.i('removeWaiting completed');
@@ -140,14 +145,14 @@ class WaitingStorageService with ListenableServiceMixin {
   }
 
   Future<void> removeWaitingAtWaitings(String waitingId) async {
-    await _removeWaitingFromStorage(waitingId);
+    //await _removeWaitingFromStorage(waitingId);
     _waitings.removeWhere((element) => element.waitingId == waitingId);
     logger.i('removeWaitingAtWaitings completed');
     notifyListeners();
   }
 
   Future<void> removeWaitingAtArchivedWaitings(String waitingId) async {
-    await _removeWaitingFromStorage(waitingId);
+    //await _removeWaitingFromStorage(waitingId);
     _archivedWaitings.removeWhere((element) => element.waitingId == waitingId);
     logger.i('removeWaitingAtArchivedWaitings completed');
     notifyListeners();
@@ -211,5 +216,4 @@ class WaitingStorageService with ListenableServiceMixin {
     DateTime bDateTime = DateTime.parse(b.dateCreated);
     return aDateTime.compareTo(bDateTime);
   }
-
 }
