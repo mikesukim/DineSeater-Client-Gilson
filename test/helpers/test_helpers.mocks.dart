@@ -1010,6 +1010,17 @@ class MockWaitingStorageService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
+  _i7.Future<void> updatingWiatingFromNotification(_i3.WaitingItem? waiting) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updatingWiatingFromNotification,
+          [waiting],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
   _i7.Future<void> updateWaiting(_i3.WaitingItem? waiting) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1051,6 +1062,23 @@ class MockWaitingStorageService extends _i1.Mock
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
+  @override
+  int compareByLastModified(
+    _i3.WaitingItem? a,
+    _i3.WaitingItem? b,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #compareByLastModified,
+          [
+            a,
+            b,
+          ],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
 
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>

@@ -35,6 +35,11 @@ class FirebaseMessagingService {
       _handleMessage(message);
     });
 
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('Received message: ${message.notification?.title}');
+      _handleMessage(message);
+    });
+
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
@@ -48,6 +53,6 @@ class FirebaseMessagingService {
     print('Received data: ${message.data}');
     final waiting = json.decode(message.data['waiting']);
     final waitingItem = WaitingItem.fromJson(waiting);
-    _waiting_storage_service.updateWaiting(waitingItem);
+    _waiting_storage_service.updatingWiatingFromNotification(waitingItem);
   }
 }
