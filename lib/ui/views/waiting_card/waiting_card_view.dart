@@ -7,6 +7,7 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'waiting_card_viewmodel.dart';
 
+//TODO : prevent entire cards to be clickable while one card is loading
 class WaitingCardView extends StackedView<WaitingCardViewModel> {
   final int index;
   final bool isArchive;
@@ -107,7 +108,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       try {
-                                        viewModel.onTapTableReady(index);
+                                        viewModel.onTapTableReady(waiting);
                                       } catch (e) {
                                         showDialog(
                                           context: context,
@@ -145,7 +146,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                       iconSize: 60,
                                       onPressed: () {
                                         try {
-                                          viewModel.onTapCancel(index);
+                                          viewModel.onTapCancel(waiting);
                                         } catch (e) {
                                           showDialog(
                                             context: context,
@@ -167,7 +168,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                       iconSize: 60,
                                       onPressed: () {
                                         try {
-                                          viewModel.onTapConfirm(index);
+                                          viewModel.onTapConfirm(waiting);
                                         } catch (e) {
                                           showDialog(
                                             context: context,
@@ -186,7 +187,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       try {
-                                        viewModel.onTapBackToList(index);
+                                        viewModel.onTapBackToList(waiting);
                                       } catch (e) {
                                         showDialog(
                                           context: context,
@@ -253,7 +254,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
   WaitingCardViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      WaitingCardViewModel();
+      WaitingCardViewModel(waiting);
 }
 
 class ErrorAlertDialog extends StatelessWidget {

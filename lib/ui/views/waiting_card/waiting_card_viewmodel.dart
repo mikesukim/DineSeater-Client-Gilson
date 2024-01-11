@@ -21,12 +21,19 @@ class WaitingCardViewModel extends BaseViewModel {
   bool isTableReady = false;
   bool isTimerEnd = false;
 
+  WaitingItem waiting;
   late StopWatchTimer stopWatchTimer;
 
-  WaitingCardViewModel() {
+  WaitingCardViewModel(this.waiting) {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
     stopWatchTimer.setPresetSecondTime(20);
+
+    if (waiting.status == WaitingStatus.TEXT_SENT.name) {
+      isTableReady = true;
+      // TODO : remaining time is not synced yet
+      stopWatchTimer.onStartTimer();
+    }
   }
 
   void showWaitingInfoDialog(WaitingItem waiting) async {
@@ -40,12 +47,11 @@ class WaitingCardViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> onTapTableReady(int index) async {
+  Future<void> onTapTableReady(WaitingItem waitingItem) async {
     isTableReady = true;
 
     stopWatchTimer.onStartTimer();
 
-    WaitingItem waitingItem = _waitingStorageService.waitings[index];
     waitingItem.status = WaitingStatus.TEXT_SENT.name;
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
@@ -61,8 +67,8 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   // TODO: display confirm alert dialog
-  Future<void> onTapCancel(int index) async {
-    WaitingItem waitingItem = _waitingStorageService.waitings[index];
+  Future<void> onTapCancel(WaitingItem waitingItem) async {
+
     waitingItem.status = WaitingStatus.MISSED.name;
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
@@ -80,8 +86,8 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   // TODO: display confirm alert dialog
-  Future<void> onTapConfirm(int index) async {
-    WaitingItem waitingItem = _waitingStorageService.waitings[index];
+  Future<void> onTapConfirm(WaitingItem waitingItem) async {
+
     waitingItem.status = WaitingStatus.ARRIVED.name;
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
@@ -104,8 +110,8 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> onTapBackToList(int index) async {
-    WaitingItem waitingItem = _waitingStorageService.archivedWaitings[index];
+  Future<void> onTapBackToList(WaitingItem waitingItem) async {
+
     waitingItem.status = WaitingStatus.WAITING.name;
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();

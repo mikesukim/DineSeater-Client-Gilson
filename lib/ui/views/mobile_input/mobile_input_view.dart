@@ -61,6 +61,7 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                               verticalSpaceMedium,
                               FractionallySizedBox(
                                 widthFactor: 0.9,
+                                // TODO: +1 should not be deleted
                                 child: TextFormField(
                                   autofocus: true,
                                   controller: viewModel.phoneController,
