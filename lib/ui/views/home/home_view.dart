@@ -10,7 +10,7 @@ class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
   // TODO: check all UIs to improve
-  // TODO: show total number of waitings
+  // TODO: show total number of waitings instead of list
   @override
   Widget builder(
     BuildContext context,

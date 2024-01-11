@@ -7,6 +7,7 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
+// TODO : when table is moving, item is not clickable
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
