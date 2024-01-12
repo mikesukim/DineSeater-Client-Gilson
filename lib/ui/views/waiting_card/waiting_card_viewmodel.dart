@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
+import 'package:dineseater_client_gilson/model/waiting_item_publish_request.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -16,7 +17,7 @@ import '../../../services/waiting_storage_service.dart';
 class WaitingCardViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final _waitingStorageService = locator<WaitingStorageService>();
-  final _dineSeaterApiService = locator<DineseaterApiService>();
+  final _dineseaterApiService = locator<DineseaterApiService>();
 
   bool isTableReady = false;
   bool isTimerEnd = false;
@@ -49,18 +50,23 @@ class WaitingCardViewModel extends BaseViewModel {
 
   Future<void> onTapTableReady(WaitingItem waitingItem) async {
     isTableReady = true;
+    setBusy(true);
 
     stopWatchTimer.onStartTimer();
 
-    waitingItem.status = WaitingStatus.TEXT_SENT.name;
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.NOTIFY;
+    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    setBusy(true);
-    await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    waitingItem.status = WaitingStatus.TEXT_SENT.name;
     await _waitingStorageService.updateWaiting(waitingItem);
+
+    WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
+    waitingItemPublishRequest.waiting = waitingItem;
+    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
     setBusy(false);
 
     notifyListeners();
@@ -68,16 +74,20 @@ class WaitingCardViewModel extends BaseViewModel {
 
   // TODO: display confirm alert dialog
   Future<void> onTapCancel(WaitingItem waitingItem) async {
-
-    waitingItem.status = WaitingStatus.MISSED.name;
+    setBusy(true);
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_MISSED;
+    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    setBusy(true);
-    await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    waitingItem.status = WaitingStatus.MISSED.name;
     await _waitingStorageService.updateWaiting(waitingItem);
+
+    WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
+    waitingItemPublishRequest.waiting = waitingItem;
+    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
     setBusy(false);
 
     stopWatchTimer.onStopTimer();
@@ -87,16 +97,20 @@ class WaitingCardViewModel extends BaseViewModel {
 
   // TODO: display confirm alert dialog
   Future<void> onTapConfirm(WaitingItem waitingItem) async {
-
-    waitingItem.status = WaitingStatus.ARRIVED.name;
+    setBusy(true);
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_ARRIVAL;
+    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    setBusy(true);
-    await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    waitingItem.status = WaitingStatus.ARRIVED.name;
     await _waitingStorageService.updateWaiting(waitingItem);
+
+    WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
+    waitingItemPublishRequest.waiting = waitingItem;
+    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
     setBusy(false);
 
     stopWatchTimer.onStopTimer();
@@ -111,16 +125,21 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   Future<void> onTapBackToList(WaitingItem waitingItem) async {
+    setBusy(true);
 
-    waitingItem.status = WaitingStatus.WAITING.name;
     WaitingItemUpdateRequest waitingItemUpdateRequest =
-        WaitingItemUpdateRequest();
+    WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_BACK_INITIAL_STATUS;
+    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    setBusy(true);
-    await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    waitingItem.status = WaitingStatus.WAITING.name;
     await _waitingStorageService.updateWaiting(waitingItem);
+
+    WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
+    waitingItemPublishRequest.waiting = waitingItem;
+    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
     setBusy(false);
 
     stopWatchTimer.onStopTimer();

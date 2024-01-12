@@ -6,6 +6,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
 import '../../../model/waiting_item.dart';
+import '../../../model/waiting_item_publish_request.dart';
 import '../../../services/dineseater_api_service.dart';
 import '../../../services/waiting_storage_service.dart';
 
@@ -51,5 +52,10 @@ class Confirm1ViewModel extends BaseViewModel {
     WaitingItem addedWaiting =
         await _dineseaterApiService.addWaitingItem(request);
     await _waitingStorageService.addWaiting(addedWaiting);
+
+    WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
+    waitingItemPublishRequest.waiting = addedWaiting;
+    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
   }
 }

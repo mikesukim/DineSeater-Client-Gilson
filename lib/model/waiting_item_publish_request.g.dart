@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'waiting_item_update_request.dart';
+part of 'waiting_item_publish_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WaitingItemUpdateRequest _$WaitingItemUpdateRequestFromJson(
+WaitingItemPublishRequest _$WaitingItemPublishRequestFromJson(
         Map<String, dynamic> json) =>
-    WaitingItemUpdateRequest()
+    WaitingItemPublishRequest()
       ..action = $enumDecode(_$ActionTypeEnumMap, json['action'])
-      ..waitingId = json['waiting_id'] as String;
+      ..waiting = WaitingItem.fromJson(json['waiting'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$WaitingItemUpdateRequestToJson(
-        WaitingItemUpdateRequest instance) =>
+Map<String, dynamic> _$WaitingItemPublishRequestToJson(
+        WaitingItemPublishRequest instance) =>
     <String, dynamic>{
       'action': _$ActionTypeEnumMap[instance.action]!,
-      'waiting_id': instance.waitingId,
+      'waiting': instance.waiting,
     };
 
 const _$ActionTypeEnumMap = {

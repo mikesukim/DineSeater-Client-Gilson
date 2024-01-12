@@ -11,4 +11,6 @@ enum ActionType {
   REPORT_ARRIVAL,
   @JsonValue("report_back_initial_status")
   REPORT_BACK_INITIAL_STATUS,
+  @JsonValue("publish")
+  PUBLISH,
 }
