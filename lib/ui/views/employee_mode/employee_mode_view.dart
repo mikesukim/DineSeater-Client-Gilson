@@ -27,6 +27,8 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
               elevation: 0,
               leadingWidth: 60,
               toolbarHeight: 40,
+              // TODO : delete after debugging
+              title: Text(viewModel.getWaitingCount().toString()),
               leading: TextButton(
                 onPressed: () => viewModel.navigateBack(),
                 child: const Text(

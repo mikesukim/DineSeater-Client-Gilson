@@ -30,6 +30,14 @@ class HomeView extends StackedView<HomeViewModel> {
                     Stack(
                       alignment: Alignment.topCenter,
                       children: [
+                        // TODO : delete after debugging
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(viewModel.getWaitingCount().toString()),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: gilsonIconSmall,

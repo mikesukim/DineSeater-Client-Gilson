@@ -15,9 +15,11 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
     Confirm2ViewModel viewModel,
     Widget? child,
   ) {
-    // TODO : test block sliding back to previous page
-    return PopScope(
-      canPop: false,
+    // TODO : change back to following after debugging
+    //     return PopScope(
+    //       canPop: false,
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
