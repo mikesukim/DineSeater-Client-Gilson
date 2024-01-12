@@ -7,6 +7,7 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'customer_name_viewmodel.dart';
 
+//TODO : make sure to let customer know their name will be exposed at the main page
 class CustomerNameView extends StackedView<CustomerNameViewModel> {
   const CustomerNameView({Key? key}) : super(key: key);
 
