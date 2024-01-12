@@ -58,13 +58,13 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.NOTIFY;
-    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    WaitingItem updatedItem = await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.TEXT_SENT.name;
-    await _waitingStorageService.updateWaiting(waitingItem);
+    await _waitingStorageService.updateWaiting(updatedItem);
 
     WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = waitingItem;
+    waitingItemPublishRequest.waiting = updatedItem;
     await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
     setBusy(false);
@@ -79,13 +79,13 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_MISSED;
-    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    WaitingItem updatedItem = await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.MISSED.name;
-    await _waitingStorageService.updateWaiting(waitingItem);
+    await _waitingStorageService.updateWaiting(updatedItem);
 
     WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = waitingItem;
+    waitingItemPublishRequest.waiting = updatedItem;
     await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
     setBusy(false);
@@ -102,13 +102,13 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_ARRIVAL;
-    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    WaitingItem updatedItem = await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.ARRIVED.name;
-    await _waitingStorageService.updateWaiting(waitingItem);
+    await _waitingStorageService.updateWaiting(updatedItem);
 
     WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = waitingItem;
+    waitingItemPublishRequest.waiting = updatedItem;
     await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
     setBusy(false);
@@ -131,13 +131,13 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_BACK_INITIAL_STATUS;
-    await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+    WaitingItem updatedItem = await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.WAITING.name;
-    await _waitingStorageService.updateWaiting(waitingItem);
+    await _waitingStorageService.updateWaiting(updatedItem);
 
     WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = waitingItem;
+    waitingItemPublishRequest.waiting = updatedItem;
     await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
     setBusy(false);

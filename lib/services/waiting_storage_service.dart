@@ -51,8 +51,8 @@ class WaitingStorageService with ListenableServiceMixin {
   Future<void> updateWaitings(List<WaitingItem> waitings) async {
     //await _addWaitingListToStorage(waitings);
     for (var waiting in waitings) {
-      if (waiting.status == WaitingStatus.ARRIVED.name ||
-          waiting.status == WaitingStatus.MISSED.name) {
+      if (waiting.status.toUpperCase() == WaitingStatus.ARRIVED.name ||
+          waiting.status.toUpperCase() == WaitingStatus.MISSED.name) {
         final index = _archivedWaitings
             .indexWhere((element) => element.waitingId == waiting.waitingId);
         if (index != -1) {
@@ -125,8 +125,8 @@ class WaitingStorageService with ListenableServiceMixin {
   }
 
   Future<void> _updateWaitingOrArchive(WaitingItem waiting) async {
-    if (waiting.status == WaitingStatus.ARRIVED.name ||
-        waiting.status == WaitingStatus.MISSED.name) {
+    if (waiting.status.toUpperCase() == WaitingStatus.ARRIVED.name ||
+        waiting.status.toUpperCase() == WaitingStatus.MISSED.name) {
       final index = _archivedWaitings
           .indexWhere((element) => element.waitingId == waiting.waitingId);
       if (index != -1) {
