@@ -8,6 +8,7 @@ import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
 // TODO : when table is moving, item is not clickable
+// TODO : card should be deletable when is waiting status
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
