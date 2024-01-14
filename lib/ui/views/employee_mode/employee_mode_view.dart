@@ -7,6 +7,8 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
+// TODO : when table is moving, item is not clickable
+// TODO : card should be deletable when is waiting status
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
@@ -16,66 +18,64 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
     EmployeeModeViewModel viewModel,
     Widget? child,
   ) {
-    return ViewModelBuilder.reactive(
-        viewModelBuilder: () => EmployeeModeViewModel(),
-        builder: (context, model, _) {
-          return Scaffold(
-            backgroundColor: kcPrimaryColor,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leadingWidth: 60,
-              toolbarHeight: 40,
-              leading: TextButton(
-                onPressed: () => viewModel.navigateBack(),
-                child: const Text(
-                  'Back',
-                  style: blackBackButtonStyle,
-                ),
-              ),
-              actions: [
-                IconButton(
-                    onPressed: viewModel.navigateToArchiveView,
-                    icon: const Icon(
-                      Icons.archive_outlined,
-                      color: Colors.black,
-                      size: 30,
-                    )),
-              ],
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding:
-                    EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
-                child: Center(
+    return Scaffold(
+      backgroundColor: kcPrimaryColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leadingWidth: 60,
+        toolbarHeight: 40,
+        // TODO : delete after debugging
+        title: Text(viewModel.getWaitingCount().toString()),
+        leading: TextButton(
+          onPressed: () => viewModel.navigateBack(),
+          child: const Text(
+            'Back',
+            style: blackBackButtonStyle,
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: viewModel.navigateToArchiveView,
+              icon: const Icon(
+                Icons.archive_outlined,
+                color: Colors.black,
+                size: 30,
+              )),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 0.0),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      gilsonIconSmall,
+                      verticalSpaceMedium,
                       Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            gilsonIconSmall,
-                            verticalSpaceMedium,
-                            Expanded(
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: viewModel.getWaitingCount(),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return WaitingCardView(
-                                        index, viewModel.getWaitingItem(index));
-                                  }),
-                            )
-                          ],
-                        ),
-                      ),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: viewModel.getWaitingCount(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return WaitingCardView(
+                                  key: UniqueKey(),
+                                  index,
+                                  viewModel.getWaitingItem(index));
+                            }),
+                      )
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-          );
-        });
+          ),
+        ),
+      ),
+    );
   }
 
   @override

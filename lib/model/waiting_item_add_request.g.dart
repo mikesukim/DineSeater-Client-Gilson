@@ -32,4 +32,5 @@ const _$ActionTypeEnumMap = {
   ActionType.REPORT_MISSED: 'report_missed',
   ActionType.REPORT_ARRIVAL: 'report_arrival',
   ActionType.REPORT_BACK_INITIAL_STATUS: 'report_back_initial_status',
+  ActionType.PUBLISH: 'publish',
 };

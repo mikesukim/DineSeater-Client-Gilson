@@ -61,42 +61,48 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                               verticalSpaceMedium,
                               FractionallySizedBox(
                                 widthFactor: 0.9,
-                                child: TextFormField(
-                                  autofocus: true,
-                                  controller: viewModel.phoneController,
-                                  keyboardType: TextInputType.phone,
-                                  validator: (String? value) {
-                                    value = value?.replaceAll('+', '');
-                                    value = value?.replaceAll('(', '');
-                                    value = value?.replaceAll(')', '');
-                                    value = value?.replaceAll(' ', '');
-                                    String pattern =
-                                        r'(^(?:[+0]9)?[0-9]{11,13}$)';
-                                    RegExp regExp = RegExp(pattern);
-                                    if (value!.isEmpty) {
-                                      return 'Please enter mobile number.';
-                                    } else if (!regExp.hasMatch(value)) {
-                                      return 'Please enter valid mobile number.';
-                                    }
-                                    return null;
-                                  },
-                                  inputFormatters: [
-                                    PhoneInputFormatter(
-                                      allowEndlessPhone: false,
-                                    )
+                                child: Row(
+                                  children: [
+                                    const Text(
+                                      '+1',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    horizontalSpaceSmall,
+                                    Expanded(
+                                      child: TextFormField(
+                                        autofocus: true,
+                                        controller: viewModel.phoneController,
+                                        keyboardType: TextInputType.phone,
+                                        validator: (String? value) {
+                                          value = value?.replaceAll('(', '');
+                                          value = value?.replaceAll(')', '');
+                                          value = value?.replaceAll(' ', '');
+                                          String pattern =
+                                              r'^(?:[+0]9)?[0-9]{10,13}$';
+                                          RegExp regExp = RegExp(pattern);
+                                          if (value!.isEmpty) {
+                                            return 'Please enter mobile number.';
+                                          } else if (!regExp.hasMatch(value)) {
+                                            return 'Please enter valid mobile number.';
+                                          }
+                                          return null;
+                                        },
+                                        inputFormatters: [
+                                          PhoneInputFormatter(
+                                            allowEndlessPhone: false,
+                                            defaultCountryCode: 'US'
+                                          )
+                                        ],
+                                        decoration: const InputDecoration(
+                                            hintText: '253-561-3187',
+                                            hintStyle: inputHintTextStyle,
+                                            filled: true,
+                                            fillColor: kcInputBackgroundColor,
+                                            enabledBorder: inputBorderStyle,
+                                            focusedBorder: inputBorderStyle),
+                                      ),
+                                    ),
                                   ],
-                                  decoration: const InputDecoration(
-                                      hintText: '253-561-3187',
-                                      hintStyle: inputHintTextStyle,
-                                      filled: true,
-                                      fillColor: kcInputBackgroundColor,
-                                      enabledBorder: inputBorderStyle,
-                                      focusedBorder: inputBorderStyle),
-                                  onChanged: (value) {
-                                    if (value.length <= 3) {
-                                      viewModel.phoneController.text = '+1 ';
-                                    }
-                                  },
                                 ),
                               ),
                               verticalSpaceMedium,

@@ -8,19 +8,19 @@ import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
 
 class MobileInputViewModel extends BaseViewModel {
-  final _navigatorService = NavigationService();
+  final _navigatorService = locator<NavigationService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final mobileInputFormKey = GlobalKey<FormState>();
 
   Waiting waiting;
 
-  TextEditingController phoneController = TextEditingController(text: '+1 ');
+  TextEditingController phoneController = TextEditingController();
 
   MobileInputViewModel({required this.waiting}) {
     if (waiting.mobileNumber != null) {
       String formattedMobileNumber = waiting.mobileNumber!;
       formattedMobileNumber =
-          '${formattedMobileNumber.substring(0, 2)} (${formattedMobileNumber.substring(2, 5)}) ${formattedMobileNumber.substring(5, 8)} ${formattedMobileNumber.substring(8, 12)}';
+          '(${formattedMobileNumber.substring(2, 5)}) ${formattedMobileNumber.substring(5, 8)} ${formattedMobileNumber.substring(8, 12)}';
       phoneController.text = formattedMobileNumber;
     }
   }
@@ -40,6 +40,7 @@ class MobileInputViewModel extends BaseViewModel {
     String mobileNumber = phoneController.text.replaceAll('(', '');
     mobileNumber = mobileNumber.replaceAll(')', '');
     mobileNumber = mobileNumber.replaceAll(' ', '');
+    mobileNumber = '+1$mobileNumber';
     waiting.mobileNumber = mobileNumber;
 
     _navigatorService.navigateTo(Routes.confirm1View, arguments: waiting);

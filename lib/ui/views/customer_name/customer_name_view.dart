@@ -85,6 +85,15 @@ class CustomerNameView extends StackedView<CustomerNameViewModel> {
                                       focusedBorder: inputBorderStyle),
                                 ),
                               ),
+                              verticalSpaceMedium,
+                              const FractionallySizedBox(
+                                widthFactor: 0.9,
+                                child: Text(
+                                  'Your name will be displayed on the waiting list.',
+                                  textAlign: TextAlign.center,
+                                  style: tinyText,
+                                ),
+                              ),
                             ],
                           ),
                           FractionallySizedBox(

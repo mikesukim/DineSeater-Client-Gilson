@@ -32,22 +32,28 @@ class FirebaseMessagingService {
     // Configure how to handle incoming notifications
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Received message: ${message.notification?.title}');
-      _handleMessage(message);
+      _updateSingleWaiting(message);
     });
 
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    // Due to AWS SNS limitation when sending FCM Data message Type, receiving notification while app is not running is not possible.
+    // thus, handling notification when app is not foreground is ignored, instead, when app state is resumed, it will fetch the waiting list from server.
+    // https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages
+
+    // handling when user clicks the notification
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    //   print('Received message: ${message.notification?.title}');
+    // });
+
+    // handling background update
+    // however backgound update should not be used for this app, due to apple's limitation that the priority of the notification only can be low.
+    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
-  Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    print('Handling a background message ${message..notification?.title}');
-    _handleMessage(message);
-  }
-
-  void _handleMessage(RemoteMessage message) {
+  void _updateSingleWaiting(RemoteMessage message) {
     print('Received data: ${message.data}');
     final waiting = json.decode(message.data['waiting']);
     final waitingItem = WaitingItem.fromJson(waiting);
-    _waiting_storage_service.updateWaiting(waitingItem);
+    _waiting_storage_service.updatingWiatingFromNotification(waitingItem);
   }
 }
