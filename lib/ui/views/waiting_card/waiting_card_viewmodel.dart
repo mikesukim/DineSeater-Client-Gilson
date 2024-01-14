@@ -30,10 +30,13 @@ class WaitingCardViewModel extends BaseViewModel {
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
     stopWatchTimer.setPresetSecondTime(20);
 
-    if (waiting.status == WaitingStatus.TEXT_SENT.name) {
+    if (waiting.status.toUpperCase() == WaitingStatus.TEXT_SENT.name) {
       isTableReady = true;
       // TODO : remaining time is not synced yet
       stopWatchTimer.onStartTimer();
+    } else {
+      isTableReady = false;
+      stopWatchTimer.onStopTimer();
     }
   }
 
@@ -74,6 +77,8 @@ class WaitingCardViewModel extends BaseViewModel {
 
   // TODO: display confirm alert dialog
   Future<void> onTapCancel(WaitingItem waitingItem) async {
+    stopWatchTimer.onStopTimer();
+
     setBusy(true);
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
@@ -89,8 +94,6 @@ class WaitingCardViewModel extends BaseViewModel {
     await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
     setBusy(false);
-
-    stopWatchTimer.onStopTimer();
 
     notifyListeners();
   }
@@ -125,6 +128,7 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   Future<void> onTapBackToList(WaitingItem waitingItem) async {
+    stopWatchTimer.onStopTimer();
     setBusy(true);
 
     WaitingItemUpdateRequest waitingItemUpdateRequest =
@@ -141,7 +145,5 @@ class WaitingCardViewModel extends BaseViewModel {
     await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
     setBusy(false);
-
-    stopWatchTimer.onStopTimer();
   }
 }
