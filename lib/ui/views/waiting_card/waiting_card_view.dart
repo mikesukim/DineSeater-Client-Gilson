@@ -11,9 +11,9 @@ import 'waiting_card_viewmodel.dart';
 class WaitingCardView extends StackedView<WaitingCardViewModel> {
   final int index;
   final bool isArchive;
-  final WaitingItem waiting;
+  final WaitingItem waitingItem;
 
-  const WaitingCardView(this.index, this.waiting,
+  const WaitingCardView(this.index, this.waitingItem,
       {Key? key, this.isArchive = false})
       : super(key: key);
 
@@ -39,7 +39,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                       width: 10),
                   borderRadius: BorderRadius.circular(15)),
               child: InkWell(
-                onTap: () => viewModel.showWaitingInfoDialog(waiting),
+                onTap: () => viewModel.showWaitingInfoDialog(waitingItem),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -54,7 +54,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  waiting.detailAttribute.isGrill
+                                  waitingItem.detailAttribute.isGrill
                                       ? grillIconMedium
                                       : mealIconMedium,
                                   if (viewModel.isTableReady)
@@ -88,13 +88,13 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  waiting.name,
+                                  waitingItem.name,
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  'Party size: ${waiting.numberOfCustomers.toString()}',
+                                  'Party size: ${waitingItem.numberOfCustomers.toString()}',
                                   style: const TextStyle(fontSize: 18),
                                 ),
                               ],
@@ -108,7 +108,8 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       try {
-                                        viewModel.onTapTableReady(waiting);
+                                        viewModel
+                                            .showConfirmDialog(waitingItem);
                                       } catch (e) {
                                         showDialog(
                                           context: context,
@@ -146,7 +147,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                       iconSize: 60,
                                       onPressed: () {
                                         try {
-                                          viewModel.onTapCancel(waiting);
+                                          viewModel.onTapCancel(waitingItem);
                                         } catch (e) {
                                           showDialog(
                                             context: context,
@@ -168,7 +169,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                       iconSize: 60,
                                       onPressed: () {
                                         try {
-                                          viewModel.onTapConfirm(waiting);
+                                          viewModel.onTapConfirm(waitingItem);
                                         } catch (e) {
                                           showDialog(
                                             context: context,
@@ -187,7 +188,8 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       try {
-                                        viewModel.onTapBackToList(waiting);
+                                        viewModel.showConfirmDialog(waitingItem,
+                                            isArchiveView: true);
                                       } catch (e) {
                                         showDialog(
                                           context: context,
@@ -206,13 +208,11 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                         ),
                                         backgroundColor: kcMediumGrey),
                                     child: const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 16.0),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 16.0),
                                       child: Text(
-                                        'Back to list',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16),
+                                        'Return to list',
+                                        style: TextStyle(fontSize: 16),
                                       ),
                                     ),
                                   ),
@@ -254,7 +254,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
   WaitingCardViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      WaitingCardViewModel(waiting);
+      WaitingCardViewModel(waitingItem);
 }
 
 class ErrorAlertDialog extends StatelessWidget {

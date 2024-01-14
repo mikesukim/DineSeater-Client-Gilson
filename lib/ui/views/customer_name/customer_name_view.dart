@@ -7,7 +7,6 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'customer_name_viewmodel.dart';
 
-//TODO : make sure to let customer know their name will be exposed at the main page
 class CustomerNameView extends StackedView<CustomerNameViewModel> {
   const CustomerNameView({Key? key}) : super(key: key);
 
@@ -84,6 +83,15 @@ class CustomerNameView extends StackedView<CustomerNameViewModel> {
                                       // fillColor: kcInputBackgroundColor,
                                       enabledBorder: inputBorderStyle,
                                       focusedBorder: inputBorderStyle),
+                                ),
+                              ),
+                              verticalSpaceMedium,
+                              const FractionallySizedBox(
+                                widthFactor: 0.9,
+                                child: Text(
+                                  'Your name will be displayed on the waiting list.',
+                                  textAlign: TextAlign.center,
+                                  style: tinyText,
                                 ),
                               ),
                             ],

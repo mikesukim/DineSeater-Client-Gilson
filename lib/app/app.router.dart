@@ -182,7 +182,7 @@ class StackedRouter extends _i1.RouterBase {
     _i12.WaitingCardView: (data) {
       final args = data.getArgs<WaitingCardViewArguments>(nullOk: false);
       return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => _i12.WaitingCardView(args.index, args.waiting,
+        builder: (context) => _i12.WaitingCardView(args.index, args.waitingItem,
             key: args.key, isArchive: args.isArchive),
         settings: data,
       );
@@ -199,14 +199,14 @@ class StackedRouter extends _i1.RouterBase {
 class WaitingCardViewArguments {
   const WaitingCardViewArguments({
     required this.index,
-    required this.waiting,
+    required this.waitingItem,
     this.key,
     this.isArchive = false,
   });
 
   final int index;
 
-  final _i14.WaitingItem waiting;
+  final _i14.WaitingItem waitingItem;
 
   final _i13.Key? key;
 
@@ -214,14 +214,14 @@ class WaitingCardViewArguments {
 
   @override
   String toString() {
-    return '{"index": "$index", "waiting": "$waiting", "key": "$key", "isArchive": "$isArchive"}';
+    return '{"index": "$index", "waitingItem": "$waitingItem", "key": "$key", "isArchive": "$isArchive"}';
   }
 
   @override
   bool operator ==(covariant WaitingCardViewArguments other) {
     if (identical(this, other)) return true;
     return other.index == index &&
-        other.waiting == waiting &&
+        other.waitingItem == waitingItem &&
         other.key == key &&
         other.isArchive == isArchive;
   }
@@ -229,7 +229,7 @@ class WaitingCardViewArguments {
   @override
   int get hashCode {
     return index.hashCode ^
-        waiting.hashCode ^
+        waitingItem.hashCode ^
         key.hashCode ^
         isArchive.hashCode;
   }
@@ -378,7 +378,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
 
   Future<dynamic> navigateToWaitingCardView({
     required int index,
-    required _i14.WaitingItem waiting,
+    required _i14.WaitingItem waitingItem,
     _i13.Key? key,
     bool isArchive = false,
     int? routerId,
@@ -389,7 +389,10 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.waitingCardView,
         arguments: WaitingCardViewArguments(
-            index: index, waiting: waiting, key: key, isArchive: isArchive),
+            index: index,
+            waitingItem: waitingItem,
+            key: key,
+            isArchive: isArchive),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -538,7 +541,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
 
   Future<dynamic> replaceWithWaitingCardView({
     required int index,
-    required _i14.WaitingItem waiting,
+    required _i14.WaitingItem waitingItem,
     _i13.Key? key,
     bool isArchive = false,
     int? routerId,
@@ -549,7 +552,10 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.waitingCardView,
         arguments: WaitingCardViewArguments(
-            index: index, waiting: waiting, key: key, isArchive: isArchive),
+            index: index,
+            waitingItem: waitingItem,
+            key: key,
+            isArchive: isArchive),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
