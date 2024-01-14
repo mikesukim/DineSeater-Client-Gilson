@@ -8,7 +8,7 @@ import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
 
 class PartySizeViewModel extends BaseViewModel {
-  final _navigatorService = NavigationService();
+  final _navigatorService = locator<NavigationService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final partySizeFormKey = GlobalKey<FormState>();
 

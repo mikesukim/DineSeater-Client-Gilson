@@ -1,5 +1,4 @@
 import 'package:dineseater_client_gilson/ui/bottom_sheets/notice/notice_sheet.dart';
-import 'package:dineseater_client_gilson/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:dineseater_client_gilson/ui/views/home/home_view.dart';
 import 'package:dineseater_client_gilson/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -18,6 +17,8 @@ import 'package:dineseater_client_gilson/ui/views/employee_mode_archive/employee
 import 'package:dineseater_client_gilson/services/waiting_storage_service.dart';
 import 'package:dineseater_client_gilson/ui/views/waiting_card/waiting_card_view.dart';
 import 'package:dineseater_client_gilson/ui/dialogs/waiting_info/waiting_info_dialog.dart';
+
+import '../ui/dialogs/confirm_alert/confirm_alert_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -50,7 +51,7 @@ import 'package:dineseater_client_gilson/ui/dialogs/waiting_info/waiting_info_di
 // @stacked-bottom-sheet
   ],
   dialogs: [
-    StackedDialog(classType: InfoAlertDialog),
+    StackedDialog(classType: ConfirmAlertDialog),
     StackedDialog(classType: WaitingInfoDialog),
 // @stacked-dialog
   ],

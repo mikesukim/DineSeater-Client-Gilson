@@ -10,7 +10,7 @@ import '../../../services/dineseater_api_service.dart';
 import '../../../services/waiting_storage_service.dart';
 
 class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
-  final _navigationService = NavigationService();
+  final _navigationService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
   final _dineSeaterApiService = locator<DineseaterApiService>();
   var logger = Logger();
@@ -30,6 +30,7 @@ class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
         break;
     }
   }

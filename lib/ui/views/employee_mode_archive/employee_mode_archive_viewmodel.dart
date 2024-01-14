@@ -6,7 +6,7 @@ import '../../../model/waiting_item.dart';
 import '../../../services/waiting_storage_service.dart';
 
 class EmployeeModeArchiveViewModel extends ReactiveViewModel {
-  final _navigatorService = NavigationService();
+  final _navigatorService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
 
   @override

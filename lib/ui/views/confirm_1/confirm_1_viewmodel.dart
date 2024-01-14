@@ -11,8 +11,8 @@ import '../../../services/dineseater_api_service.dart';
 import '../../../services/waiting_storage_service.dart';
 
 class Confirm1ViewModel extends BaseViewModel {
-  final _navigatorService = NavigationService();
-  final _dineseaterApiService = locator<DineseaterApiService>();
+  final _navigatorService = locator<NavigationService>();
+  final _dineSeaterApiService = locator<DineseaterApiService>();
   final _waitingStorageService = locator<WaitingStorageService>();
 
   Waiting waiting;
@@ -29,7 +29,7 @@ class Confirm1ViewModel extends BaseViewModel {
   }
 
   void navigateToMealTypeView() {
-    _navigatorService.navigateTo(Routes.mealTypeView, arguments: waiting);
+    _navigatorService.popUntil((route) => route.settings.name == '/meal-type-view');
   }
 
   Future<void> navigateToConfirm2View() async {
@@ -50,12 +50,12 @@ class Confirm1ViewModel extends BaseViewModel {
         phoneNumber: waiting.mobileNumber!);
 
     WaitingItem addedWaiting =
-        await _dineseaterApiService.addWaitingItem(request);
+        await _dineSeaterApiService.addWaitingItem(request);
     await _waitingStorageService.addWaiting(addedWaiting);
 
-    WaitingItemPublishRequest waitingItemPublishRequest = WaitingItemPublishRequest();
+    WaitingItemPublishRequest waitingItemPublishRequest =
+        WaitingItemPublishRequest();
     waitingItemPublishRequest.waiting = addedWaiting;
-    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
-
+    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
   }
 }

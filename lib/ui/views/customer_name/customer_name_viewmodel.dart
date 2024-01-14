@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
 
 class CustomerNameViewModel extends BaseViewModel {
-  final _navigatorService = NavigationService();
+  final _navigatorService = locator<NavigationService>();
   final nameFormKey = GlobalKey<FormState>();
 
   Waiting waiting;

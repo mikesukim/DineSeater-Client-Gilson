@@ -3,8 +3,10 @@ import 'package:dineseater_client_gilson/model/waiting.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../app/app.locator.dart';
+
 class MealTypeViewModel extends BaseViewModel {
-  final _navigationService = NavigationService();
+  final _navigationService = locator<NavigationService>();
 
   Waiting waiting;
 

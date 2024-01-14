@@ -10,7 +10,7 @@ import '../../../services/waiting_storage_service.dart';
 // TODO: timers should not be reset when coming back from other view.
 // TODO: when a card is archived by tapping cancel or confirm button, the next card state is also changed to table is ready, which shouldn't be changed.
 class EmployeeModeViewModel extends ReactiveViewModel {
-  final _navigatorService = NavigationService();
+  final _navigatorService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
 
   @override
@@ -27,10 +27,6 @@ class EmployeeModeViewModel extends ReactiveViewModel {
 
   WaitingItem getWaitingItem(int index) {
     return _waitingStorageService.waitings[index];
-  }
-
-  void onTapCard(int index) {
-    print('$index is tapped');
   }
 
   void navigateBack() {
