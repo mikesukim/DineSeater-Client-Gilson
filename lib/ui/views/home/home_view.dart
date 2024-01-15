@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
+import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../common/app_colors.dart';
@@ -45,7 +46,15 @@ class HomeView extends StackedView<HomeViewModel> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
-                              onPressed: viewModel.navigateToEmployeeModeView,
+                              onPressed: () {
+                                screenLock(
+                                    context: context,
+                                    correctString: viewModel.passcode,
+                                    onUnlocked: () {
+                                      Navigator.pop(context);
+                                      viewModel.navigateToEmployeeModeView();
+                                    });
+                              },
                               icon: const Icon(Icons.manage_accounts_outlined)),
                         ),
                       ],
