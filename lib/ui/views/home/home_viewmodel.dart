@@ -1,36 +1,68 @@
-import 'package:dineseater_client_gilson/app/app.bottomsheets.dart';
-import 'package:dineseater_client_gilson/app/app.dialogs.dart';
-import 'package:dineseater_client_gilson/app/app.locator.dart';
-import 'package:dineseater_client_gilson/ui/common/app_strings.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+import '../../../app/app.locator.dart';
+import '../../../app/app.router.dart';
+import '../../../model/waiting.dart';
+import '../../../services/dineseater_api_service.dart';
+import '../../../services/waiting_storage_service.dart';
 
-  String get counterLabel => 'Counter is: $_counter';
+class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
+  final _navigationService = locator<NavigationService>();
+  final _waitingStorageService = locator<WaitingStorageService>();
+  final _dineSeaterApiService = locator<DineseaterApiService>();
+  final passcode = dotenv.env['PASSCODE']!;
+  var logger = Logger();
 
-  int _counter = 0;
-
-  void incrementCounter() {
-    _counter++;
-    rebuildUi();
+  void initialise() {
+    WidgetsBinding.instance.addObserver(this);
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        logger.i('On Resume : reset waitings');
+        final waitings = await _dineSeaterApiService.getWaitingList();
+        await _waitingStorageService.resetWaitingsAs(waitings);
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      // case AppLifecycleState.hidden:
+        break;
+    }
   }
 
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  List<ListenableServiceMixin> get listenableServices =>
+      [_waitingStorageService];
+
+  void navigateToEmployeeModeView() {
+    //TODO : add authentication so only employees can access this view
+    _navigationService.navigateToEmployeeModeView();
+  }
+
+  int getWaitingCount() {
+    return _waitingStorageService.waitings.length;
+  }
+
+  Waiting getWaiting(int index) {
+    return Waiting.from(_waitingStorageService.waitings[index]);
+  }
+
+  void navigateToMealTypeView() {
+    Waiting waiting = Waiting();
+
+    _navigationService.navigateTo(Routes.mealTypeView, arguments: waiting);
   }
 }

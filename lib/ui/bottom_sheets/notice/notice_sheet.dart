@@ -45,7 +45,7 @@ class NoticeSheet extends StackedView<NoticeSheetModel> {
             maxLines: 3,
             softWrap: true,
           ),
-          verticalSpaceLarge,
+          verticalSpaceExtraLarge,
         ],
       ),
     );

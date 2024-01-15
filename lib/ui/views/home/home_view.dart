@@ -1,80 +1,206 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
+import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:stacked/stacked.dart';
-import 'package:dineseater_client_gilson/ui/common/app_colors.dart';
-import 'package:dineseater_client_gilson/ui/common/ui_helpers.dart';
 
+import '../../common/app_colors.dart';
+import '../../common/ui_helpers.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
+  // TODO: check all UIs to improve
+  // TODO: show total number of waitings instead of list
   @override
   Widget builder(
     BuildContext context,
     HomeViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                verticalSpaceLarge,
-                Column(
+    return ViewModelBuilder.reactive(
+        viewModelBuilder: () => HomeViewModel(),
+        builder: (context, model, _) {
+          return Scaffold(
+            body: SafeArea(
+              child: Padding(
+                padding:
+                    EdgeInsets.only(bottom: Device.get().isTablet ? 20.0 : 8.0),
+                child: Column(
                   children: [
-                    const Text(
-                      'Hello, STACKED!',
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w900,
+                    Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        // TODO : delete after debugging
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(viewModel.getWaitingCount().toString()),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: gilsonIconSmall,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                              onPressed: () {
+                                screenLock(
+                                    context: context,
+                                    correctString: viewModel.passcode,
+                                    onUnlocked: () {
+                                      Navigator.pop(context);
+                                      viewModel.navigateToEmployeeModeView();
+                                    });
+                              },
+                              icon: const Icon(Icons.manage_accounts_outlined)),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      height: 10.0,
+                    ),
+                    verticalSpaceSmall,
+                    Expanded(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Waitlist',
+                              style: TextStyle(
+                                  fontSize: 26, fontWeight: mediumFontWeight),
+                            ),
+                            verticalSpaceMedium,
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 50),
+                                      Text(
+                                        'Name',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: semiBoldFontWeight),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    'Party size',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: semiBoldFontWeight),
+                                  )
+                                ],
+                              ),
+                            ),
+                            verticalSpaceMedium,
+                            Expanded(
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: viewModel.getWaitingCount(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    height: 60,
+                                    color: (index == 0)
+                                        ? kcLightPrimaryColor
+                                        : Colors.transparent,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: (viewModel
+                                                .getWaiting(index)
+                                                .isGrill!)
+                                            ? 14.0
+                                            : 16.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              (viewModel
+                                                      .getWaiting(index)
+                                                      .isGrill!)
+                                                  ? grillIconSmall
+                                                  : mealIconSmall,
+                                              (viewModel
+                                                      .getWaiting(index)
+                                                      .isGrill!)
+                                                  ? const SizedBox(width: 16)
+                                                  : const SizedBox(width: 20),
+                                              Text(
+                                                viewModel
+                                                    .getWaiting(index)
+                                                    .name!,
+                                                style: const TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight:
+                                                        mediumFontWeight),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                viewModel
+                                                    .getWaiting(index)
+                                                    .partySize
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              ),
+                                              const SizedBox(
+                                                width: 50,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) =>
+                                        const Divider(
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    verticalSpaceMedium,
-                    MaterialButton(
-                      color: Colors.black,
-                      onPressed: viewModel.incrementCounter,
-                      child: Text(
-                        viewModel.counterLabel,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: ElevatedButton(
+                          onPressed: () => viewModel.navigateToMealTypeView(),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: kcPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)),
+                              elevation: 0),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.0),
+                            child: Text(
+                              'Join the Waitlist',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: semiBoldFontWeight),
+                            ),
+                          )),
+                    )
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      onPressed: viewModel.showDialog,
-                      child: const Text(
-                        'Show Dialog',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      onPressed: viewModel.showBottomSheet,
-                      child: const Text(
-                        'Show Bottom Sheet',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
+        });
   }
 
   @override
@@ -82,4 +208,10 @@ class HomeView extends StackedView<HomeViewModel> {
     BuildContext context,
   ) =>
       HomeViewModel();
+
+  @override
+  void onViewModelReady(HomeViewModel viewModel) {
+    viewModel.initialise();
+    super.onViewModelReady(viewModel);
+  }
 }
