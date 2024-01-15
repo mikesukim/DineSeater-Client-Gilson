@@ -17,15 +17,16 @@ import '../../../services/waiting_storage_service.dart';
 class WaitingCardViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final _waitingStorageService = locator<WaitingStorageService>();
-  final _dineseaterApiService = locator<DineseaterApiService>();
+  final _dineSeaterApiService = locator<DineseaterApiService>();
 
   bool isTableReady = false;
   bool isTimerEnd = false;
 
   WaitingItem waiting;
   late StopWatchTimer stopWatchTimer;
+  final Function toggleIsLoadingFromParent;
 
-  WaitingCardViewModel(this.waiting) {
+  WaitingCardViewModel(this.waiting, this.toggleIsLoadingFromParent) {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
     stopWatchTimer.setPresetSecondTime(20);
@@ -69,7 +70,8 @@ class WaitingCardViewModel extends BaseViewModel {
 
   Future<void> onTapTableReady(WaitingItem waitingItem) async {
     isTableReady = true;
-    setBusy(true);
+
+    toggleIsLoadingFromParent();
 
     stopWatchTimer.onStartTimer();
 
@@ -78,7 +80,7 @@ class WaitingCardViewModel extends BaseViewModel {
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.NOTIFY;
     WaitingItem updatedItem =
-        await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.TEXT_SENT.name;
     await _waitingStorageService.updateWaiting(updatedItem);
@@ -86,9 +88,9 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemPublishRequest waitingItemPublishRequest =
         WaitingItemPublishRequest();
     waitingItemPublishRequest.waiting = updatedItem;
-    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
-    setBusy(false);
+    toggleIsLoadingFromParent();
 
     notifyListeners();
   }
@@ -96,13 +98,14 @@ class WaitingCardViewModel extends BaseViewModel {
   Future<void> onTapCancel(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
-    setBusy(true);
+    toggleIsLoadingFromParent();
+
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_MISSED;
     WaitingItem updatedItem =
-        await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.MISSED.name;
     await _waitingStorageService.updateWaiting(updatedItem);
@@ -110,21 +113,22 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemPublishRequest waitingItemPublishRequest =
         WaitingItemPublishRequest();
     waitingItemPublishRequest.waiting = updatedItem;
-    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
-    setBusy(false);
+    toggleIsLoadingFromParent();
 
     notifyListeners();
   }
 
   Future<void> onTapConfirm(WaitingItem waitingItem) async {
-    setBusy(true);
+    toggleIsLoadingFromParent();
+
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_ARRIVAL;
     WaitingItem updatedItem =
-        await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.ARRIVED.name;
     await _waitingStorageService.updateWaiting(updatedItem);
@@ -132,9 +136,9 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemPublishRequest waitingItemPublishRequest =
         WaitingItemPublishRequest();
     waitingItemPublishRequest.waiting = updatedItem;
-    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
-    setBusy(false);
+    toggleIsLoadingFromParent();
 
     stopWatchTimer.onStopTimer();
 
@@ -149,14 +153,15 @@ class WaitingCardViewModel extends BaseViewModel {
 
   Future<void> onTapBackToList(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
-    setBusy(true);
+
+    toggleIsLoadingFromParent();
 
     WaitingItemUpdateRequest waitingItemUpdateRequest =
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_BACK_INITIAL_STATUS;
     WaitingItem updatedItem =
-        await _dineseaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.WAITING.name;
     await _waitingStorageService.updateWaiting(updatedItem);
@@ -164,8 +169,10 @@ class WaitingCardViewModel extends BaseViewModel {
     WaitingItemPublishRequest waitingItemPublishRequest =
         WaitingItemPublishRequest();
     waitingItemPublishRequest.waiting = updatedItem;
-    await _dineseaterApiService.publishWaitingItem(waitingItemPublishRequest);
+    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
 
-    setBusy(false);
+    toggleIsLoadingFromParent();
+
+    notifyListeners();
   }
 }
