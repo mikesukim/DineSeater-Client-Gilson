@@ -7,15 +7,22 @@ import '../../../model/waiting.dart';
 import '../../../model/waiting_item.dart';
 import '../../../services/waiting_storage_service.dart';
 
-// TODO: timers should not be reset when coming back from other view.
-// TODO: when a card is archived by tapping cancel or confirm button, the next card state is also changed to table is ready, which shouldn't be changed.
+// TODO: time is not synced yet. If status is text_sent, current time - text sent time.
 class EmployeeModeViewModel extends ReactiveViewModel {
   final _navigatorService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
 
+  bool isLoading = false;
+
   @override
   List<ListenableServiceMixin> get listenableServices =>
       [_waitingStorageService];
+
+  void toggleIsLoading() {
+    isLoading = !isLoading;
+
+    notifyListeners();
+  }
 
   int getWaitingCount() {
     return _waitingStorageService.waitings.length;

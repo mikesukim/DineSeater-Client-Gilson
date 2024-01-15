@@ -9,9 +9,17 @@ class EmployeeModeArchiveViewModel extends ReactiveViewModel {
   final _navigatorService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
 
+  bool isLoading = false;
+
   @override
   List<ListenableServiceMixin> get listenableServices =>
       [_waitingStorageService];
+
+  void toggleIsLoading() {
+    isLoading = !isLoading;
+
+    notifyListeners();
+  }
 
   int getArchivedWaitingCount() {
     return _waitingStorageService.archivedWaitings.length;
