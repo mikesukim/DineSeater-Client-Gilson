@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,6 +14,7 @@ class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
   final _navigationService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
   final _dineSeaterApiService = locator<DineseaterApiService>();
+  final passcode = dotenv.env['PASSCODE']!;
   var logger = Logger();
 
   void initialise() {
