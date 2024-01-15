@@ -30,7 +30,7 @@ class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
-      case AppLifecycleState.hidden:
+      // case AppLifecycleState.hidden:
         break;
     }
   }
