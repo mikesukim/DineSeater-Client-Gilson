@@ -19,6 +19,7 @@ class StartupView extends StackedView<StartupViewModel> {
       body: SafeArea(
         // TODO : switch to popup and block the process
         child: viewModel.hasError
+            // TODO : delete before deployment
             ? Text(viewModel.error.toString())
             : Stack(
                 children: [
