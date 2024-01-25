@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_publish_request.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -26,15 +27,31 @@ class WaitingCardViewModel extends BaseViewModel {
   late StopWatchTimer stopWatchTimer;
   final Function toggleIsLoadingFromParent;
 
+  final _waitingTime = int.parse(dotenv.env['WAITING_TIME_IN_SEC']!);
+
+
   WaitingCardViewModel(this.waiting, this.toggleIsLoadingFromParent) {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
-    stopWatchTimer.setPresetSecondTime(20);
+
+    stopWatchTimer.setPresetSecondTime(_waitingTime);
 
     if (waiting.status.toUpperCase() == WaitingStatus.TEXT_SENT.name) {
       isTableReady = true;
-      // TODO : remaining time is not synced yet
-      stopWatchTimer.onStartTimer();
+
+      DateTime now = DateTime.now();
+      DateTime lastModified = DateTime.parse(waiting.lastModified);
+      int remainingTime = _waitingTime - now.difference(lastModified).inSeconds;
+
+      if (remainingTime <= 0) {
+        isTimerEnd = true;
+        stopWatchTimer.clearPresetTime();
+        stopWatchTimer.onStopTimer();
+      } else {
+        stopWatchTimer.setPresetSecondTime(remainingTime);
+        stopWatchTimer.onStartTimer();
+      }
+
     } else {
       isTableReady = false;
       stopWatchTimer.onStopTimer();
