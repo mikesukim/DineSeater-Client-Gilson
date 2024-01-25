@@ -12,6 +12,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'firebase_options.dart';
 
+// TODO : add intentional delay when sending text event occurs
 Future<void> main() async {
   // flutter init
   WidgetsFlutterBinding.ensureInitialized();
