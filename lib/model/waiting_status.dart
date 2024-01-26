@@ -9,4 +9,6 @@ enum WaitingStatus {
   ARRIVED,
   @JsonValue("missed")
   MISSED,
+  @JsonValue("cancelled")
+  CANCELLED,
 }

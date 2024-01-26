@@ -113,7 +113,7 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> onTapCancel(WaitingItem waitingItem) async {
+  Future<void> onTapMiss(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
     toggleIsLoadingFromParent();
@@ -165,6 +165,31 @@ class WaitingCardViewModel extends BaseViewModel {
 
   void onTimerEnd() {
     isTimerEnd = true;
+
+    notifyListeners();
+  }
+
+  Future<void> onTapCancel(WaitingItem waitingItem) async {
+    stopWatchTimer.onStopTimer();
+
+    toggleIsLoadingFromParent();
+
+    WaitingItemUpdateRequest waitingItemUpdateRequest =
+    WaitingItemUpdateRequest();
+    waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
+    waitingItemUpdateRequest.action = ActionType.REPORT_CANCELLED;
+    WaitingItem updatedItem =
+    await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+
+    waitingItem.status = WaitingStatus.CANCELLED.name;
+    await _waitingStorageService.updateWaiting(updatedItem);
+
+    WaitingItemPublishRequest waitingItemPublishRequest =
+    WaitingItemPublishRequest();
+    waitingItemPublishRequest.waiting = updatedItem;
+    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+    toggleIsLoadingFromParent();
 
     notifyListeners();
   }
