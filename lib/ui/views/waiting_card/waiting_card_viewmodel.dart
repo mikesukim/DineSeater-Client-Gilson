@@ -48,6 +48,7 @@ class WaitingCardViewModel extends BaseViewModel {
         stopWatchTimer.clearPresetTime();
         stopWatchTimer.onStopTimer();
       } else {
+        stopWatchTimer.clearPresetTime();
         stopWatchTimer.setPresetSecondTime(remainingTime);
         stopWatchTimer.onStartTimer();
       }
