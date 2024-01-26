@@ -107,6 +107,8 @@ class MobileInputView extends StackedView<MobileInputViewModel> {
                                           decoration: const InputDecoration(
                                               hintText: '253-561-3187',
                                               hintStyle: inputHintTextStyle,
+                                              filled: true,
+                                              fillColor: kcInputBackgroundColor,
                                               enabledBorder: inputBorderStyle,
                                               focusedBorder: inputBorderStyle),
                                         ),

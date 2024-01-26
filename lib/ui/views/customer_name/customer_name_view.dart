@@ -90,6 +90,8 @@ class CustomerNameView extends StackedView<CustomerNameViewModel> {
                                     decoration: const InputDecoration(
                                         hintText: 'Michael',
                                         hintStyle: inputHintTextStyle,
+                                        filled: true,
+                                        fillColor: kcInputBackgroundColor,
                                         enabledBorder: inputBorderStyle,
                                         focusedBorder: inputBorderStyle),
                                   ),

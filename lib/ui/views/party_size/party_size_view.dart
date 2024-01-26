@@ -93,6 +93,8 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                                     decoration: const InputDecoration(
                                         hintText: '1',
                                         hintStyle: inputHintTextStyle,
+                                        filled: true,
+                                        fillColor: kcInputBackgroundColor,
                                         enabledBorder: inputBorderStyle,
                                         focusedBorder: inputBorderStyle),
                                   ),
