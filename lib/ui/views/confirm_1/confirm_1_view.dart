@@ -33,7 +33,7 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
                     Icon(
                       Icons.arrow_back_ios_new,
                       color: kcPrimaryColor,
-                      size: 20,
+                      size: 16,
                     ),
                     Text(
                       'Back',
@@ -83,20 +83,23 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
                                 FractionallySizedBox(
                                   widthFactor: 0.9,
                                   child: ElevatedButton(
-                                      onPressed: viewModel.navigateToConfirm2View,
+                                      onPressed:
+                                          viewModel.navigateToConfirm2View,
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: kcPrimaryColor,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           elevation: 0),
-                                      child: const Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 16.0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 16.0),
                                         child: Text(
                                           'Confirm',
                                           style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: Device.get().isTablet
+                                                  ? 20
+                                                  : 16,
                                               fontWeight: semiBoldFontWeight),
                                         ),
                                       )),

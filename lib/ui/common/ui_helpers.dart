@@ -63,7 +63,9 @@ const TextStyle inputHintTextStyle =
     TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
 
 const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
+const backButtonTabletStyle = TextStyle(color: kcPrimaryColor, fontSize: 20);
 const blackBackButtonStyle = TextStyle(color: Colors.black, fontSize: 16);
+const blackBackButtonTabletStyle = TextStyle(color: Colors.black, fontSize: 20);
 
 const inputBorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),

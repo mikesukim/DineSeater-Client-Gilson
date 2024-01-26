@@ -8,7 +8,6 @@ import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
 // TODO : when table is moving, item is not clickable
-// TODO : card should be deletable when is waiting status
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
@@ -29,7 +28,7 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
             leadingWidth: 90,
             toolbarHeight: 40,
             // TODO : delete after debugging
-            title: Text(viewModel.getWaitingCount().toString()),
+            title: Text(viewModel.getWaitingCount.toString()),
             leading: TextButton(
               onPressed: () => viewModel.navigateBack(),
               child: const Row(
@@ -37,7 +36,7 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                   Icon(
                     Icons.arrow_back_ios_new,
                     color: Colors.black,
-                    size: 20,
+                    size: 16,
                   ),
                   Text(
                     'Back',
@@ -50,7 +49,7 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
               IconButton(
                   onPressed: viewModel.navigateToArchiveView,
                   icon: const Icon(
-                    Icons.archive_outlined,
+                    Icons.archive,
                     color: Colors.black,
                     size: 30,
                   )),
@@ -70,16 +69,42 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                           children: [
                             gilsonIconSmall,
                             verticalSpaceMedium,
+                            Container(
+                              padding: EdgeInsets.zero,
+                              decoration: const BoxDecoration(
+                                color: kcToggleButtonColor,
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              child: ToggleButtons(
+                                splashColor: Colors.transparent,
+                                borderWidth: 0,
+                                fillColor: Colors.white,
+                                color: kcVeryLightGrey,
+                                selectedColor: kcPrimaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                                constraints: BoxConstraints(
+                                  minHeight: 50.0,
+                                  minWidth: (MediaQuery.of(context).size.width - 26) / 2,
+                                ),
+                                isSelected: viewModel.isSelected,
+                                onPressed: (int index) =>
+                                    viewModel.onTapToggleButton(index),
+                                children: viewModel.toggleSelections,
+                              ),
+                            ),
+                            verticalSpaceSmall,
                             Expanded(
                               child: ListView.builder(
                                   shrinkWrap: true,
-                                  itemCount: viewModel.getWaitingCount(),
-                                  itemBuilder: (BuildContext context, int index) {
+                                  itemCount: viewModel.getWaitingCount,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
                                     return WaitingCardView(
                                         key: UniqueKey(),
                                         index,
                                         viewModel.getWaitingItem(index),
-                                        toggleIsLoadingFromParent: viewModel.toggleIsLoading);
+                                        toggleIsLoadingFromParent:
+                                            viewModel.toggleIsLoading);
                                   }),
                             )
                           ],

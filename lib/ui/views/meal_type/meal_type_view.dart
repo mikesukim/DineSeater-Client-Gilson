@@ -33,7 +33,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                   Icon(
                     Icons.arrow_back_ios_new,
                     color: kcPrimaryColor,
-                    size: 20,
+                    size: 16,
                   ),
                   Text(
                     'Back',
@@ -87,7 +87,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     CircleAvatar(
-                                                      maxRadius: 40,
+                                                      maxRadius: Device.get().isTablet ? 60 : 40,
                                                       backgroundColor: (viewModel
                                                                   .selectedButton ==
                                                               0)
@@ -95,7 +95,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                           : kcLightGreyWithOpacity,
                                                       child: Image.asset(
                                                         'assets/meal.png',
-                                                        scale: 2,
+                                                        scale: Device.get().isTablet ? 1.3 : 2.0,
                                                         color: (viewModel
                                                                     .selectedButton ==
                                                                 0)
@@ -112,7 +112,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                                   0)
                                                               ? Colors.black
                                                               : kcVeryLightGrey,
-                                                          fontSize: 17,
+                                                          fontSize: Device.get().isTablet ? 23 : 17,
                                                           fontWeight: (viewModel
                                                                       .selectedButton ==
                                                                   0)
@@ -148,7 +148,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     CircleAvatar(
-                                                      maxRadius: 40,
+                                                      maxRadius: Device.get().isTablet ? 60 : 40,
                                                       backgroundColor: (viewModel
                                                                   .selectedButton ==
                                                               1)
@@ -161,7 +161,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                                 1)
                                                             ? Colors.white
                                                             : kcVeryLightGrey,
-                                                        scale: 2,
+                                                        scale: Device.get().isTablet ? 1.3 : 2.0,
                                                       ),
                                                     ),
                                                     verticalSpaceMedium,
@@ -173,7 +173,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                                                   1)
                                                               ? Colors.black
                                                               : kcVeryLightGrey,
-                                                          fontSize: 17,
+                                                          fontSize: Device.get().isTablet ? 23 : 17,
                                                           fontWeight: (viewModel
                                                                       .selectedButton ==
                                                                   1)
@@ -191,7 +191,7 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                     ),
                                   ),
                                 ),
-                                const Expanded(flex: 2, child: SizedBox())
+                                Expanded(flex: Device.get().isTablet ? 1 : 2, child: const SizedBox())
                               ],
                             ),
                           ),
@@ -204,12 +204,12 @@ class MealTypeView extends StackedView<MealTypeViewModel> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(25)),
                                     elevation: 0),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 16.0),
                                   child: Text(
                                     'Next',
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: Device.get().isTablet ? 20 : 16,
                                         fontWeight: semiBoldFontWeight),
                                   ),
                                 )),

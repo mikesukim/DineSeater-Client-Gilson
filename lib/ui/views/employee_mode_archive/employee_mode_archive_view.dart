@@ -36,7 +36,7 @@ class EmployeeModeArchiveView
                   Icon(
                     Icons.arrow_back_ios_new,
                     color: Colors.black,
-                    size: 20,
+                    size: 16,
                   ),
                   Text(
                     'Back',

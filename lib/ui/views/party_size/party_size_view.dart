@@ -33,7 +33,7 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                   Icon(
                     Icons.arrow_back_ios_new,
                     color: kcPrimaryColor,
-                    size: 20,
+                    size: 16,
                   ),
                   Text(
                     'Back',
@@ -116,12 +116,12 @@ class PartySizeView extends StackedView<PartySizeViewModel> {
                                           borderRadius:
                                               BorderRadius.circular(25)),
                                       elevation: 0),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                                     child: Text(
                                       'Next',
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: Device.get().isTablet ? 20 : 16,
                                           fontWeight: semiBoldFontWeight),
                                     ),
                                   )),
