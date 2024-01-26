@@ -15,6 +15,7 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
     Confirm2ViewModel viewModel,
     Widget? child,
   ) {
+    // TODO : navigate to main view after 5 sec
     // TODO : change back to following after debugging
     //     return PopScope(
     //       canPop: false,
@@ -24,7 +25,7 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leadingWidth: 60,
+          leadingWidth: 90,
           toolbarHeight: 40,
           leading: null,
         ),
@@ -64,12 +65,12 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25)),
                                   elevation: 0),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 16.0),
                                 child: Text(
                                   'Go to Home',
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: Device.get().isTablet ? 20 : 16,
                                       fontWeight: semiBoldFontWeight),
                                 ),
                               )),

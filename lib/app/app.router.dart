@@ -185,7 +185,7 @@ class StackedRouter extends _i1.RouterBase {
         builder: (context) => _i12.WaitingCardView(args.index, args.waitingItem,
             key: args.key,
             isArchive: args.isArchive,
-            toggleIsLoadingFromParent: args.onButtonTapped),
+            toggleIsLoadingFromParent: args.toggleIsLoadingFromParent),
         settings: data,
       );
     },
@@ -204,7 +204,7 @@ class WaitingCardViewArguments {
     required this.waitingItem,
     this.key,
     this.isArchive = false,
-    required this.onButtonTapped,
+    required this.toggleIsLoadingFromParent,
   });
 
   final int index;
@@ -215,11 +215,11 @@ class WaitingCardViewArguments {
 
   final bool isArchive;
 
-  final Function onButtonTapped;
+  final Function toggleIsLoadingFromParent;
 
   @override
   String toString() {
-    return '{"index": "$index", "waitingItem": "$waitingItem", "key": "$key", "isArchive": "$isArchive", "onButtonTapped": "$onButtonTapped"}';
+    return '{"index": "$index", "waitingItem": "$waitingItem", "key": "$key", "isArchive": "$isArchive", "toggleIsLoadingFromParent": "$toggleIsLoadingFromParent"}';
   }
 
   @override
@@ -229,7 +229,7 @@ class WaitingCardViewArguments {
         other.waitingItem == waitingItem &&
         other.key == key &&
         other.isArchive == isArchive &&
-        other.onButtonTapped == onButtonTapped;
+        other.toggleIsLoadingFromParent == toggleIsLoadingFromParent;
   }
 
   @override
@@ -238,7 +238,7 @@ class WaitingCardViewArguments {
         waitingItem.hashCode ^
         key.hashCode ^
         isArchive.hashCode ^
-        onButtonTapped.hashCode;
+        toggleIsLoadingFromParent.hashCode;
   }
 }
 
@@ -388,7 +388,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required _i14.WaitingItem waitingItem,
     _i13.Key? key,
     bool isArchive = false,
-    required Function onButtonTapped,
+    required Function toggleIsLoadingFromParent,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -401,7 +401,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
             waitingItem: waitingItem,
             key: key,
             isArchive: isArchive,
-            onButtonTapped: onButtonTapped),
+            toggleIsLoadingFromParent: toggleIsLoadingFromParent),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -553,7 +553,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     required _i14.WaitingItem waitingItem,
     _i13.Key? key,
     bool isArchive = false,
-    required Function onButtonTapped,
+    required Function toggleIsLoadingFromParent,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -566,7 +566,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
             waitingItem: waitingItem,
             key: key,
             isArchive: isArchive,
-            onButtonTapped: onButtonTapped),
+            toggleIsLoadingFromParent: toggleIsLoadingFromParent),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

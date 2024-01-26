@@ -34,7 +34,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
               side: BorderSide(
                   color: viewModel.isTimerEnd ? Colors.red : Colors.transparent,
                   width: 10),
-              borderRadius: BorderRadius.circular(15)),
+              borderRadius: BorderRadius.circular(10)),
           child: InkWell(
             onTap: () => viewModel.showWaitingInfoDialog(waitingItem),
             child: Padding(
@@ -139,7 +139,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                   iconSize: 60,
                                   onPressed: () {
                                     try {
-                                      viewModel.onTapCancel(waitingItem);
+                                      viewModel.onTapMiss(waitingItem);
                                     } catch (e) {
                                       showDialog(
                                         context: context,

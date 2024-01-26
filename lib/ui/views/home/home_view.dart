@@ -186,12 +186,13 @@ class HomeView extends StackedView<HomeViewModel> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
                               elevation: 0),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Text(
                               'Join the Waitlist',
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: semiBoldFontWeight),
+                                  fontSize: Device.get().isTablet ? 20 : 16,
+                                  fontWeight: semiBoldFontWeight),
                             ),
                           )),
                     )

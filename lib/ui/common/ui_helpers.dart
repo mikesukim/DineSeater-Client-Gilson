@@ -58,12 +58,14 @@ const TextStyle mainText =
     TextStyle(fontSize: 20, fontWeight: semiBoldFontWeight);
 const TextStyle subText = TextStyle(fontSize: 15, color: kcVeryLightGrey);
 const TextStyle tinyText = TextStyle(
-    fontSize: 11, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
+    fontSize: 13, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
 const TextStyle inputHintTextStyle =
     TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
 
 const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
+const backButtonTabletStyle = TextStyle(color: kcPrimaryColor, fontSize: 20);
 const blackBackButtonStyle = TextStyle(color: Colors.black, fontSize: 16);
+const blackBackButtonTabletStyle = TextStyle(color: Colors.black, fontSize: 20);
 
 const inputBorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
