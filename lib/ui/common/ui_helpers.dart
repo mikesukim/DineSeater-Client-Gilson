@@ -58,7 +58,7 @@ const TextStyle mainText =
     TextStyle(fontSize: 20, fontWeight: semiBoldFontWeight);
 const TextStyle subText = TextStyle(fontSize: 15, color: kcVeryLightGrey);
 const TextStyle tinyText = TextStyle(
-    fontSize: 11, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
+    fontSize: 13, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
 const TextStyle inputHintTextStyle =
     TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
 

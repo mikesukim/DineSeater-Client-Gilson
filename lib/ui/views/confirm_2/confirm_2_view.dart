@@ -24,7 +24,7 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leadingWidth: 60,
+          leadingWidth: 90,
           toolbarHeight: 40,
           leading: null,
         ),
