@@ -139,7 +139,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                                   iconSize: 60,
                                   onPressed: () {
                                     try {
-                                      viewModel.onTapCancel(waitingItem);
+                                      viewModel.onTapMiss(waitingItem);
                                     } catch (e) {
                                       showDialog(
                                         context: context,
