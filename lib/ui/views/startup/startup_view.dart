@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../common/app_colors.dart';
@@ -28,11 +29,14 @@ class StartupView extends StackedView<StartupViewModel> {
                     'assets/Logo_Gilson.png',
                     scale: 1.5,
                   )),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Image.asset(
-                      'assets/Logo_DineSeater_white.png',
-                      width: 75,
+                  Padding(
+                    padding: EdgeInsets.all(Device.get().isTablet ? 20.0 : 8.0),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        'assets/Logo_DineSeater_white.png',
+                        width: 75,
+                      ),
                     ),
                   ),
                 ],
