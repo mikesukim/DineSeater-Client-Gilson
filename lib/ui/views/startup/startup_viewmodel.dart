@@ -23,6 +23,7 @@ class StartupViewModel extends BaseViewModel {
 
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
+
     // init variables
     final LocalStorage appInitFlagsStorage = LocalStorage('app_init_flags');
     await appInitFlagsStorage.ready;

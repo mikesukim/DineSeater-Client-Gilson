@@ -74,8 +74,8 @@ class WaitingCardViewModel extends BaseViewModel {
     DialogResponse? response = await _dialogService.showCustomDialog(
         variant: DialogType.confirmAlert,
         title: isArchiveView
-            ? 'Back ${waitingItem.name} to list?'
-            : 'Send text to ${waitingItem.name}?',
+            ? 'Are you sure you want to return ${waitingItem.name} to the list?'
+            : 'Send text to ${waitingItem.name}',
         barrierDismissible: true);
 
     if (response != null && response.confirmed) {
