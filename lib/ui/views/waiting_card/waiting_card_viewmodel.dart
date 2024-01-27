@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_publish_request.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -20,27 +21,35 @@ class WaitingCardViewModel extends BaseViewModel {
   final _waitingStorageService = locator<WaitingStorageService>();
   final _dineSeaterApiService = locator<DineseaterApiService>();
 
-  bool isTableReady = false;
+  bool isTextSent = false;
   bool isTimerEnd = false;
 
-  WaitingItem waiting;
+  WaitingItem waitingItem;
   late StopWatchTimer stopWatchTimer;
   final Function toggleIsLoadingFromParent;
 
   final _waitingTime = int.parse(dotenv.env['WAITING_TIME_IN_SEC']!);
 
+  String get dateCreated =>
+      DateFormat('HH:mm a').format(DateTime.parse(waitingItem.dateCreated));
 
-  WaitingCardViewModel(this.waiting, this.toggleIsLoadingFromParent) {
+  String get lastModified =>
+      DateFormat('HH:mm a').format(DateTime.parse(waitingItem.lastModified));
+
+  String get formattedPhoneNumber =>
+      '${waitingItem.phoneNumber.substring(2, 5)}-${waitingItem.phoneNumber.substring(5, 8)}-${waitingItem.phoneNumber.substring(8, 12)}';
+
+  WaitingCardViewModel(this.waitingItem, this.toggleIsLoadingFromParent) {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
 
     stopWatchTimer.setPresetSecondTime(_waitingTime);
 
-    if (waiting.status.toUpperCase() == WaitingStatus.TEXT_SENT.name) {
-      isTableReady = true;
+    if (waitingItem.status.toUpperCase() == WaitingStatus.TEXT_SENT.name) {
+      isTextSent = true;
 
       DateTime now = DateTime.now();
-      DateTime lastModified = DateTime.parse(waiting.lastModified);
+      DateTime lastModified = DateTime.parse(waitingItem.lastModified);
       int remainingTime = _waitingTime - now.difference(lastModified).inSeconds;
 
       if (remainingTime <= 0) {
@@ -52,21 +61,9 @@ class WaitingCardViewModel extends BaseViewModel {
         stopWatchTimer.setPresetSecondTime(remainingTime);
         stopWatchTimer.onStartTimer();
       }
-
     } else {
-      isTableReady = false;
+      isTextSent = false;
       stopWatchTimer.onStopTimer();
-    }
-  }
-
-  void showWaitingInfoDialog(WaitingItem waiting) async {
-    DialogResponse? response = await _dialogService.showCustomDialog(
-        variant: DialogType.waitingInfo,
-        barrierDismissible: true,
-        data: waiting);
-
-    if (response != null && response.confirmed) {
-      notifyListeners();
     }
   }
 
@@ -75,8 +72,8 @@ class WaitingCardViewModel extends BaseViewModel {
     DialogResponse? response = await _dialogService.showCustomDialog(
         variant: DialogType.confirmAlert,
         title: isArchiveView
-            ? 'Are you sure you want to return it to the list?'
-            : 'Confirm sending a text message to this customer?',
+            ? 'Back ${waitingItem.name} to list?'
+            : 'Send text to ${waitingItem.name}?',
         barrierDismissible: true);
 
     if (response != null && response.confirmed) {
@@ -87,7 +84,7 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   Future<void> onTapTableReady(WaitingItem waitingItem) async {
-    isTableReady = true;
+    isTextSent = true;
 
     toggleIsLoadingFromParent();
 
@@ -175,17 +172,17 @@ class WaitingCardViewModel extends BaseViewModel {
     toggleIsLoadingFromParent();
 
     WaitingItemUpdateRequest waitingItemUpdateRequest =
-    WaitingItemUpdateRequest();
+        WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_CANCELLED;
     WaitingItem updatedItem =
-    await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
+        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
     waitingItem.status = WaitingStatus.CANCELLED.name;
     await _waitingStorageService.updateWaiting(updatedItem);
 
     WaitingItemPublishRequest waitingItemPublishRequest =
-    WaitingItemPublishRequest();
+        WaitingItemPublishRequest();
     waitingItemPublishRequest.waiting = updatedItem;
     await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
 

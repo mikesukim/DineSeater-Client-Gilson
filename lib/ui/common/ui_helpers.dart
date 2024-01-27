@@ -45,7 +45,7 @@ Widget mealIconMedium = Image.asset(
 );
 Widget grillIconMedium = Image.asset(
   'assets/grill.png',
-  scale: 1.2,
+  scale: 1.4,
 );
 Widget employeeModeCancel = Image.asset(
   'assets/employee_mode_cancel.png',

@@ -29,7 +29,8 @@ class Confirm1ViewModel extends BaseViewModel {
   }
 
   void navigateToMealTypeView() {
-    _navigatorService.popUntil((route) => route.settings.name == '/meal-type-view');
+    _navigatorService
+        .popUntil((route) => route.settings.name == '/meal-type-view');
   }
 
   Future<void> navigateToConfirm2View() async {
