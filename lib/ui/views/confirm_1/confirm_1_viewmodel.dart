@@ -2,6 +2,7 @@ import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../model/waiting.dart';
@@ -18,10 +19,19 @@ class Confirm1ViewModel extends BaseViewModel {
   Waiting waiting;
   late String formattedMobileNumber;
 
+  final Uri termsOfService = Uri.parse('https://dineseater-public.s3.us-west-2.amazonaws.com/Terms+of+Service.pdf');
+  final Uri privacyPolicy = Uri.parse('https://dineseater-public.s3.us-west-2.amazonaws.com/Privacy+Policy.pdf');
+
   Confirm1ViewModel({required this.waiting}) {
     formattedMobileNumber = waiting.mobileNumber!;
     formattedMobileNumber =
         '${formattedMobileNumber.substring(0, 2)} (${formattedMobileNumber.substring(2, 5)}) ${formattedMobileNumber.substring(5, 8)} ${formattedMobileNumber.substring(8, 12)}';
+  }
+
+  Future<void> launchUrlLink(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   void navigateBack() {

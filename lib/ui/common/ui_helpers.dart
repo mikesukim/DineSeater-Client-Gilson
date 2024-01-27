@@ -61,6 +61,9 @@ const TextStyle tinyText = TextStyle(
     fontSize: 13, color: kcVeryLightGrey, fontWeight: FontWeight.w300);
 const TextStyle inputHintTextStyle =
     TextStyle(color: kcInputHintTextColor, fontWeight: mediumFontWeight);
+const TextStyle defaultPolicyTextStyle =
+    TextStyle(color: kcVeryLightGrey, fontSize: 13.0);
+const TextStyle hyperLinkStyle = TextStyle(color: Colors.blue, fontSize: 13.0);
 
 const backButtonStyle = TextStyle(color: kcPrimaryColor, fontSize: 16);
 const backButtonTabletStyle = TextStyle(color: kcPrimaryColor, fontSize: 20);
