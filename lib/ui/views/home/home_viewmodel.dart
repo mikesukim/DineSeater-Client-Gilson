@@ -14,7 +14,7 @@ class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
   final _navigationService = locator<NavigationService>();
   final _waitingStorageService = locator<WaitingStorageService>();
   final _dineSeaterApiService = locator<DineseaterApiService>();
-  final passcode = dotenv.env['PASSCODE']!;
+  final passcode = dotenv.env['EMPLOYEE_VIEW_PASSCODE']!;
   var logger = Logger();
 
   void initialise() {

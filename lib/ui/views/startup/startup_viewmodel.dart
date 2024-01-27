@@ -69,8 +69,8 @@ class StartupViewModel extends BaseViewModel {
     logger.i('isLoggedIn: $isLoggedIn');
     if (!isLoggedIn) {
       try {
-        final username = dotenv.env['COGNITO_TESTING_USER_ID']!;
-        final password = dotenv.env['COGNITO_TESTING_USER_PASSWORD']!;
+        final username = dotenv.env['COGNITO_GILSON_USER_ID']!;
+        final password = dotenv.env['COGNITO_GILSON_USER_PASSWORD']!;
         await _cognitoService.signInUser(username, password);
       } catch (e) {
         final errorMessage = 'signInUser error: $e';
