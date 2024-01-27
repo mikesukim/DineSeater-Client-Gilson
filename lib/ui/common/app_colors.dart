@@ -11,3 +11,9 @@ const Color kcInputBorderColor = Color(0xffE8E8E8);
 const Color kcInputBackgroundColor = Color(0xffF6F6F6);
 const Color kcInputHintTextColor = Color(0xffBDBDBD);
 const Color kcToggleButtonColor = Color(0xffDADADA);
+const Color kcInactiveCardColor = Color(0xffE0E0E0);
+const Color kcInactiveCardButtonColor = Color(0xffBFBFBF);
+const Color kcHereCardColor = Color(0xffFFE0BD);
+const Color kcNotHereCardColor = Color(0xffF1F1F1);
+
+

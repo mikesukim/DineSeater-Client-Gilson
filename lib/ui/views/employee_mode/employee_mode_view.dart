@@ -73,7 +73,8 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                               padding: EdgeInsets.zero,
                               decoration: const BoxDecoration(
                                 color: kcToggleButtonColor,
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: ToggleButtons(
                                 splashColor: Colors.transparent,
@@ -84,7 +85,9 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                                 borderRadius: BorderRadius.circular(10),
                                 constraints: BoxConstraints(
                                   minHeight: 50.0,
-                                  minWidth: (MediaQuery.of(context).size.width - 26) / 2,
+                                  minWidth:
+                                      (MediaQuery.of(context).size.width - 26) /
+                                          2,
                                 ),
                                 isSelected: viewModel.isSelected,
                                 onPressed: (int index) =>

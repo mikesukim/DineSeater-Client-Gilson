@@ -16,7 +16,6 @@ import 'package:dineseater_client_gilson/ui/views/employee_mode/employee_mode_vi
 import 'package:dineseater_client_gilson/ui/views/employee_mode_archive/employee_mode_archive_view.dart';
 import 'package:dineseater_client_gilson/services/waiting_storage_service.dart';
 import 'package:dineseater_client_gilson/ui/views/waiting_card/waiting_card_view.dart';
-import 'package:dineseater_client_gilson/ui/dialogs/waiting_info/waiting_info_dialog.dart';
 
 import '../ui/dialogs/confirm_alert/confirm_alert_dialog.dart';
 // @stacked-import
@@ -52,7 +51,6 @@ import '../ui/dialogs/confirm_alert/confirm_alert_dialog.dart';
   ],
   dialogs: [
     StackedDialog(classType: ConfirmAlertDialog),
-    StackedDialog(classType: WaitingInfoDialog),
 // @stacked-dialog
   ],
 )
