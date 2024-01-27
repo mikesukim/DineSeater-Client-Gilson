@@ -52,6 +52,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                 Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
+                      //TODO: add confirming dialog
                       onPressed: () => viewModel.onTapCancel(waitingItem),
                       icon: employeeModeCancel,
                       iconSize: 20,
