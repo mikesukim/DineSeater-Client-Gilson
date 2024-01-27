@@ -32,7 +32,7 @@ class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
-      case AppLifecycleState.hidden:
+      //case AppLifecycleState.hidden: //// TODO : match flutter version with Jiyun
         break;
     }
   }
@@ -48,7 +48,6 @@ class HomeViewModel extends ReactiveViewModel with WidgetsBindingObserver {
       [_waitingStorageService];
 
   void navigateToEmployeeModeView() {
-    //TODO : add authentication so only employees can access this view
     _navigationService.navigateToEmployeeModeView();
   }
 
