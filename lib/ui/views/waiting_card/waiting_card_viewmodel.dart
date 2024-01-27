@@ -16,6 +16,8 @@ import '../../../model/waiting_status.dart';
 import '../../../services/dineseater_api_service.dart';
 import '../../../services/waiting_storage_service.dart';
 
+
+// parent view's loading is required, due to SNS message sending threshold.
 class WaitingCardViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final _waitingStorageService = locator<WaitingStorageService>();

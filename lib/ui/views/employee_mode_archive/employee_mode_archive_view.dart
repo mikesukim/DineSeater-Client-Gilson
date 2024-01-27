@@ -7,7 +7,7 @@ import '../../common/ui_helpers.dart';
 import '../waiting_card/waiting_card_view.dart';
 import 'employee_mode_archive_viewmodel.dart';
 
-// TODO : when table is moving, item is not clickable
+
 class EmployeeModeArchiveView
     extends StackedView<EmployeeModeArchiveViewModel> {
   const EmployeeModeArchiveView({Key? key}) : super(key: key);
