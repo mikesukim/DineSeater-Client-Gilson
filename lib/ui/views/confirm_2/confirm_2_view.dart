@@ -16,9 +16,6 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
     Widget? child,
   ) {
     // TODO : navigate to main view after 5 sec
-    // TODO : change back to following after debugging
-    //     return PopScope(
-    //       canPop: false,
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

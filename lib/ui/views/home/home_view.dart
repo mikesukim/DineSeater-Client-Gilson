@@ -10,8 +10,6 @@ import 'home_viewmodel.dart';
 class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
-  // TODO: check all UIs to improve
-  // TODO: show total number of waitings instead of list
   @override
   Widget builder(
     BuildContext context,
@@ -31,14 +29,6 @@ class HomeView extends StackedView<HomeViewModel> {
                     Stack(
                       alignment: Alignment.topCenter,
                       children: [
-                        // TODO : delete after debugging
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(viewModel.getWaitingCount().toString()),
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: gilsonIconSmall,

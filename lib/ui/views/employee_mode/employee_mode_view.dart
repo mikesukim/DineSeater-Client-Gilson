@@ -7,7 +7,7 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
-// TODO : when table is moving, item is not clickable
+
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
@@ -27,8 +27,6 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
             elevation: 0,
             leadingWidth: 90,
             toolbarHeight: 40,
-            // TODO : delete after debugging
-            title: Text(viewModel.getWaitingCount.toString()),
             leading: TextButton(
               onPressed: () => viewModel.navigateBack(),
               child: const Row(
