@@ -25,7 +25,7 @@ class StartupViewModel extends BaseViewModel {
   Future runStartupLogic() async {
 
     // init variables
-    final LocalStorage appInitFlagsStorage = LocalStorage('app_init_flags');
+    final LocalStorage appInitFlagsStorage = LocalStorage('app_init_flags_${dotenv.env['STAGE_NAME']}');
     await appInitFlagsStorage.ready;
 
     // last opened date check

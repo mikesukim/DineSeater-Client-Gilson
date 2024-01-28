@@ -1,0 +1,58 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dineseaterclientgils-test-233821-authRole",
+      "UnauthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-test-233821-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-test-233821-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-dineseaterclientgils-test-233821-deployment",
+      "UnauthRoleName": "amplify-dineseaterclientgils-test-233821-unauthRole",
+      "StackName": "amplify-dineseaterclientgils-test-233821",
+      "StackId": "arn:aws:cloudformation:us-west-2:112014237129:stack/amplify-dineseaterclientgils-test-233821/0c086c90-bce7-11ee-afca-0ae80231f8b9",
+      "AmplifyAppId": "d2jy7zvew6wkiv"
+    }
+  },
+  "auth": {
+    "dineseaterclientgils699e12ab": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "us-west-2_RDWvl0qoM",
+        "UserPoolName": "DineSeater-Test",
+        "AppClientID": "6gn9d6c64rrqlee2d8uqqb6i27",
+        "AppClientIDWeb": "6gn9d6c64rrqlee2d8uqqb6i27",
+        "HostedUIDomain": "dineseater"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "GIVEN_NAME",
+          "FAMILY_NAME",
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+          ]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "lastPushTimeStamp": "2024-01-27T07:55:26.477Z"
+    }
+  }
+}
