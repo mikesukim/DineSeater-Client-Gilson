@@ -61,19 +61,22 @@ class EmployeeModeArchiveView
                             gilsonIconSmall,
                             verticalSpaceMedium,
                             Expanded(
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: viewModel.getArchivedWaitingCount(),
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return WaitingCardView(
-                                      key: UniqueKey(),
-                                      index,
-                                      viewModel.getArchivedWaiting(index),
-                                      isArchive: true,
-                                      toggleIsLoadingFromParent:
-                                          viewModel.toggleIsLoading,
-                                    );
-                                  }),
+                              child: FractionallySizedBox(
+                                widthFactor: Device.get().isTablet ? 0.85 : 0.95,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: viewModel.getArchivedWaitingCount(),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return WaitingCardView(
+                                        key: UniqueKey(),
+                                        index,
+                                        viewModel.getArchivedWaiting(index),
+                                        isArchive: true,
+                                        toggleIsLoadingFromParent:
+                                            viewModel.toggleIsLoading,
+                                      );
+                                    }),
+                              ),
                             )
                           ],
                         ),

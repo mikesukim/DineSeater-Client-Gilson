@@ -16,7 +16,6 @@ import '../../../model/waiting_status.dart';
 import '../../../services/dineseater_api_service.dart';
 import '../../../services/waiting_storage_service.dart';
 
-
 // parent view's loading is required, due to SNS message sending threshold.
 class WaitingCardViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
@@ -70,18 +69,22 @@ class WaitingCardViewModel extends BaseViewModel {
   }
 
   Future<void> showConfirmDialog(WaitingItem waitingItem,
-      {bool isArchiveView = false}) async {
+      {bool isArchiveView = false, bool isCancel = false}) async {
     DialogResponse? response = await _dialogService.showCustomDialog(
         variant: DialogType.confirmAlert,
         title: isArchiveView
             ? 'Are you sure you want to return ${waitingItem.name} to the list?'
-            : 'Send text to ${waitingItem.name}',
+            : isCancel
+                ? 'Are you sure you want to remove ${waitingItem.name} from the list?'
+                : 'Send text to ${waitingItem.name}',
         barrierDismissible: true);
 
     if (response != null && response.confirmed) {
       isArchiveView
           ? onTapBackToList(waitingItem)
-          : onTapTableReady(waitingItem);
+          : isCancel
+              ? onTapCancel(waitingItem)
+              : onTapTableReady(waitingItem);
     }
   }
 
