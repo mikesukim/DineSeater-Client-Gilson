@@ -19,10 +19,10 @@ class StartupView extends StackedView<StartupViewModel> {
       backgroundColor: kcPrimaryColor,
       body: SafeArea(
         child: viewModel.hasError
-            ? AlertDialog(
+            ? const AlertDialog(
                 // TODO: show proper error message
                 title: Text(
-                    'Oops! An error occurred while opening the app. ${viewModel.error.toString()}'),
+                    'Oops! An error occurred while opening the app. Please check your internet connection and try again.'),
               )
             : Stack(
                 children: [

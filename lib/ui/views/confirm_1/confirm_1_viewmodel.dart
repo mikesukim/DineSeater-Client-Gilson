@@ -60,6 +60,7 @@ class Confirm1ViewModel extends BaseViewModel {
         ),
         phoneNumber: waiting.mobileNumber!);
 
+    // TODO : add error handling. If error occurs show dialog
     WaitingItem addedWaiting =
         await _dineSeaterApiService.addWaitingItem(request);
     await _waitingStorageService.addWaiting(addedWaiting);

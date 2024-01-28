@@ -68,6 +68,12 @@ class WaitingCardViewModel extends BaseViewModel {
     }
   }
 
+  void onTimerEnd() {
+    isTimerEnd = true;
+
+    notifyListeners();
+  }
+
   Future<void> showConfirmDialog(WaitingItem waitingItem,
       {bool isArchiveView = false, bool isCancel = false}) async {
     DialogResponse? response = await _dialogService.showCustomDialog(
@@ -87,7 +93,7 @@ class WaitingCardViewModel extends BaseViewModel {
               : onTapTableReady(waitingItem);
     }
   }
-
+// TODO : add error handling. If error occurs show dialog
   Future<void> onTapTableReady(WaitingItem waitingItem) async {
     isTextSent = true;
 
@@ -114,7 +120,7 @@ class WaitingCardViewModel extends BaseViewModel {
 
     notifyListeners();
   }
-
+// TODO : add error handling. If error occurs show dialog
   Future<void> onTapMiss(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
@@ -139,7 +145,7 @@ class WaitingCardViewModel extends BaseViewModel {
 
     notifyListeners();
   }
-
+// TODO : add error handling. If error occurs show dialog
   Future<void> onTapConfirm(WaitingItem waitingItem) async {
     toggleIsLoadingFromParent();
 
@@ -165,12 +171,7 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void onTimerEnd() {
-    isTimerEnd = true;
-
-    notifyListeners();
-  }
-
+// TODO : add error handling. If error occurs show dialog
   Future<void> onTapCancel(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
@@ -195,7 +196,7 @@ class WaitingCardViewModel extends BaseViewModel {
 
     notifyListeners();
   }
-
+// TODO : add error handling. If error occurs show dialog
   Future<void> onTapBackToList(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
