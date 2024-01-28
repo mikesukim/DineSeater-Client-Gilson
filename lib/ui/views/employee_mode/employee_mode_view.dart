@@ -7,7 +7,6 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
-
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
@@ -83,8 +82,17 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                                 borderRadius: BorderRadius.circular(10),
                                 constraints: BoxConstraints(
                                   minHeight: 50.0,
-                                  minWidth:
-                                      (MediaQuery.of(context).size.width - 26) /
+                                  minWidth: Device.get().isTablet
+                                      ? MediaQuery.of(context).orientation ==
+                                              Orientation.portrait
+                                          ? (MediaQuery.of(context).size.width -
+                                                  132) /
+                                              2
+                                          : (MediaQuery.of(context).size.width -
+                                                  188) /
+                                              2
+                                      : (MediaQuery.of(context).size.width -
+                                              26) /
                                           2,
                                 ),
                                 isSelected: viewModel.isSelected,
@@ -95,18 +103,22 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                             ),
                             verticalSpaceSmall,
                             Expanded(
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: viewModel.getWaitingCount,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return WaitingCardView(
-                                        key: UniqueKey(),
-                                        index,
-                                        viewModel.getWaitingItem(index),
-                                        toggleIsLoadingFromParent:
-                                            viewModel.toggleIsLoading);
-                                  }),
+                              child: FractionallySizedBox(
+                                widthFactor:
+                                    Device.get().isTablet ? 0.85 : 0.95,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: viewModel.getWaitingCount,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return WaitingCardView(
+                                          key: UniqueKey(),
+                                          index,
+                                          viewModel.getWaitingItem(index),
+                                          toggleIsLoadingFromParent:
+                                              viewModel.toggleIsLoading);
+                                    }),
+                              ),
                             )
                           ],
                         ),
