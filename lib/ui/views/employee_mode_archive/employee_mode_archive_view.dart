@@ -7,7 +7,6 @@ import '../../common/ui_helpers.dart';
 import '../waiting_card/waiting_card_view.dart';
 import 'employee_mode_archive_viewmodel.dart';
 
-// TODO : when table is moving, item is not clickable
 class EmployeeModeArchiveView
     extends StackedView<EmployeeModeArchiveViewModel> {
   const EmployeeModeArchiveView({Key? key}) : super(key: key);
@@ -61,19 +60,26 @@ class EmployeeModeArchiveView
                             gilsonIconSmall,
                             verticalSpaceMedium,
                             Expanded(
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: viewModel.getArchivedWaitingCount(),
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return WaitingCardView(
-                                      key: UniqueKey(),
-                                      index,
-                                      viewModel.getArchivedWaiting(index),
-                                      isArchive: true,
-                                      toggleIsLoadingFromParent:
-                                          viewModel.toggleIsLoading,
-                                    );
-                                  }),
+                              child: FractionallySizedBox(
+                                widthFactor:
+                                    Device.get().isTablet ? 0.85 : 0.95,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        viewModel.getArchivedWaitingCount(),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return WaitingCardView(
+                                        key: UniqueKey(),
+                                        index,
+                                        viewModel.getArchivedWaiting(index),
+                                        isArchive: true,
+                                        toggleIsLoadingFromParent:
+                                            viewModel.toggleIsLoading,
+                                        setErrorFromParent: viewModel.setError,
+                                      );
+                                    }),
+                              ),
                             )
                           ],
                         ),
@@ -96,7 +102,13 @@ class EmployeeModeArchiveView
             child: const ModalBarrier(
               color: Colors.black26,
               dismissible: false,
-            ))
+            )),
+        Visibility(
+            visible: viewModel.hasError,
+            child: const AlertDialog(
+              title: Text(
+                  'Oops! An error occurred. Please check your internet connection and restart the app.'),
+            )),
       ]),
     );
   }

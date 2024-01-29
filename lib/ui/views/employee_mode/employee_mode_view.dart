@@ -7,7 +7,6 @@ import '../../common/app_colors.dart';
 import '../../common/ui_helpers.dart';
 import 'employee_mode_viewmodel.dart';
 
-// TODO : when table is moving, item is not clickable
 class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
   const EmployeeModeView({Key? key}) : super(key: key);
 
@@ -27,8 +26,6 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
             elevation: 0,
             leadingWidth: 90,
             toolbarHeight: 40,
-            // TODO : delete after debugging
-            title: Text(viewModel.getWaitingCount.toString()),
             leading: TextButton(
               onPressed: () => viewModel.navigateBack(),
               child: const Row(
@@ -73,7 +70,8 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                               padding: EdgeInsets.zero,
                               decoration: const BoxDecoration(
                                 color: kcToggleButtonColor,
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: ToggleButtons(
                                 splashColor: Colors.transparent,
@@ -84,7 +82,18 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                                 borderRadius: BorderRadius.circular(10),
                                 constraints: BoxConstraints(
                                   minHeight: 50.0,
-                                  minWidth: (MediaQuery.of(context).size.width - 26) / 2,
+                                  minWidth: Device.get().isTablet
+                                      ? MediaQuery.of(context).orientation ==
+                                              Orientation.portrait
+                                          ? (MediaQuery.of(context).size.width -
+                                                  132) /
+                                              2
+                                          : (MediaQuery.of(context).size.width -
+                                                  188) /
+                                              2
+                                      : (MediaQuery.of(context).size.width -
+                                              26) /
+                                          2,
                                 ),
                                 isSelected: viewModel.isSelected,
                                 onPressed: (int index) =>
@@ -94,18 +103,24 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                             ),
                             verticalSpaceSmall,
                             Expanded(
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: viewModel.getWaitingCount,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return WaitingCardView(
-                                        key: UniqueKey(),
-                                        index,
-                                        viewModel.getWaitingItem(index),
-                                        toggleIsLoadingFromParent:
-                                            viewModel.toggleIsLoading);
-                                  }),
+                              child: FractionallySizedBox(
+                                widthFactor:
+                                    Device.get().isTablet ? 0.85 : 0.95,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: viewModel.getWaitingCount,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return WaitingCardView(
+                                          key: UniqueKey(),
+                                          index,
+                                          viewModel.getWaitingItem(index),
+                                          toggleIsLoadingFromParent:
+                                              viewModel.toggleIsLoading,
+                                          setErrorFromParent:
+                                              viewModel.setError);
+                                    }),
+                              ),
                             )
                           ],
                         ),
@@ -128,7 +143,13 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
             child: const ModalBarrier(
               color: Colors.black26,
               dismissible: false,
-            ))
+            )),
+        Visibility(
+            visible: viewModel.hasError,
+            child: const AlertDialog(
+              title: Text(
+                  'Oops! An error occurred. Please check your internet connection and restart the app.'),
+            )),
       ]),
     );
   }

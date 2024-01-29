@@ -1,7 +1,7 @@
 name: dineseater_client_gilson
 description: A new Flutter project.
 publish_to: 'none'
-version: 0.1.1
+version: 0.2.0
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -29,6 +29,7 @@ dependencies:
   stop_watch_timer: ^3.0.2
   intl: ^0.19.0
   flutter_screen_lock: ^9.0.2
+  url_launcher: 6.1.10
 
 dev_dependencies:
   build_runner: ^2.4.5

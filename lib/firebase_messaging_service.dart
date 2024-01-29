@@ -26,8 +26,6 @@ class FirebaseMessagingService {
           'User declined or has not yet granted permission for notifications');
     }
 
-    // TODO : know how to receive notifications while app is not running at all.
-    // if this implemented, then every post request when app is launch is not needed.
 
     // Configure how to handle incoming notifications
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {

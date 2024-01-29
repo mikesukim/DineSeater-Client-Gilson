@@ -74,7 +74,7 @@ class ConfirmAlertDialog extends StackedView<ConfirmAlertDialogModel> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Text(
-                        'Ok',
+                        'Confirm',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

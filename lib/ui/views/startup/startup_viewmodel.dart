@@ -23,26 +23,36 @@ class StartupViewModel extends BaseViewModel {
 
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
-    // init variables
-    final LocalStorage appInitFlagsStorage = LocalStorage('app_init_flags');
-    await appInitFlagsStorage.ready;
 
-    // last opened date check
-    final lastOpenedDate = appInitFlagsStorage.getItem('lastOpenedDate');
-    if (lastOpenedDate == null) {
-      appInitFlagsStorage.setItem(
-          'lastOpenedDate', DateTime.now().toIso8601String());
-      appInitFlagsStorage.setItem('isFirstTimeOfToday', true);
-    } else {
-      // check if last opened date is yesterday
-      final now = DateTime.now();
-      final DateTime lastOpenedDate =
-          DateTime.parse(appInitFlagsStorage.getItem('lastOpenedDate'));
-      if (lastOpenedDate.day != now.day) {
-        appInitFlagsStorage.setItem('isFirstTimeOfToday', true);
+
+    final appInitFlagsStorageName = 'app_init_flags_${dotenv.env['STAGE']}';
+    logger.i(appInitFlagsStorageName);
+    final LocalStorage appInitFlagsStorage = LocalStorage(appInitFlagsStorageName);
+    try {
+      // init variables
+      await appInitFlagsStorage.ready;
+      // last opened date check
+      final lastOpenedDate = await appInitFlagsStorage.getItem('lastOpenedDate');
+      if (lastOpenedDate == null) {
+        await appInitFlagsStorage.setItem(
+            'lastOpenedDate', DateTime.now().toIso8601String());
+        await appInitFlagsStorage.setItem('isFirstTimeOfToday', true);
+      } else {
+        // check if last opened date is yesterday
+        final now = DateTime.now();
+        final DateTime lastOpenedDate =
+        DateTime.parse(await appInitFlagsStorage.getItem('lastOpenedDate'));
+        if (lastOpenedDate.day != now.day) {
+          await appInitFlagsStorage.setItem('isFirstTimeOfToday', true);
+        }
+        await appInitFlagsStorage.setItem(
+            'lastOpenedDate', DateTime.now().toIso8601String());
       }
-      appInitFlagsStorage.setItem(
-          'lastOpenedDate', DateTime.now().toIso8601String());
+    } catch (e) {
+      final errorMessage = 'runStartupLogic error: $e';
+      logger.e(errorMessage);
+      setError(errorMessage);
+      rethrow;
     }
 
     // Firebase messaging init for notification
@@ -52,6 +62,7 @@ class StartupViewModel extends BaseViewModel {
       final errorMessage = 'FirebaseMessagingService initialize error: $e';
       logger.e(errorMessage);
       setError(errorMessage);
+      rethrow;
     }
 
     // Amplify auth configuration
@@ -61,6 +72,7 @@ class StartupViewModel extends BaseViewModel {
       final errorMessage = 'configureAmplify error: $e';
       logger.e(errorMessage);
       setError(errorMessage);
+      rethrow;
     }
 
     // login check
@@ -68,13 +80,14 @@ class StartupViewModel extends BaseViewModel {
     logger.i('isLoggedIn: $isLoggedIn');
     if (!isLoggedIn) {
       try {
-        final username = dotenv.env['COGNITO_TESTING_USER_ID']!;
-        final password = dotenv.env['COGNITO_TESTING_USER_PASSWORD']!;
+        final username = dotenv.env['COGNITO_GILSON_USER_ID']!;
+        final password = dotenv.env['COGNITO_GILSON_USER_PASSWORD']!;
         await _cognitoService.signInUser(username, password);
       } catch (e) {
         final errorMessage = 'signInUser error: $e';
         logger.e(errorMessage);
         setError(errorMessage);
+        rethrow;
       }
     }
     final idToken = await _cognitoService.getIdToken();
@@ -85,11 +98,11 @@ class StartupViewModel extends BaseViewModel {
     try {
       String? deviceToken = await FirebaseMessaging.instance.getToken();
       log('Device token: $deviceToken');
-      if (appInitFlagsStorage.getItem('isDeviceTokenRegistered') == null ||
-          appInitFlagsStorage.getItem('isDeviceTokenRegistered') == false) {
+      if (await appInitFlagsStorage.getItem('isDeviceTokenRegistered') == null ||
+          await appInitFlagsStorage.getItem('isDeviceTokenRegistered') == false) {
         logger.i("Device token is not registered yet. Registering...");
         _dineSeaterApiService.registerDeviceToken(deviceToken!);
-        appInitFlagsStorage.setItem('isDeviceTokenRegistered', true);
+        await appInitFlagsStorage.setItem('isDeviceTokenRegistered', true);
         logger.i("Device token is registered.");
       } else {
         logger.i("Device token is already registered.");
@@ -98,6 +111,7 @@ class StartupViewModel extends BaseViewModel {
       final errorMessage = 'Device token registration error: $e';
       logger.e(errorMessage);
       setError(errorMessage);
+      rethrow;
     }
 
     // WaitingStorageService init
@@ -105,12 +119,12 @@ class StartupViewModel extends BaseViewModel {
 
     // get waiting list from remote
     try {
-      if (appInitFlagsStorage.getItem('isFirstTimeOfToday') == null ||
-          appInitFlagsStorage.getItem('isFirstTimeOfToday') == true) {
+      if (await appInitFlagsStorage.getItem('isFirstTimeOfToday') == null ||
+          await appInitFlagsStorage.getItem('isFirstTimeOfToday') == true) {
         logger.i("First time of today. Getting waiting list from remote...");
         final waitings = await _dineSeaterApiService.getWaitingList();
         await _waitingStorageService.resetWaitingsAs(waitings);
-        appInitFlagsStorage.setItem('isFirstTimeOfToday', false);
+        await appInitFlagsStorage.setItem('isFirstTimeOfToday', false);
         logger.i("Waiting list is updated from remote.");
       } else {
         logger.i(
@@ -124,6 +138,7 @@ class StartupViewModel extends BaseViewModel {
       final errorMessage = 'getWaitingList error: $e';
       logger.e(errorMessage);
       setError(errorMessage);
+      rethrow;
     }
 
     // Navigate to Home

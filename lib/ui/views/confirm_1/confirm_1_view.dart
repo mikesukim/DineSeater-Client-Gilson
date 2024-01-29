@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:stacked/stacked.dart';
@@ -77,32 +78,73 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
                                         child: const Text(
                                           'Edit my information',
                                           style: TextStyle(fontSize: 15),
-                                        ))
+                                        )),
                                   ],
                                 ),
-                                FractionallySizedBox(
-                                  widthFactor: 0.9,
-                                  child: ElevatedButton(
-                                      onPressed:
-                                          viewModel.navigateToConfirm2View,
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: kcPrimaryColor,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          elevation: 0),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 16.0),
-                                        child: Text(
-                                          'Confirm',
-                                          style: TextStyle(
-                                              fontSize: Device.get().isTablet
-                                                  ? 20
-                                                  : 16,
-                                              fontWeight: semiBoldFontWeight),
+                                Column(
+                                  children: [
+                                    FractionallySizedBox(
+                                      widthFactor: 0.9,
+                                      child: RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          text:
+                                              'By continuing, you agree to\nthe ',
+                                          style: defaultPolicyTextStyle,
+                                          children: [
+                                            TextSpan(
+                                                text: 'Terms of Service',
+                                                recognizer: TapGestureRecognizer()
+                                                  ..onTap = () => viewModel
+                                                      .launchUrlLink(viewModel
+                                                          .termsOfService),
+                                                style: hyperLinkStyle),
+                                            const TextSpan(
+                                                text: ' and ',
+                                                style: defaultPolicyTextStyle),
+                                            TextSpan(
+                                                text: 'Privacy Policy',
+                                                recognizer: TapGestureRecognizer()
+                                                  ..onTap = () => viewModel
+                                                      .launchUrlLink(viewModel
+                                                          .privacyPolicy),
+                                                style: hyperLinkStyle),
+                                            const TextSpan(
+                                                text: '.',
+                                                style: defaultPolicyTextStyle),
+                                          ],
                                         ),
-                                      )),
+                                      ),
+                                    ),
+                                    verticalSpaceSmall,
+                                    FractionallySizedBox(
+                                      widthFactor: 0.9,
+                                      child: ElevatedButton(
+                                          onPressed:
+                                              viewModel.navigateToConfirm2View,
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: kcPrimaryColor,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25)),
+                                              elevation: 0),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 16.0),
+                                            child: Text(
+                                              'Confirm',
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      Device.get().isTablet
+                                                          ? 20
+                                                          : 16,
+                                                  fontWeight:
+                                                      semiBoldFontWeight),
+                                            ),
+                                          )),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -116,11 +158,18 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
               ],
             ),
           ),
+          // TODO : check why using if statement instead of visibility
           if (viewModel.isBusy)
             const ModalBarrier(
               color: Colors.black26,
               dismissible: false,
             ),
+          Visibility(
+              visible: viewModel.hasError,
+              child: const AlertDialog(
+                title: Text(
+                    'Oops! Looks like something went wrong. Please contact your restaurant server for assistance.'),
+              )),
         ],
       ),
     );

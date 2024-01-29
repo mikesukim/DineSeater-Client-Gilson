@@ -15,10 +15,6 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
     Confirm2ViewModel viewModel,
     Widget? child,
   ) {
-    // TODO : navigate to main view after 5 sec
-    // TODO : change back to following after debugging
-    //     return PopScope(
-    //       canPop: false,
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -54,6 +50,9 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
                             const Text('We\'ll text you once ready!',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
+                            verticalSpaceMedium,
+                            const Text('You\'ll be back to the main page in 5 seconds', style: subText,),
+                            verticalSpaceMedium
                           ],
                         ),
                         FractionallySizedBox(
@@ -66,7 +65,8 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
                                       borderRadius: BorderRadius.circular(25)),
                                   elevation: 0),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16.0),
                                 child: Text(
                                   'Go to Home',
                                   style: TextStyle(
@@ -85,6 +85,13 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
         ),
       ),
     );
+  }
+
+  @override
+  Future<void> onViewModelReady(Confirm2ViewModel viewModel) async {
+    await Future.delayed(const Duration(seconds: 5));
+
+    viewModel.navigateToHome();
   }
 
   @override

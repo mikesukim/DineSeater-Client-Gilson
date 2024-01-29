@@ -1,0 +1,48 @@
+{
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dineseaterclientgils-test-233821-authRole",
+      "UnauthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-test-233821-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-test-233821-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-dineseaterclientgils-test-233821-deployment",
+      "UnauthRoleName": "amplify-dineseaterclientgils-test-233821-unauthRole",
+      "StackName": "amplify-dineseaterclientgils-test-233821",
+      "StackId": "arn:aws:cloudformation:us-west-2:112014237129:stack/amplify-dineseaterclientgils-test-233821/0c086c90-bce7-11ee-afca-0ae80231f8b9",
+      "AmplifyAppId": "d2jy7zvew6wkiv"
+    },
+    "categories": {
+      "auth": {
+        "dineseaterclientgils699e12ab": {
+          "userPoolId": "us-west-2_RDWvl0qoM",
+          "userPoolName": "DineSeater-Test",
+          "webClientId": "6gn9d6c64rrqlee2d8uqqb6i27",
+          "nativeClientId": "6gn9d6c64rrqlee2d8uqqb6i27"
+        }
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dineseaterclientgils-prod-00236-authRole",
+      "UnauthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-prod-00236-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-prod-00236-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-dineseaterclientgils-prod-00236-deployment",
+      "UnauthRoleName": "amplify-dineseaterclientgils-prod-00236-unauthRole",
+      "StackName": "amplify-dineseaterclientgils-prod-00236",
+      "StackId": "arn:aws:cloudformation:us-west-2:112014237129:stack/amplify-dineseaterclientgils-prod-00236/6fa97610-bcea-11ee-ab7f-02b039d97c2f",
+      "AmplifyAppId": "d2jy7zvew6wkiv"
+    },
+    "categories": {
+      "auth": {
+        "dineseaterclientgils699e12ab": {
+          "userPoolId": "us-west-2_3tK9yddb9",
+          "userPoolName": "DineSeater-Prod",
+          "webClientId": "29u95oo74qfrkqtoonaaudv007",
+          "nativeClientId": "29u95oo74qfrkqtoonaaudv007"
+        }
+      }
+    }
+  }
+}

@@ -18,10 +18,11 @@ class StartupView extends StackedView<StartupViewModel> {
     return Scaffold(
       backgroundColor: kcPrimaryColor,
       body: SafeArea(
-        // TODO : switch to popup and block the process
         child: viewModel.hasError
-            // TODO : delete before deployment
-            ? Text(viewModel.error.toString())
+            ? AlertDialog(
+                title: Text(
+                    'Oops! An error occurred while opening the app with the error message: ${viewModel.modelError}'),
+              )
             : Stack(
                 children: [
                   Center(
