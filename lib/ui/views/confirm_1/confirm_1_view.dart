@@ -158,11 +158,18 @@ class Confirm1View extends StackedView<Confirm1ViewModel> {
               ],
             ),
           ),
+          // TODO : check why using if statement instead of visibility
           if (viewModel.isBusy)
             const ModalBarrier(
               color: Colors.black26,
               dismissible: false,
             ),
+          Visibility(
+              visible: viewModel.hasError,
+              child: const AlertDialog(
+                title: Text(
+                    'Oops! Looks like something went wrong. Please contact your restaurant server for assistance.'),
+              )),
         ],
       ),
     );

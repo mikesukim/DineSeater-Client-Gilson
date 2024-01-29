@@ -185,7 +185,8 @@ class StackedRouter extends _i1.RouterBase {
         builder: (context) => _i12.WaitingCardView(args.index, args.waitingItem,
             key: args.key,
             isArchive: args.isArchive,
-            toggleIsLoadingFromParent: args.toggleIsLoadingFromParent),
+            toggleIsLoadingFromParent: args.toggleIsLoadingFromParent,
+            setErrorFromParent: args.setErrorFromParent),
         settings: data,
       );
     },
@@ -205,6 +206,7 @@ class WaitingCardViewArguments {
     this.key,
     this.isArchive = false,
     required this.toggleIsLoadingFromParent,
+    required this.setErrorFromParent,
   });
 
   final int index;
@@ -217,9 +219,11 @@ class WaitingCardViewArguments {
 
   final Function toggleIsLoadingFromParent;
 
+  final Function setErrorFromParent;
+
   @override
   String toString() {
-    return '{"index": "$index", "waitingItem": "$waitingItem", "key": "$key", "isArchive": "$isArchive", "toggleIsLoadingFromParent": "$toggleIsLoadingFromParent"}';
+    return '{"index": "$index", "waitingItem": "$waitingItem", "key": "$key", "isArchive": "$isArchive", "toggleIsLoadingFromParent": "$toggleIsLoadingFromParent", "setErrorFromParent": "$setErrorFromParent"}';
   }
 
   @override
@@ -229,7 +233,8 @@ class WaitingCardViewArguments {
         other.waitingItem == waitingItem &&
         other.key == key &&
         other.isArchive == isArchive &&
-        other.toggleIsLoadingFromParent == toggleIsLoadingFromParent;
+        other.toggleIsLoadingFromParent == toggleIsLoadingFromParent &&
+        other.setErrorFromParent == setErrorFromParent;
   }
 
   @override
@@ -238,7 +243,8 @@ class WaitingCardViewArguments {
         waitingItem.hashCode ^
         key.hashCode ^
         isArchive.hashCode ^
-        toggleIsLoadingFromParent.hashCode;
+        toggleIsLoadingFromParent.hashCode ^
+        setErrorFromParent.hashCode;
   }
 }
 
@@ -389,6 +395,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     _i13.Key? key,
     bool isArchive = false,
     required Function toggleIsLoadingFromParent,
+    required Function setErrorFromParent,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -401,7 +408,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
             waitingItem: waitingItem,
             key: key,
             isArchive: isArchive,
-            toggleIsLoadingFromParent: toggleIsLoadingFromParent),
+            toggleIsLoadingFromParent: toggleIsLoadingFromParent,
+            setErrorFromParent: setErrorFromParent),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -554,6 +562,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
     _i13.Key? key,
     bool isArchive = false,
     required Function toggleIsLoadingFromParent,
+    required Function setErrorFromParent,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -566,7 +575,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
             waitingItem: waitingItem,
             key: key,
             isArchive: isArchive,
-            toggleIsLoadingFromParent: toggleIsLoadingFromParent),
+            toggleIsLoadingFromParent: toggleIsLoadingFromParent,
+            setErrorFromParent: setErrorFromParent),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
