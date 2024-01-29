@@ -28,6 +28,7 @@ class WaitingCardViewModel extends BaseViewModel {
   WaitingItem waitingItem;
   late StopWatchTimer stopWatchTimer;
   final Function toggleIsLoadingFromParent;
+  final Function setErrorFromParent;
 
   final _waitingTime = int.parse(dotenv.env['WAITING_TIME_IN_SEC']!);
 
@@ -40,7 +41,7 @@ class WaitingCardViewModel extends BaseViewModel {
   String get formattedPhoneNumber =>
       '${waitingItem.phoneNumber.substring(2, 5)}-${waitingItem.phoneNumber.substring(5, 8)}-${waitingItem.phoneNumber.substring(8, 12)}';
 
-  WaitingCardViewModel(this.waitingItem, this.toggleIsLoadingFromParent) {
+  WaitingCardViewModel(this.waitingItem, this.toggleIsLoadingFromParent, this.setErrorFromParent) {
     stopWatchTimer =
         StopWatchTimer(mode: StopWatchMode.countDown, onEnded: onTimerEnd);
 
@@ -93,7 +94,7 @@ class WaitingCardViewModel extends BaseViewModel {
               : onTapTableReady(waitingItem);
     }
   }
-// TODO : add error handling. If error occurs show dialog
+
   Future<void> onTapTableReady(WaitingItem waitingItem) async {
     isTextSent = true;
 
@@ -105,22 +106,30 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.NOTIFY;
-    WaitingItem updatedItem =
-        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    waitingItem.status = WaitingStatus.TEXT_SENT.name;
-    await _waitingStorageService.updateWaiting(updatedItem);
+    try {
+      WaitingItem updatedItem =
+      await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    WaitingItemPublishRequest waitingItemPublishRequest =
-        WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = updatedItem;
-    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+      waitingItem.status = WaitingStatus.TEXT_SENT.name;
+      await _waitingStorageService.updateWaiting(updatedItem);
+
+      WaitingItemPublishRequest waitingItemPublishRequest =
+      WaitingItemPublishRequest();
+      waitingItemPublishRequest.waiting = updatedItem;
+      await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+    } catch (e) {
+      final errorMessage = 'onTapTableReady error: $e';
+      setErrorFromParent(errorMessage);
+      rethrow;
+    }
 
     toggleIsLoadingFromParent();
 
     notifyListeners();
   }
-// TODO : add error handling. If error occurs show dialog
+
   Future<void> onTapMiss(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
@@ -130,22 +139,30 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_MISSED;
-    WaitingItem updatedItem =
-        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    waitingItem.status = WaitingStatus.MISSED.name;
-    await _waitingStorageService.updateWaiting(updatedItem);
+    try {
+      WaitingItem updatedItem =
+      await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    WaitingItemPublishRequest waitingItemPublishRequest =
-        WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = updatedItem;
-    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+      waitingItem.status = WaitingStatus.MISSED.name;
+      await _waitingStorageService.updateWaiting(updatedItem);
+
+      WaitingItemPublishRequest waitingItemPublishRequest =
+      WaitingItemPublishRequest();
+      waitingItemPublishRequest.waiting = updatedItem;
+      await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+    } catch (e) {
+      final errorMessage = 'onTapMiss error: $e';
+      setErrorFromParent(errorMessage);
+      rethrow;
+    }
 
     toggleIsLoadingFromParent();
 
     notifyListeners();
   }
-// TODO : add error handling. If error occurs show dialog
+
   Future<void> onTapConfirm(WaitingItem waitingItem) async {
     toggleIsLoadingFromParent();
 
@@ -153,16 +170,24 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_ARRIVAL;
-    WaitingItem updatedItem =
-        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    waitingItem.status = WaitingStatus.ARRIVED.name;
-    await _waitingStorageService.updateWaiting(updatedItem);
+    try {
+      WaitingItem updatedItem =
+      await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    WaitingItemPublishRequest waitingItemPublishRequest =
-        WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = updatedItem;
-    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+      waitingItem.status = WaitingStatus.ARRIVED.name;
+      await _waitingStorageService.updateWaiting(updatedItem);
+
+      WaitingItemPublishRequest waitingItemPublishRequest =
+      WaitingItemPublishRequest();
+      waitingItemPublishRequest.waiting = updatedItem;
+      await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+    } catch (e) {
+      final errorMessage = 'onTapConfirm error: $e';
+      setErrorFromParent(errorMessage);
+      rethrow;
+    }
 
     toggleIsLoadingFromParent();
 
@@ -171,7 +196,7 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-// TODO : add error handling. If error occurs show dialog
+
   Future<void> onTapCancel(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
@@ -181,22 +206,30 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_CANCELLED;
-    WaitingItem updatedItem =
-        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    waitingItem.status = WaitingStatus.CANCELLED.name;
-    await _waitingStorageService.updateWaiting(updatedItem);
+    try {
+      WaitingItem updatedItem =
+      await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    WaitingItemPublishRequest waitingItemPublishRequest =
-        WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = updatedItem;
-    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+      waitingItem.status = WaitingStatus.CANCELLED.name;
+      await _waitingStorageService.updateWaiting(updatedItem);
+
+      WaitingItemPublishRequest waitingItemPublishRequest =
+      WaitingItemPublishRequest();
+      waitingItemPublishRequest.waiting = updatedItem;
+      await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+    } catch (e) {
+      final errorMessage = 'onTapCancel error: $e';
+      setErrorFromParent(errorMessage);
+      rethrow;
+    }
 
     toggleIsLoadingFromParent();
 
     notifyListeners();
   }
-// TODO : add error handling. If error occurs show dialog
+
   Future<void> onTapBackToList(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
@@ -206,16 +239,24 @@ class WaitingCardViewModel extends BaseViewModel {
         WaitingItemUpdateRequest();
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_BACK_INITIAL_STATUS;
-    WaitingItem updatedItem =
-        await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    waitingItem.status = WaitingStatus.WAITING.name;
-    await _waitingStorageService.updateWaiting(updatedItem);
+    try{
+      WaitingItem updatedItem =
+      await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
-    WaitingItemPublishRequest waitingItemPublishRequest =
-        WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = updatedItem;
-    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+      waitingItem.status = WaitingStatus.WAITING.name;
+      await _waitingStorageService.updateWaiting(updatedItem);
+
+      WaitingItemPublishRequest waitingItemPublishRequest =
+      WaitingItemPublishRequest();
+      waitingItemPublishRequest.waiting = updatedItem;
+      await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+    } catch (e) {
+      final errorMessage = 'onTapBackToList error: $e';
+      setErrorFromParent(errorMessage);
+      rethrow;
+    }
 
     toggleIsLoadingFromParent();
 

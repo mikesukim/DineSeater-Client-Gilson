@@ -60,14 +60,19 @@ class Confirm1ViewModel extends BaseViewModel {
         ),
         phoneNumber: waiting.mobileNumber!);
 
-    // TODO : add error handling. If error occurs show dialog
-    WaitingItem addedWaiting =
-        await _dineSeaterApiService.addWaitingItem(request);
-    await _waitingStorageService.addWaiting(addedWaiting);
+    try {
+      WaitingItem addedWaiting =
+      await _dineSeaterApiService.addWaitingItem(request);
+      await _waitingStorageService.addWaiting(addedWaiting);
 
-    WaitingItemPublishRequest waitingItemPublishRequest =
-        WaitingItemPublishRequest();
-    waitingItemPublishRequest.waiting = addedWaiting;
-    await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+      WaitingItemPublishRequest waitingItemPublishRequest =
+      WaitingItemPublishRequest();
+      waitingItemPublishRequest.waiting = addedWaiting;
+      await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+    } catch (e) {
+      final errorMessage = 'addWaitingItem error: $e';
+      setError(errorMessage);
+      rethrow;
+    }
   }
 }

@@ -14,11 +14,13 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
   final bool isArchive;
   final WaitingItem waitingItem;
   final Function toggleIsLoadingFromParent;
+  final Function setErrorFromParent;
 
   const WaitingCardView(this.index, this.waitingItem,
       {Key? key,
       this.isArchive = false,
-      required this.toggleIsLoadingFromParent})
+      required this.toggleIsLoadingFromParent,
+      required this.setErrorFromParent})
       : super(key: key);
 
   @override
@@ -316,7 +318,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
   WaitingCardViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      WaitingCardViewModel(waitingItem, toggleIsLoadingFromParent);
+      WaitingCardViewModel(waitingItem, toggleIsLoadingFromParent, setErrorFromParent);
 }
 
 class ErrorAlertDialog extends StatelessWidget {

@@ -116,7 +116,9 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                                           index,
                                           viewModel.getWaitingItem(index),
                                           toggleIsLoadingFromParent:
-                                              viewModel.toggleIsLoading);
+                                              viewModel.toggleIsLoading,
+                                          setErrorFromParent:
+                                              viewModel.setError);
                                     }),
                               ),
                             )
@@ -141,7 +143,13 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
             child: const ModalBarrier(
               color: Colors.black26,
               dismissible: false,
-            ))
+            )),
+        Visibility(
+            visible: viewModel.hasError,
+            child: const AlertDialog(
+              title: Text(
+                  'Oops! An error occurred. Please check your internet connection and restart the app.'),
+            )),
       ]),
     );
   }

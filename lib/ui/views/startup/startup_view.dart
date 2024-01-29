@@ -20,7 +20,6 @@ class StartupView extends StackedView<StartupViewModel> {
       body: SafeArea(
         child: viewModel.hasError
             ? AlertDialog(
-                // TODO: show proper error message
                 title: Text(
                     'Oops! An error occurred while opening the app with the error message: ${viewModel.modelError}'),
               )
