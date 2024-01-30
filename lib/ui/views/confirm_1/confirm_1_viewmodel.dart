@@ -1,5 +1,6 @@
 import 'package:dineseater_client_gilson/app/app.router.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_add_request.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -69,6 +70,13 @@ class Confirm1ViewModel extends BaseViewModel {
       WaitingItemPublishRequest();
       waitingItemPublishRequest.waiting = addedWaiting;
       await _dineSeaterApiService.publishWaitingItem(waitingItemPublishRequest);
+
+      await FirebaseAnalytics.instance.logEvent(
+        name: "select_confirm_to_join_waiting_list",
+        parameters: {
+          "waitingItem": addedWaiting.toJson().toString(),
+        },
+      );
     } catch (e) {
       final errorMessage = 'addWaitingItem error: $e';
       setError(errorMessage);
