@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dineseater_client_gilson/app/app.dialogs.dart';
 import 'package:dineseater_client_gilson/model/waiting_item_publish_request.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -108,6 +109,13 @@ class WaitingCardViewModel extends BaseViewModel {
     waitingItemUpdateRequest.action = ActionType.NOTIFY;
 
     try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: "select_table_ready",
+        parameters: {
+          "waitingItem": waitingItem.toJson().toString(),
+        },
+      );
+
       WaitingItem updatedItem =
       await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
@@ -141,6 +149,13 @@ class WaitingCardViewModel extends BaseViewModel {
     waitingItemUpdateRequest.action = ActionType.REPORT_MISSED;
 
     try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: "select_miss",
+        parameters: {
+          "waitingItem": waitingItem.toJson().toString(),
+        },
+      );
+
       WaitingItem updatedItem =
       await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
@@ -163,7 +178,7 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> onTapConfirm(WaitingItem waitingItem) async {
+  Future<void> onTapArrived(WaitingItem waitingItem) async {
     toggleIsLoadingFromParent();
 
     WaitingItemUpdateRequest waitingItemUpdateRequest =
@@ -172,6 +187,13 @@ class WaitingCardViewModel extends BaseViewModel {
     waitingItemUpdateRequest.action = ActionType.REPORT_ARRIVAL;
 
     try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: "select_arrived",
+        parameters: {
+          "waitingItem": waitingItem.toJson().toString(),
+        },
+      );
+
       WaitingItem updatedItem =
       await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
@@ -196,7 +218,8 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-
+  // TODO : show cancel button when only status is waiting NOT after (SENT_TEXT & others)
+  // TODO : increase the button size
   Future<void> onTapCancel(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
@@ -208,6 +231,13 @@ class WaitingCardViewModel extends BaseViewModel {
     waitingItemUpdateRequest.action = ActionType.REPORT_CANCELLED;
 
     try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: "select_cancel",
+        parameters: {
+          "waitingItem": waitingItem.toJson().toString(),
+        },
+      );
+
       WaitingItem updatedItem =
       await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 
@@ -240,7 +270,14 @@ class WaitingCardViewModel extends BaseViewModel {
     waitingItemUpdateRequest.waitingId = waitingItem.waitingId;
     waitingItemUpdateRequest.action = ActionType.REPORT_BACK_INITIAL_STATUS;
 
-    try{
+    try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: "select_back_to_list",
+        parameters: {
+          "waitingItem": waitingItem.toJson().toString(),
+        },
+      );
+
       WaitingItem updatedItem =
       await _dineSeaterApiService.updateWaitingItem(waitingItemUpdateRequest);
 

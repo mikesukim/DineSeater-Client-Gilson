@@ -222,7 +222,7 @@ class WaitingCardView extends StackedView<WaitingCardViewModel> {
                           child: ElevatedButton(
                         onPressed: () {
                           try {
-                            viewModel.onTapConfirm(waitingItem);
+                            viewModel.onTapArrived(waitingItem);
                           } catch (e) {
                             showDialog(
                               context: context,

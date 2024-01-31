@@ -20,9 +20,7 @@ class CognitoService {
 
   Future<void> signInUser(String username, String password) async {
     try {
-      final cognitoPlugin =
-          Amplify.Auth.getPlugin(AmplifyAuthCognito.pluginKey);
-      final result = await cognitoPlugin.signIn(
+      final result = await Amplify.Auth.signIn(
         username: username,
         password: password,
       );
@@ -44,10 +42,8 @@ class CognitoService {
 
   Future<bool> isUserSignedIn() async {
     try {
-      final cognitoPlugin =
-          Amplify.Auth.getPlugin(AmplifyAuthCognito.pluginKey);
-      final session = await cognitoPlugin.fetchAuthSession();
-      return session.isSignedIn;
+      await Amplify.Auth.getCurrentUser();
+      return true;
     } on SignedOutException catch (e) {
       safePrint('User is not signed in: ${e.message}');
       return false;

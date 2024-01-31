@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-dineseaterclientgils-test-233821-authRole",
-      "UnauthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-test-233821-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-test-233821-authRole",
+      "AuthRoleName": "amplify-dineseaterclientgils-prod-00236-authRole",
+      "UnauthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-prod-00236-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::112014237129:role/amplify-dineseaterclientgils-prod-00236-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-dineseaterclientgils-test-233821-deployment",
-      "UnauthRoleName": "amplify-dineseaterclientgils-test-233821-unauthRole",
-      "StackName": "amplify-dineseaterclientgils-test-233821",
-      "StackId": "arn:aws:cloudformation:us-west-2:112014237129:stack/amplify-dineseaterclientgils-test-233821/0c086c90-bce7-11ee-afca-0ae80231f8b9",
+      "DeploymentBucketName": "amplify-dineseaterclientgils-prod-00236-deployment",
+      "UnauthRoleName": "amplify-dineseaterclientgils-prod-00236-unauthRole",
+      "StackName": "amplify-dineseaterclientgils-prod-00236",
+      "StackId": "arn:aws:cloudformation:us-west-2:112014237129:stack/amplify-dineseaterclientgils-prod-00236/6fa97610-bcea-11ee-ab7f-02b039d97c2f",
       "AmplifyAppId": "d2jy7zvew6wkiv"
     }
   },
@@ -20,11 +20,11 @@
       "dependsOn": [],
       "customAuth": false,
       "output": {
-        "UserPoolId": "us-west-2_RDWvl0qoM",
-        "UserPoolName": "DineSeater-Test",
-        "AppClientID": "6gn9d6c64rrqlee2d8uqqb6i27",
-        "AppClientIDWeb": "6gn9d6c64rrqlee2d8uqqb6i27",
-        "HostedUIDomain": "dineseater"
+        "UserPoolId": "us-west-2_3tK9yddb9",
+        "UserPoolName": "DineSeater-Prod",
+        "AppClientID": "29u95oo74qfrkqtoonaaudv007",
+        "AppClientIDWeb": "29u95oo74qfrkqtoonaaudv007",
+        "HostedUIDomain": "dineseatergilson"
       },
       "frontendAuthConfig": {
         "socialProviders": [],
@@ -32,10 +32,7 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "GIVEN_NAME",
-          "FAMILY_NAME",
-          "EMAIL",
-          "PHONE_NUMBER"
+          "EMAIL"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -52,7 +49,7 @@
           "EMAIL"
         ]
       },
-      "lastPushTimeStamp": "2024-01-27T07:55:26.477Z"
+      "lastPushTimeStamp": "2024-01-27T08:05:13.447Z"
     }
   }
 }
