@@ -58,6 +58,7 @@ class StartupViewModel extends BaseViewModel {
     // Firebase messaging init for notification
     try {
       await FirebaseMessagingService().initialize();
+      await Future.delayed(const Duration(seconds: 1));
     } catch (e) {
       final errorMessage = 'FirebaseMessagingService initialize error: $e';
       logger.e(errorMessage);
