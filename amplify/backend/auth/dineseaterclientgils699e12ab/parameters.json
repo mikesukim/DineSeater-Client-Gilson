@@ -8,10 +8,7 @@
   ],
   "authProvidersUserPool": [],
   "requiredAttributes": [
-    "given_name",
-    "family_name",
-    "email",
-    "phone_number"
+    "email"
   ],
   "passwordPolicyMinLength": 8,
   "passwordPolicyCharacters": [
