@@ -218,7 +218,8 @@ class WaitingCardViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-
+  // TODO : show cancel button when only status is waiting NOT after (SENT_TEXT & others)
+  // TODO : increase the button size
   Future<void> onTapCancel(WaitingItem waitingItem) async {
     stopWatchTimer.onStopTimer();
 
