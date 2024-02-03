@@ -33,7 +33,9 @@ class WaitingStorageService with ListenableServiceMixin {
     List<WaitingItem> archivedWaitings = [];
     List<WaitingItem> newWaitings = [];
     for (var waiting in waitings) {
-      if (waiting.status == 'arrived' || waiting.status == 'missed') {
+      if (waiting.status.toUpperCase() == WaitingStatus.ARRIVED.name ||
+          waiting.status.toUpperCase() == WaitingStatus.MISSED.name ||
+          waiting.status.toUpperCase() == WaitingStatus.CANCELLED.name) {
         archivedWaitings.add(waiting);
       } else {
         newWaitings.add(waiting);
