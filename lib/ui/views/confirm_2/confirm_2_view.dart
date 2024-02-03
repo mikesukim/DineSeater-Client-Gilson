@@ -51,8 +51,6 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                             verticalSpaceMedium,
-                            const Text('You\'ll be back to the main page in 5 seconds', style: subText,),
-                            verticalSpaceMedium
                           ],
                         ),
                         FractionallySizedBox(
@@ -85,13 +83,6 @@ class Confirm2View extends StackedView<Confirm2ViewModel> {
         ),
       ),
     );
-  }
-
-  @override
-  Future<void> onViewModelReady(Confirm2ViewModel viewModel) async {
-    await Future.delayed(const Duration(seconds: 5));
-
-    viewModel.navigateToHome();
   }
 
   @override
