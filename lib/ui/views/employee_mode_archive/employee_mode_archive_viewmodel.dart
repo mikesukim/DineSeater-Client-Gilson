@@ -32,4 +32,8 @@ class EmployeeModeArchiveViewModel extends ReactiveViewModel {
   void navigateBack() {
     _navigatorService.back();
   }
+
+  Future<void> onRefresh() async {
+    print("onRefresh");
+  }
 }

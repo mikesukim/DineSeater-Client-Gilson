@@ -106,20 +106,25 @@ class EmployeeModeView extends StackedView<EmployeeModeViewModel> {
                               child: FractionallySizedBox(
                                 widthFactor:
                                     Device.get().isTablet ? 0.85 : 0.95,
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: viewModel.getWaitingCount,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return WaitingCardView(
-                                          key: UniqueKey(),
-                                          index,
-                                          viewModel.getWaitingItem(index),
-                                          toggleIsLoadingFromParent:
+                                child:
+                                RefreshIndicator(
+                                    onRefresh: viewModel.onRefresh,
+                                    child:ListView.builder(
+                                        physics: const AlwaysScrollableScrollPhysics(),
+                                        shrinkWrap: false,
+                                        itemCount: viewModel.getWaitingCount,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return WaitingCardView(
+                                              key: UniqueKey(),
+                                              index,
+                                              viewModel.getWaitingItem(index),
+                                              toggleIsLoadingFromParent:
                                               viewModel.toggleIsLoading,
-                                          setErrorFromParent:
+                                              setErrorFromParent:
                                               viewModel.setError);
-                                    }),
+                                        }),
+                                ),
                               ),
                             )
                           ],

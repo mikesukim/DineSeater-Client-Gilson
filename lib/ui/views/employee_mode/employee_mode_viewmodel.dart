@@ -69,4 +69,8 @@ class EmployeeModeViewModel extends ReactiveViewModel {
   void navigateToArchiveView() {
     _navigatorService.navigateToEmployeeModeArchiveView();
   }
+
+  Future<void> onRefresh() async {
+    print('refresh');
+  }
 }
